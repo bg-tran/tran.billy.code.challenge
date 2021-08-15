@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tran.billy.code.challenge.helper.JsonHelperTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-08-15T04:44:12" hostname="Billys-Mac-mini.local" time="1.135">
+  <properties/>
+  <testcase name="testReadUserFile()" classname="tran.billy.code.challenge.helper.JsonHelperTest" time="1.074"/>
+  <testcase name="testReadOrganizationFile()" classname="tran.billy.code.challenge.helper.JsonHelperTest" time="0.025"/>
+  <testcase name="testReadTicketFile()" classname="tran.billy.code.challenge.helper.JsonHelperTest" time="0.032"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

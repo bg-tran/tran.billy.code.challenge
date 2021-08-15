@@ -1,6 +1,7 @@
 package tran.billy.code.challenge.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import tran.billy.code.challenge.helper.StringHelper;
 
 import java.util.ArrayList;
@@ -9,29 +10,67 @@ import java.util.Arrays;
 public class User {
 
     static public final String TERM_PREFIX = "user_";
+
+    @JsonProperty("_id")
     private int id;
+
+    @JsonProperty("url")
     private String url;
+
+    @JsonProperty("external_id")
+    private String externalId;
+
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("alias")
     private String alias;
+
+    @JsonProperty("created_at")
     private String createdAt;
+
+    @JsonProperty("active")
     private boolean active;
+
+    @JsonProperty("verified")
     private boolean verified;
+
+    @JsonProperty("shared")
     private boolean shared;
+
+    @JsonProperty("locale")
     private String locale;
+
+    @JsonProperty("timezone")
     private String timezone;
+
+    @JsonProperty("last_login_at")
     private String lastLoginAt;
+
+    @JsonProperty("email")
     private String email;
+
+    @JsonProperty("phone")
     private String phone;
+
+    @JsonProperty("signature")
     private String signature;
+
+    @JsonProperty("organization_id")
     private int organizationId;
+
+    @JsonProperty("tags")
     private String[] tags;
+
+    @JsonProperty("suspended")
     private boolean suspended;
+
+    @JsonProperty("role")
     private String role;
 
     private Organization organization;
 
     private ArrayList<Object> tickets;
-
 
     public int getId() {
         return id;
@@ -47,6 +86,14 @@ public class User {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
     }
 
     public String getName() {

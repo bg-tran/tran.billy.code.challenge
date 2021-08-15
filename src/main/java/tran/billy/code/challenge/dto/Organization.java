@@ -1,5 +1,6 @@
 package tran.billy.code.challenge.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import tran.billy.code.challenge.helper.StringHelper;
 
 import java.util.ArrayList;
@@ -7,14 +8,31 @@ import java.util.Arrays;
 
 public class Organization {
 
+    @JsonProperty("_id")
     private int id;
+
+    @JsonProperty("url")
     private String url;
+
+    @JsonProperty("external_id")
     private String externalId;
+
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("domain_names")
     private String[] domainNames;
+
+    @JsonProperty("created_at")
     private String createdAt;
+
+    @JsonProperty("details")
     private String details;
+
+    @JsonProperty("shared_tickets")
     private boolean sharedTickets;
+
+    @JsonProperty("tags")
     private String[] tags;
 
     private ArrayList<Ticket> tickets;

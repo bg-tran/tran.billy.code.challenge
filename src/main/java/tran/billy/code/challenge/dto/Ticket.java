@@ -1,5 +1,6 @@
 package tran.billy.code.challenge.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import tran.billy.code.challenge.helper.StringHelper;
 
 import java.util.Arrays;
@@ -7,21 +8,53 @@ import java.util.Arrays;
 public class Ticket {
 
     static public final String TERM_PREFIX = "ticket_";
+
+    @JsonProperty("_id")
     private String id;
+
+    @JsonProperty("url")
     private String url;
+
+    @JsonProperty("external_id")
     private String externalId;
+
+    @JsonProperty("created_at")
     private String createdAt;
+
+    @JsonProperty("type")
     private String type;
+
+    @JsonProperty("subject")
     private String subject;
+
+    @JsonProperty("description")
     private String description;
+
+    @JsonProperty("priority")
     private String priority;
+
+    @JsonProperty("status")
     private String status;
+
+    @JsonProperty("submitter_id")
     private int submitterId;
+
+    @JsonProperty("assignee_id")
     private int assigneeId;
+
+    @JsonProperty("organization_id")
     private int organizationId;
+
+    @JsonProperty("tags")
     private String[] tags;
+
+    @JsonProperty("has_incidents")
     private boolean hasIncidents;
+
+    @JsonProperty("due_at")
     private String dueAt;
+
+    @JsonProperty("via")
     private String via;
 
     private Organization organization;
