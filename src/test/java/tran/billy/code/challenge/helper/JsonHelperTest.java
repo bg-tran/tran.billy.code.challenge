@@ -22,6 +22,8 @@ public class JsonHelperTest {
                         && organization.getName().equals("Enthaze"))
                 .expectNextMatches(organization -> organization.getId() == 102
                         && organization.getName().equals("Nutralab"))
+                .expectNextMatches(organization -> organization.getId() == 119
+                        && organization.getName().equals("Multron"))
                 .expectComplete()
                 .verify();
     }
@@ -38,7 +40,7 @@ public class JsonHelperTest {
                 .expectNextMatches(user -> user.getId() == 3
                         && user.getAlias().equals("Miss Buck")
                         && user.getRole().equals("end-user"))
-                .expectNextMatches(user -> user.getId() == 75
+                .expectNextMatches(user -> user.getId() == 71
                         && user.getAlias().equals("Miss Rosanna")
                         && user.getRole().equals("agent"))
                 .expectComplete()

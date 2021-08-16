@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tran.billy.code.challenge.helper.StringHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Organization {
 
@@ -22,7 +20,7 @@ public class Organization {
     private String name;
 
     @JsonProperty("domain_names")
-    private List<String> domainNames;
+    private ArrayList<String> domainNames;
 
     @JsonProperty("created_at")
     private String createdAt;
@@ -34,10 +32,8 @@ public class Organization {
     private boolean sharedTickets;
 
     @JsonProperty("tags")
-    private List<String> tags;
+    private ArrayList<String> tags;
 
-    private ArrayList<Ticket> tickets;
-    private ArrayList<User> users;
 
     public int getId() {
         return id;
@@ -71,11 +67,11 @@ public class Organization {
         this.name = name;
     }
 
-    public List<String> getDomainNames() {
+    public ArrayList<String> getDomainNames() {
         return domainNames;
     }
 
-    public void setDomainNames(List<String> domainNames) {
+    public void setDomainNames(ArrayList<String> domainNames) {
         this.domainNames = domainNames;
     }
 
@@ -103,29 +99,14 @@ public class Organization {
         this.sharedTickets = sharedTickets;
     }
 
-    public List<String> getTags() {
+    public ArrayList<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 
-    public ArrayList<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(ArrayList<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
-    public ArrayList<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(ArrayList<User> users) {
-        this.users = users;
-    }
 
     @Override
     public String toString() {
@@ -142,8 +123,6 @@ public class Organization {
                 StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + getCreatedAt() + "\n" +
                 StringHelper.addRightPadding("details", StringHelper.WIDTH) + getDetails() + "\n" +
                 StringHelper.addRightPadding("shared_tickets", StringHelper.WIDTH) + isSharedTickets() + "\n" +
-                StringHelper.addRightPadding("tags", StringHelper.WIDTH) +  getTags() + "\n" +
-                StringHelper.printListAsString(getTickets(), Ticket.TERM_PREFIX) + "\n" +
-                StringHelper.printListAsString(getUsers(), User.TERM_PREFIX)  + "\n";
+                StringHelper.addRightPadding("tags", StringHelper.WIDTH) +  getTags() + "\n" ;
     }
 }

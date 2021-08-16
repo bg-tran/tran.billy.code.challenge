@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import reactor.core.publisher.Flux;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -15,6 +14,14 @@ import java.nio.file.Paths;
 
 public class JsonHelper {
 
+    /**
+     * Read a JSON file containing array of JSON objects
+     * and deserialize into a stream of T
+     *
+     * @param filename
+     * @param valueType
+     * @return a stream of T
+     */
     public static <T> Flux<T> readJSONFile(String filename, Class<T> valueType) {
 
         return Flux.<T>create(sink -> {
@@ -35,9 +42,7 @@ public class JsonHelper {
                 }
 
                 reader.close();
-            } catch (IOException e) {
-                sink.error(e);
-            } catch (IllegalStateException e) {
+            } catch (IOException | IllegalStateException e) {
                 sink.error(e);
             }
             sink.complete();

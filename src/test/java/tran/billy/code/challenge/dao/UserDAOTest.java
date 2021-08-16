@@ -24,16 +24,16 @@ class UserDAOTest {
 
     @Test
     void testSearchOrgByCriteria(){
-        List<User> actualResult = userDao.searchUsersByCriteria("email","rosannasimpson@flotonic.com")
+        List<User> actualResult = userDao.findUsersByCriteria("email","rosannasimpson@flotonic.com")
                 .collect(Collectors.<User>toList())
                 .block();
         Assertions.assertEquals(1, actualResult.size());
-        actualResult = userDao.searchUsersByCriteria("email","1022")
+        actualResult = userDao.findUsersByCriteria("email","1022")
                 .collect(Collectors.<User>toList())
                 .block();
         Assertions.assertEquals(0, actualResult.size());
 
-        actualResult = userDao.searchUsersByCriteria("tags","Navarre")
+        actualResult = userDao.findUsersByCriteria("tags","Navarre")
                 .collect(Collectors.<User>toList())
                 .block();
         Assertions.assertEquals(1, actualResult.size());

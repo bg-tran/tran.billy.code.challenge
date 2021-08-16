@@ -22,9 +22,15 @@ public class OrganizationDAO extends GenericDAO{
         super(dataSource);
     }
 
-    public Flux<Organization> searchOrganizationByCriteria(String fieldName, String fieldValue){
+    /**
+     * Find organization by field in SEARCH_FIELDS
+     * @param fieldName
+     * @param fieldValue
+     * @return a stream of Organization
+     */
+    public Flux<Organization> findOrganizationsByCriteria(String fieldName, String fieldValue){
 
-        return searchByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, Organization.class);
+        return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, Organization.class);
     }
 
 }

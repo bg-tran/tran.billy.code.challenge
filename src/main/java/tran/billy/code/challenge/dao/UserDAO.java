@@ -33,8 +33,14 @@ public class UserDAO extends GenericDAO{
         super(dataSource);
     }
 
-    public Flux<User> searchUsersByCriteria(String fieldName, String fieldValue){
+    /**
+     * Find user by field in SEARCH_FIELDS
+     * @param fieldName
+     * @param fieldValue
+     * @return a stream of User
+     */
+    public Flux<User> findUsersByCriteria(String fieldName, String fieldValue){
 
-        return searchByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, User.class);
+        return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, User.class);
     }
 }

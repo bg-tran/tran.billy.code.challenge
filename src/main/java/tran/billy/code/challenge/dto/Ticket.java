@@ -3,8 +3,7 @@ package tran.billy.code.challenge.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import tran.billy.code.challenge.helper.StringHelper;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Ticket {
 
@@ -47,7 +46,7 @@ public class Ticket {
     private int organizationId;
 
     @JsonProperty("tags")
-    private List<String> tags;
+    private ArrayList<String> tags;
 
     @JsonProperty("has_incidents")
     private boolean hasIncidents;
@@ -57,10 +56,6 @@ public class Ticket {
 
     @JsonProperty("via")
     private String via;
-
-    private Organization organization;
-    private User submitter;
-    private User assignee;
 
     public String getId() {
         return id;
@@ -158,11 +153,11 @@ public class Ticket {
         this.organizationId = organizationId;
     }
 
-    public List<String> getTags() {
+    public ArrayList<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 
@@ -190,30 +185,6 @@ public class Ticket {
         this.via = via;
     }
 
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
-    public User getSubmitter() {
-        return submitter;
-    }
-
-    public void setSubmitter(User submitter) {
-        this.submitter = submitter;
-    }
-
-    public User getAssignee() {
-        return assignee;
-    }
-
-    public void setAssignee(User assignee) {
-        this.assignee = assignee;
-    }
-
     @Override
     public String toString() {
         return subject;
@@ -230,15 +201,12 @@ public class Ticket {
                 StringHelper.addRightPadding("description", StringHelper.WIDTH) +  getDescription() + "\n" +
                 StringHelper.addRightPadding("priority", StringHelper.WIDTH) + getPriority() + "\n" +
                 StringHelper.addRightPadding("status", StringHelper.WIDTH) + getStatus() + "\n" +
-                StringHelper.addRightPadding("submitter_id", StringHelper.WIDTH) + getSubmitterId() +
-                StringHelper.addRightPadding("assignee_id", StringHelper.WIDTH) + getAssigneeId() +
-                StringHelper.addRightPadding("organization_id", StringHelper.WIDTH) + getOrganizationId() +
-                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + getTags() +
-                StringHelper.addRightPadding("has_incidents", StringHelper.WIDTH) + isHasIncidents() +
+                StringHelper.addRightPadding("submitter_id", StringHelper.WIDTH) + getSubmitterId() + "\n" +
+                StringHelper.addRightPadding("assignee_id", StringHelper.WIDTH) + getAssigneeId() + "\n" +
+                StringHelper.addRightPadding("organization_id", StringHelper.WIDTH) + getOrganizationId() + "\n" +
+                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + getTags() + "\n" +
+                StringHelper.addRightPadding("has_incidents", StringHelper.WIDTH) + isHasIncidents() + "\n" +
                 StringHelper.addRightPadding("due_at", StringHelper.WIDTH) + getDueAt() + "\n" +
-                StringHelper.addRightPadding("via", StringHelper.WIDTH) + getVia() + "\n" +
-                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + getOrganization() + "\n" +
-                StringHelper.addRightPadding("submitter_name", StringHelper.WIDTH) + getSubmitter() + "\n" +
-                StringHelper.addRightPadding("assignee_name", StringHelper.WIDTH) + getAssignee() + "\n";
+                StringHelper.addRightPadding("via", StringHelper.WIDTH) + getVia() + "\n";
     }
 }

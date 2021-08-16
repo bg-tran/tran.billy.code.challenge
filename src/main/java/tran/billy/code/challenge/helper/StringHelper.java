@@ -5,21 +5,29 @@ import java.util.stream.IntStream;
 
 public class StringHelper {
 
-    public static final int WIDTH = 100;
+    public static final int WIDTH = 50;
 
+    /**
+     * Format a string to fixed size column
+     *
+     * @param text
+     * @param length
+     * @return
+     */
     public static String addRightPadding(String text, int length) {
         return String.format("%-" + length + "." + length + "s", text);
     }
 
-    public static <T> String printListAsString(ArrayList<T> list, String prefixTerm) {
+    /**
+     * Format key:value pair for printing
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public static <T> String printKeyValue(String key, String value) {
 
-        StringBuffer retVal = new StringBuffer();
+        return StringHelper.addRightPadding(key, StringHelper.WIDTH) + value  + "\n";
 
-        if (list != null){
-            IntStream.range(0, list.size())
-                .forEach(idx -> retVal.append(StringHelper.addRightPadding(prefixTerm + idx, StringHelper.WIDTH)
-                        + list.get(idx)  + "\n"));
-        }
-        return retVal.toString();
     }
 }

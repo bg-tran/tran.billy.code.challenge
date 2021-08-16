@@ -2,7 +2,6 @@ package tran.billy.code.challenge.dao;
 
 import reactor.core.publisher.Flux;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.function.Predicate;
@@ -18,6 +17,13 @@ public class GenericDAO {
         this.dataSource = dataSource;
     }
 
+
+    /**
+     * Create a predicate by <fieldName,fieldValue> for filtering
+     * @param fieldName
+     * @param fieldValue
+     * @return
+     */
     private <T> Predicate<T> createCriteria(String fieldName, String fieldValue){
 
         return p -> {
@@ -33,13 +39,19 @@ public class GenericDAO {
 
                 return fieldObj.toString().equals(fieldValue);
             } catch (NoSuchFieldException | IllegalAccessException e) {
-//                e.printStackTrace();
                 return false;
             }
         };
     }
 
-    public <T> Flux<T> searchByCriteria(String fieldName, String fieldValue, Class<T> valueType){
+
+    /**
+     * Find T by field
+     * @param fieldName
+     * @param fieldValue
+     * @return a stream of T
+     */
+    public <T> Flux<T> findByCriteria(String fieldName, String fieldValue, Class<T> valueType){
 
         Predicate<T> predicate = createCriteria(fieldName, fieldValue);
         Flux<T> tFlux = JsonHelper.readJSONFile(dataSource, valueType);

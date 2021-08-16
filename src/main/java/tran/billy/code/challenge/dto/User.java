@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tran.billy.code.challenge.helper.StringHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class User {
 
@@ -61,7 +59,7 @@ public class User {
     private int organizationId;
 
     @JsonProperty("tags")
-    private List<String> tags;
+    private ArrayList<String> tags;
 
     @JsonProperty("suspended")
     private boolean suspended;
@@ -201,11 +199,11 @@ public class User {
         this.organizationId = organizationId;
     }
 
-    public List<String> getTags() {
+    public ArrayList<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 
@@ -223,22 +221,6 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
-    public ArrayList<Object> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(ArrayList<Object> tickets) {
-        this.tickets = tickets;
     }
 
     @Override
@@ -265,8 +247,6 @@ public class User {
                 StringHelper.addRightPadding("organization_id", StringHelper.WIDTH) + getOrganizationId() + "\n" +
                 StringHelper.addRightPadding("tags", StringHelper.WIDTH) + getTags() + "\n" +
                 StringHelper.addRightPadding("suspended", StringHelper.WIDTH) + isSuspended() + "\n" +
-                StringHelper.addRightPadding("role", StringHelper.WIDTH) + getRole() + "\n" +
-                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + getOrganization() + "\n" +
-                StringHelper.printListAsString(getTickets(),"ticket") + "\n";
+                StringHelper.addRightPadding("role", StringHelper.WIDTH) + getRole() + "\n";
     }
 }

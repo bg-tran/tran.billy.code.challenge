@@ -24,13 +24,13 @@ class TicketDAOTest {
 
     @Test
     void testSearchOrgByCriteria(){
-        List<Ticket> actualResult = ticketDao.searchTicketsByCriteria("submitter_id","38")
+        List<Ticket> actualResult = ticketDao.findTicketsByCriteria("submitter_id","38")
                 .collect(Collectors.<Ticket>toList())
                 .block();
         Assertions.assertEquals(1, actualResult.size());
         Assertions.assertNotEquals(0,actualResult.get(0).print().length());
 //        System.out.print(actualResult.get(0).print());
-        actualResult = ticketDao.searchTicketsByCriteria("submitter_id","1022")
+        actualResult = ticketDao.findTicketsByCriteria("submitter_id","1022")
                 .collect(Collectors.<Ticket>toList())
                 .block();
         Assertions.assertEquals(0, actualResult.size());

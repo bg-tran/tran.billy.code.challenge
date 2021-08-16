@@ -24,15 +24,15 @@ class OrganizationDAOTest {
 
     @Test
     void testSearchOrgByCriteria(){
-        List<Organization> actualResult = orgDao.searchOrganizationByCriteria("_id","102")
+        List<Organization> actualResult = orgDao.findOrganizationsByCriteria("_id","102")
                 .collect(Collectors.<Organization>toList())
                 .block();
         Assertions.assertEquals(1, actualResult.size());
-        actualResult = orgDao.searchOrganizationByCriteria("_id","1022")
+        actualResult = orgDao.findOrganizationsByCriteria("_id","1022")
                 .collect(Collectors.<Organization>toList())
                 .block();
         Assertions.assertEquals(0, actualResult.size());
-        actualResult = orgDao.searchOrganizationByCriteria("domain_names","datagen.com")
+        actualResult = orgDao.findOrganizationsByCriteria("domain_names","datagen.com")
                 .collect(Collectors.<Organization>toList())
                 .block();
         Assertions.assertEquals(1, actualResult.size());
