@@ -6,6 +6,7 @@ import tran.billy.code.challenge.helper.StringHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class User {
 
@@ -60,7 +61,7 @@ public class User {
     private int organizationId;
 
     @JsonProperty("tags")
-    private String[] tags;
+    private List<String> tags;
 
     @JsonProperty("suspended")
     private boolean suspended;
@@ -200,11 +201,11 @@ public class User {
         this.organizationId = organizationId;
     }
 
-    public String[] getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
@@ -248,25 +249,24 @@ public class User {
     public String print() {
         return
                 StringHelper.addRightPadding("_id", StringHelper.WIDTH) + id + "\n" +
-                StringHelper.addRightPadding("url", StringHelper.WIDTH) + '\"' + url + "\"\n" +
-                StringHelper.addRightPadding("name", StringHelper.WIDTH) + '\"' + name + "\"\n" +
-                StringHelper.addRightPadding("alias", StringHelper.WIDTH) + '\"' +  alias + "\"\n" +
-                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + '\"' +  createdAt + "\"\n" +
+                StringHelper.addRightPadding("url", StringHelper.WIDTH) + url + "\n" +
+                StringHelper.addRightPadding("name", StringHelper.WIDTH) + name + "\n" +
+                StringHelper.addRightPadding("alias", StringHelper.WIDTH) + alias + "\n" +
+                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + createdAt + "\n" +
                 StringHelper.addRightPadding("active", StringHelper.WIDTH) +  active + "\n" +
                 StringHelper.addRightPadding("verified", StringHelper.WIDTH) + verified + "\n" +
                 StringHelper.addRightPadding("shared", StringHelper.WIDTH) + shared + "\n" +
-                StringHelper.addRightPadding("locale", StringHelper.WIDTH) + '\"' + locale + "\"\n" +
-                StringHelper.addRightPadding("timezone", StringHelper.WIDTH) + '\"' + timezone + "\"\n" +
-                StringHelper.addRightPadding("lastLoginAt", StringHelper.WIDTH) + '\"' + lastLoginAt + "\"\n" +
-                StringHelper.addRightPadding("email", StringHelper.WIDTH) + '\"' + email + "\"\n" +
-                StringHelper.addRightPadding("phone", StringHelper.WIDTH) + '\"' + phone + "\"\n" +
-                StringHelper.addRightPadding("signature", StringHelper.WIDTH) + '\"' + signature + "\"\n" +
+                StringHelper.addRightPadding("locale", StringHelper.WIDTH) + locale + "\n" +
+                StringHelper.addRightPadding("timezone", StringHelper.WIDTH) + timezone + "\n" +
+                StringHelper.addRightPadding("lastLoginAt", StringHelper.WIDTH) + lastLoginAt + "\n" +
+                StringHelper.addRightPadding("email", StringHelper.WIDTH) + email + "\n" +
+                StringHelper.addRightPadding("phone", StringHelper.WIDTH) + phone + "\n" +
+                StringHelper.addRightPadding("signature", StringHelper.WIDTH) + signature + "\n" +
                 StringHelper.addRightPadding("organization_id", StringHelper.WIDTH) + organizationId + "\n" +
-                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + Arrays.toString(tags) + "\"\n" +
+                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + tags + "\n" +
                 StringHelper.addRightPadding("suspended", StringHelper.WIDTH) + suspended + "\n" +
-                StringHelper.addRightPadding("role", StringHelper.WIDTH) + '\"' + role + "\"\n" +
-                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + '\"' + organization + "\"\n" +
-                StringHelper.printListAsString(tickets,"ticket") + "\"\n";
-
+                StringHelper.addRightPadding("role", StringHelper.WIDTH) + role + "\n" +
+                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + organization + "\n" +
+                StringHelper.printListAsString(tickets,"ticket") + "\n";
     }
 }

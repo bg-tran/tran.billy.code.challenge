@@ -4,18 +4,18 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tran.billy.code.challenge.dto.Organization;
+import tran.billy.code.challenge.dto.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-class OrganizationDAOTest {
+class UserDAOTest {
 
-    OrganizationDAO orgDao;
+    UserDAO userDao;
 
     @BeforeEach
     void setUp() {
-        orgDao = new OrganizationDAO("src/test/organizations.json");
+        userDao = new UserDAO("src/test/users.json");
     }
 
     @AfterEach
@@ -24,18 +24,20 @@ class OrganizationDAOTest {
 
     @Test
     void testSearchOrgByCriteria(){
-        List<Organization> actualResult = orgDao.searchOrganizationByCriteria("_id","102")
-                .collect(Collectors.<Organization>toList())
+        List<User> actualResult = userDao.searchUsersByCriteria("email","rosannasimpson@flotonic.com")
+                .collect(Collectors.<User>toList())
                 .block();
         Assertions.assertEquals(1, actualResult.size());
-        actualResult = orgDao.searchOrganizationByCriteria("_id","1022")
-                .collect(Collectors.<Organization>toList())
+        actualResult = userDao.searchUsersByCriteria("email","1022")
+                .collect(Collectors.<User>toList())
                 .block();
         Assertions.assertEquals(0, actualResult.size());
-        actualResult = orgDao.searchOrganizationByCriteria("domain_names","datagen.com")
-                .collect(Collectors.<Organization>toList())
+
+        actualResult = userDao.searchUsersByCriteria("tags","Navarre")
+                .collect(Collectors.<User>toList())
                 .block();
         Assertions.assertEquals(1, actualResult.size());
+        Assertions.assertNotEquals(0,actualResult.get(0).print().length());
         System.out.print(actualResult.get(0).print());
     }
 }

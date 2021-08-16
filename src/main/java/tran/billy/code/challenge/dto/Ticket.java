@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tran.billy.code.challenge.helper.StringHelper;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Ticket {
 
@@ -46,7 +47,7 @@ public class Ticket {
     private int organizationId;
 
     @JsonProperty("tags")
-    private String[] tags;
+    private List<String> tags;
 
     @JsonProperty("has_incidents")
     private boolean hasIncidents;
@@ -157,11 +158,11 @@ public class Ticket {
         this.organizationId = organizationId;
     }
 
-    public String[] getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
@@ -220,24 +221,24 @@ public class Ticket {
 
     public String print() {
         return
-                StringHelper.addRightPadding("_id", StringHelper.WIDTH) + '\"' + id + "\"\n" +
-                StringHelper.addRightPadding("url", StringHelper.WIDTH) + '\"' + url + "\"\n" +
-                StringHelper.addRightPadding("external_id", StringHelper.WIDTH) + '\"' + externalId + "\"\n" +
-                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + '\"' +  createdAt + "\"\n" +
-                StringHelper.addRightPadding("type", StringHelper.WIDTH) + '\"' +  type + "\"\n" +
-                StringHelper.addRightPadding("subject", StringHelper.WIDTH) + '\"' +  subject + "\"\n" +
-                StringHelper.addRightPadding("description", StringHelper.WIDTH) + '\"' +  description + "\"\n" +
-                StringHelper.addRightPadding("priority", StringHelper.WIDTH) + '\"' +  priority + "\"\n" +
-                StringHelper.addRightPadding("status", StringHelper.WIDTH) + '\"' +  status + "\"\n" +
+                StringHelper.addRightPadding("_id", StringHelper.WIDTH) + id + "\n" +
+                StringHelper.addRightPadding("url", StringHelper.WIDTH) + url + "\n" +
+                StringHelper.addRightPadding("external_id", StringHelper.WIDTH) + externalId + "\n" +
+                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + createdAt + "\n" +
+                StringHelper.addRightPadding("type", StringHelper.WIDTH) + type + "\n" +
+                StringHelper.addRightPadding("subject", StringHelper.WIDTH) + subject + "\n" +
+                StringHelper.addRightPadding("description", StringHelper.WIDTH) +  description + "\n" +
+                StringHelper.addRightPadding("priority", StringHelper.WIDTH) + priority + "\n" +
+                StringHelper.addRightPadding("status", StringHelper.WIDTH) + status + "\n" +
                 StringHelper.addRightPadding("submitter_id", StringHelper.WIDTH) + submitterId +
                 StringHelper.addRightPadding("assignee_id", StringHelper.WIDTH) + assigneeId +
                 StringHelper.addRightPadding("organization_id", StringHelper.WIDTH) + organizationId +
-                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + Arrays.toString(tags) +
+                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + tags +
                 StringHelper.addRightPadding("has_incidents", StringHelper.WIDTH) + hasIncidents +
-                StringHelper.addRightPadding("due_at", StringHelper.WIDTH) + '\"' +  dueAt + "\"\n" +
-                StringHelper.addRightPadding("via", StringHelper.WIDTH) + '\"' +  via + "\"\n" +
-                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + '\"' + organization + "\"\n" +
-                StringHelper.addRightPadding("submitter_name", StringHelper.WIDTH) + '\"' + submitter + "\"\n" +
-                StringHelper.addRightPadding("assignee_name", StringHelper.WIDTH) + '\"' + assignee + "\"\n";
+                StringHelper.addRightPadding("due_at", StringHelper.WIDTH) + dueAt + "\n" +
+                StringHelper.addRightPadding("via", StringHelper.WIDTH) + via + "\n" +
+                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + organization + "\n" +
+                StringHelper.addRightPadding("submitter_name", StringHelper.WIDTH) + submitter + "\n" +
+                StringHelper.addRightPadding("assignee_name", StringHelper.WIDTH) + assignee + "\n";
     }
 }

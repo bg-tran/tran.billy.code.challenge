@@ -15,9 +15,11 @@ public class StringHelper {
 
         StringBuffer retVal = new StringBuffer();
 
-        IntStream.range(0, list.size())
+        if (list != null){
+            IntStream.range(0, list.size())
                 .forEach(idx -> retVal.append(StringHelper.addRightPadding(prefixTerm + idx, StringHelper.WIDTH)
                         + list.get(idx)  + "\n"));
+        }
         return retVal.toString();
     }
 }

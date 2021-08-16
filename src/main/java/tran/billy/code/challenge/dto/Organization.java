@@ -5,6 +5,7 @@ import tran.billy.code.challenge.helper.StringHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Organization {
 
@@ -21,7 +22,7 @@ public class Organization {
     private String name;
 
     @JsonProperty("domain_names")
-    private String[] domainNames;
+    private List<String> domainNames;
 
     @JsonProperty("created_at")
     private String createdAt;
@@ -33,7 +34,7 @@ public class Organization {
     private boolean sharedTickets;
 
     @JsonProperty("tags")
-    private String[] tags;
+    private List<String> tags;
 
     private ArrayList<Ticket> tickets;
     private ArrayList<User> users;
@@ -70,11 +71,11 @@ public class Organization {
         this.name = name;
     }
 
-    public String[] getDomainNames() {
+    public List<String> getDomainNames() {
         return domainNames;
     }
 
-    public void setDomainNames(String[] domainNames) {
+    public void setDomainNames(List<String> domainNames) {
         this.domainNames = domainNames;
     }
 
@@ -102,11 +103,11 @@ public class Organization {
         this.sharedTickets = sharedTickets;
     }
 
-    public String[] getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
@@ -134,15 +135,15 @@ public class Organization {
     public String print() {
         return
                 StringHelper.addRightPadding("_id", StringHelper.WIDTH) + id + "\n" +
-                StringHelper.addRightPadding("url", StringHelper.WIDTH) + '\"' + url + "\"\n" +
-                StringHelper.addRightPadding("external_id", StringHelper.WIDTH) + '\"' + externalId + "\"\n" +
-                StringHelper.addRightPadding("name", StringHelper.WIDTH) + '\"' + name + "\"\n" +
-                StringHelper.addRightPadding("domain_names", StringHelper.WIDTH) + '\"' + Arrays.toString(domainNames) + "\"\n" +
-                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + createdAt + "\"\n" +
-                StringHelper.addRightPadding("details", StringHelper.WIDTH) + details + "\"\n" +
-                StringHelper.addRightPadding("shared_tickets", StringHelper.WIDTH) + sharedTickets + "\"\n" +
-                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + Arrays.toString(tags) + "\"\n" +
-                StringHelper.printListAsString(tickets, Ticket.TERM_PREFIX) + "\"\n" +
-                StringHelper.printListAsString(users, User.TERM_PREFIX)  + "\"\n";
+                StringHelper.addRightPadding("url", StringHelper.WIDTH) +  url + "\n" +
+                StringHelper.addRightPadding("external_id", StringHelper.WIDTH) + externalId + "\n" +
+                StringHelper.addRightPadding("name", StringHelper.WIDTH) + name + "\n" +
+                StringHelper.addRightPadding("domain_names", StringHelper.WIDTH)  + domainNames + "\n" +
+                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + createdAt + "\n" +
+                StringHelper.addRightPadding("details", StringHelper.WIDTH) + details + "\n" +
+                StringHelper.addRightPadding("shared_tickets", StringHelper.WIDTH) + sharedTickets + "\n" +
+                StringHelper.addRightPadding("tags", StringHelper.WIDTH) +  tags + "\n" +
+                StringHelper.printListAsString(tickets, Ticket.TERM_PREFIX) + "\n" +
+                StringHelper.printListAsString(users, User.TERM_PREFIX)  + "\n";
     }
 }
