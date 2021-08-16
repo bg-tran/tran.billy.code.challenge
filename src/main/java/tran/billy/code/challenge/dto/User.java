@@ -248,25 +248,25 @@ public class User {
 
     public String print() {
         return
-                StringHelper.addRightPadding("_id", StringHelper.WIDTH) + id + "\n" +
-                StringHelper.addRightPadding("url", StringHelper.WIDTH) + url + "\n" +
-                StringHelper.addRightPadding("name", StringHelper.WIDTH) + name + "\n" +
-                StringHelper.addRightPadding("alias", StringHelper.WIDTH) + alias + "\n" +
-                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + createdAt + "\n" +
-                StringHelper.addRightPadding("active", StringHelper.WIDTH) +  active + "\n" +
-                StringHelper.addRightPadding("verified", StringHelper.WIDTH) + verified + "\n" +
-                StringHelper.addRightPadding("shared", StringHelper.WIDTH) + shared + "\n" +
-                StringHelper.addRightPadding("locale", StringHelper.WIDTH) + locale + "\n" +
-                StringHelper.addRightPadding("timezone", StringHelper.WIDTH) + timezone + "\n" +
-                StringHelper.addRightPadding("lastLoginAt", StringHelper.WIDTH) + lastLoginAt + "\n" +
-                StringHelper.addRightPadding("email", StringHelper.WIDTH) + email + "\n" +
-                StringHelper.addRightPadding("phone", StringHelper.WIDTH) + phone + "\n" +
-                StringHelper.addRightPadding("signature", StringHelper.WIDTH) + signature + "\n" +
-                StringHelper.addRightPadding("organization_id", StringHelper.WIDTH) + organizationId + "\n" +
-                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + tags + "\n" +
-                StringHelper.addRightPadding("suspended", StringHelper.WIDTH) + suspended + "\n" +
-                StringHelper.addRightPadding("role", StringHelper.WIDTH) + role + "\n" +
-                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + organization + "\n" +
-                StringHelper.printListAsString(tickets,"ticket") + "\n";
+                StringHelper.addRightPadding("_id", StringHelper.WIDTH) + getId() + "\n" +
+                StringHelper.addRightPadding("url", StringHelper.WIDTH) + getUrl() + "\n" +
+                StringHelper.addRightPadding("name", StringHelper.WIDTH) + getName() + "\n" +
+                StringHelper.addRightPadding("alias", StringHelper.WIDTH) + getAlias() + "\n" +
+                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + getCreatedAt() + "\n" +
+                StringHelper.addRightPadding("active", StringHelper.WIDTH) +  isActive() + "\n" +
+                StringHelper.addRightPadding("verified", StringHelper.WIDTH) + isVerified() + "\n" +
+                StringHelper.addRightPadding("shared", StringHelper.WIDTH) + isShared() + "\n" +
+                StringHelper.addRightPadding("locale", StringHelper.WIDTH) + getLocale() + "\n" +
+                StringHelper.addRightPadding("timezone", StringHelper.WIDTH) + getTimezone() + "\n" +
+                StringHelper.addRightPadding("lastLoginAt", StringHelper.WIDTH) + getLastLoginAt() + "\n" +
+                StringHelper.addRightPadding("email", StringHelper.WIDTH) + getEmail() + "\n" +
+                StringHelper.addRightPadding("phone", StringHelper.WIDTH) + getPhone() + "\n" +
+                StringHelper.addRightPadding("signature", StringHelper.WIDTH) + getSignature() + "\n" +
+                StringHelper.addRightPadding("organization_id", StringHelper.WIDTH) + getOrganizationId() + "\n" +
+                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + getTags() + "\n" +
+                StringHelper.addRightPadding("suspended", StringHelper.WIDTH) + isSuspended() + "\n" +
+                StringHelper.addRightPadding("role", StringHelper.WIDTH) + getRole() + "\n" +
+                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + getOrganization() + "\n" +
+                StringHelper.printListAsString(getTickets(),"ticket") + "\n";
     }
 }

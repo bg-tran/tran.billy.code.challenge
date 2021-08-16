@@ -134,16 +134,16 @@ public class Organization {
 
     public String print() {
         return
-                StringHelper.addRightPadding("_id", StringHelper.WIDTH) + id + "\n" +
-                StringHelper.addRightPadding("url", StringHelper.WIDTH) +  url + "\n" +
-                StringHelper.addRightPadding("external_id", StringHelper.WIDTH) + externalId + "\n" +
-                StringHelper.addRightPadding("name", StringHelper.WIDTH) + name + "\n" +
-                StringHelper.addRightPadding("domain_names", StringHelper.WIDTH)  + domainNames + "\n" +
-                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + createdAt + "\n" +
-                StringHelper.addRightPadding("details", StringHelper.WIDTH) + details + "\n" +
-                StringHelper.addRightPadding("shared_tickets", StringHelper.WIDTH) + sharedTickets + "\n" +
-                StringHelper.addRightPadding("tags", StringHelper.WIDTH) +  tags + "\n" +
-                StringHelper.printListAsString(tickets, Ticket.TERM_PREFIX) + "\n" +
-                StringHelper.printListAsString(users, User.TERM_PREFIX)  + "\n";
+                StringHelper.addRightPadding("_id", StringHelper.WIDTH) + getId() + "\n" +
+                StringHelper.addRightPadding("url", StringHelper.WIDTH) +  getUrl() + "\n" +
+                StringHelper.addRightPadding("external_id", StringHelper.WIDTH) + getExternalId() + "\n" +
+                StringHelper.addRightPadding("name", StringHelper.WIDTH) + getName() + "\n" +
+                StringHelper.addRightPadding("domain_names", StringHelper.WIDTH)  + getDomainNames() + "\n" +
+                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + getCreatedAt() + "\n" +
+                StringHelper.addRightPadding("details", StringHelper.WIDTH) + getDetails() + "\n" +
+                StringHelper.addRightPadding("shared_tickets", StringHelper.WIDTH) + isSharedTickets() + "\n" +
+                StringHelper.addRightPadding("tags", StringHelper.WIDTH) +  getTags() + "\n" +
+                StringHelper.printListAsString(getTickets(), Ticket.TERM_PREFIX) + "\n" +
+                StringHelper.printListAsString(getUsers(), User.TERM_PREFIX)  + "\n";
     }
 }

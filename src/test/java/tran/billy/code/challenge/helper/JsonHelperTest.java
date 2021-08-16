@@ -1,11 +1,14 @@
 package tran.billy.code.challenge.helper;
 
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 import tran.billy.code.challenge.dto.Organization;
 import tran.billy.code.challenge.dto.Ticket;
 import tran.billy.code.challenge.dto.User;
+
+import java.io.IOException;
 
 public class JsonHelperTest {
 
@@ -55,4 +58,25 @@ public class JsonHelperTest {
                 .expectComplete()
                 .verify();
     }
+
+    @Test
+    void testInvalidFile() {
+
+        StepVerifier
+                .create(JsonHelper.readJSONFile("src/test/invalid.json", Object.class))
+                .expectErrorMatches(throwable -> throwable instanceof IllegalStateException &&
+                        throwable.getMessage().equals("Expected content to be an array"))
+                .verify();
+
+        StepVerifier
+                .create(JsonHelper.readJSONFile("src/test/abc.json", Object.class))
+                .expectErrorMatches(throwable -> throwable instanceof IOException)
+                .verify();
+
+        StepVerifier
+                .create(JsonHelper.readJSONFile("src/test/invalid2.json", User.class))
+                .expectErrorMatches(throwable -> throwable instanceof UnrecognizedPropertyException)
+                .verify();
+    }
+
 }

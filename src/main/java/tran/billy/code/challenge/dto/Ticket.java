@@ -221,24 +221,24 @@ public class Ticket {
 
     public String print() {
         return
-                StringHelper.addRightPadding("_id", StringHelper.WIDTH) + id + "\n" +
-                StringHelper.addRightPadding("url", StringHelper.WIDTH) + url + "\n" +
-                StringHelper.addRightPadding("external_id", StringHelper.WIDTH) + externalId + "\n" +
-                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + createdAt + "\n" +
-                StringHelper.addRightPadding("type", StringHelper.WIDTH) + type + "\n" +
-                StringHelper.addRightPadding("subject", StringHelper.WIDTH) + subject + "\n" +
-                StringHelper.addRightPadding("description", StringHelper.WIDTH) +  description + "\n" +
-                StringHelper.addRightPadding("priority", StringHelper.WIDTH) + priority + "\n" +
-                StringHelper.addRightPadding("status", StringHelper.WIDTH) + status + "\n" +
-                StringHelper.addRightPadding("submitter_id", StringHelper.WIDTH) + submitterId +
-                StringHelper.addRightPadding("assignee_id", StringHelper.WIDTH) + assigneeId +
-                StringHelper.addRightPadding("organization_id", StringHelper.WIDTH) + organizationId +
-                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + tags +
-                StringHelper.addRightPadding("has_incidents", StringHelper.WIDTH) + hasIncidents +
-                StringHelper.addRightPadding("due_at", StringHelper.WIDTH) + dueAt + "\n" +
-                StringHelper.addRightPadding("via", StringHelper.WIDTH) + via + "\n" +
-                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + organization + "\n" +
-                StringHelper.addRightPadding("submitter_name", StringHelper.WIDTH) + submitter + "\n" +
-                StringHelper.addRightPadding("assignee_name", StringHelper.WIDTH) + assignee + "\n";
+                StringHelper.addRightPadding("_id", StringHelper.WIDTH) + getId() + "\n" +
+                StringHelper.addRightPadding("url", StringHelper.WIDTH) + getUrl() + "\n" +
+                StringHelper.addRightPadding("external_id", StringHelper.WIDTH) + getExternalId() + "\n" +
+                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + getCreatedAt() + "\n" +
+                StringHelper.addRightPadding("type", StringHelper.WIDTH) + getType() + "\n" +
+                StringHelper.addRightPadding("subject", StringHelper.WIDTH) + getSubject() + "\n" +
+                StringHelper.addRightPadding("description", StringHelper.WIDTH) +  getDescription() + "\n" +
+                StringHelper.addRightPadding("priority", StringHelper.WIDTH) + getPriority() + "\n" +
+                StringHelper.addRightPadding("status", StringHelper.WIDTH) + getStatus() + "\n" +
+                StringHelper.addRightPadding("submitter_id", StringHelper.WIDTH) + getSubmitterId() +
+                StringHelper.addRightPadding("assignee_id", StringHelper.WIDTH) + getAssigneeId() +
+                StringHelper.addRightPadding("organization_id", StringHelper.WIDTH) + getOrganizationId() +
+                StringHelper.addRightPadding("tags", StringHelper.WIDTH) + getTags() +
+                StringHelper.addRightPadding("has_incidents", StringHelper.WIDTH) + isHasIncidents() +
+                StringHelper.addRightPadding("due_at", StringHelper.WIDTH) + getDueAt() + "\n" +
+                StringHelper.addRightPadding("via", StringHelper.WIDTH) + getVia() + "\n" +
+                StringHelper.addRightPadding("organization_name", StringHelper.WIDTH) + getOrganization() + "\n" +
+                StringHelper.addRightPadding("submitter_name", StringHelper.WIDTH) + getSubmitter() + "\n" +
+                StringHelper.addRightPadding("assignee_name", StringHelper.WIDTH) + getAssignee() + "\n";
     }
 }

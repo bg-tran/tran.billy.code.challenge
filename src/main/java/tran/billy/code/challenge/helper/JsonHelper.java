@@ -20,7 +20,8 @@ public class JsonHelper {
         return Flux.<T>create(sink -> {
             BufferedReader reader = null;
             Path inputFile = Paths.get(filename);
-            try{
+            try {
+
                 ObjectMapper mapper = new ObjectMapper();
                 reader = Files.newBufferedReader(inputFile, Charset.defaultCharset());
                 JsonParser jsonParser = new JsonFactory().createParser(reader);
@@ -30,21 +31,14 @@ public class JsonHelper {
                 }
 
                 while (jsonParser.nextToken() == JsonToken.START_OBJECT) {
-                    T obj = mapper.readValue(jsonParser, valueType);
-                    if (obj != null) {
-                        sink.next(obj);
-                    }
+                    sink.next(mapper.readValue(jsonParser, valueType));
                 }
-            } catch (IOException e){
-                e.printStackTrace();
-            } finally {
-                if(reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+
+                reader.close();
+            } catch (IOException e) {
+                sink.error(e);
+            } catch (IllegalStateException e) {
+                sink.error(e);
             }
             sink.complete();
         });
