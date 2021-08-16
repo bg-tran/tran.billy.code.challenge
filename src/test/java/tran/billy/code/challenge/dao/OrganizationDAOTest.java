@@ -36,6 +36,6 @@ class OrganizationDAOTest {
                 .collect(Collectors.<Organization>toList())
                 .block();
         Assertions.assertEquals(1, actualResult.size());
-        System.out.print(actualResult.get(0).print());
+//        System.out.print(actualResult.get(0).print());
     }
 }

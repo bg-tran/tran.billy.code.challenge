@@ -29,7 +29,7 @@ class TicketDAOTest {
                 .block();
         Assertions.assertEquals(1, actualResult.size());
         Assertions.assertNotEquals(0,actualResult.get(0).print().length());
-        System.out.print(actualResult.get(0).print());
+//        System.out.print(actualResult.get(0).print());
         actualResult = ticketDao.searchTicketsByCriteria("submitter_id","1022")
                 .collect(Collectors.<Ticket>toList())
                 .block();
