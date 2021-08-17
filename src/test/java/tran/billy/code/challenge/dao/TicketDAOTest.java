@@ -27,13 +27,17 @@ class TicketDAOTest {
         List<Ticket> actualResult = ticketDao.findTicketsByCriteria("submitter_id","38")
                 .collect(Collectors.<Ticket>toList())
                 .block();
-        Assertions.assertEquals(1, actualResult.size());
+        Assertions.assertTrue(actualResult != null && actualResult.size() == 1);
         Assertions.assertNotEquals(0,actualResult.get(0).print().length());
-//        System.out.print(actualResult.get(0).print());
         actualResult = ticketDao.findTicketsByCriteria("submitter_id","1022")
                 .collect(Collectors.<Ticket>toList())
                 .block();
-        Assertions.assertEquals(0, actualResult.size());
+        Assertions.assertTrue(actualResult != null && actualResult.size() == 0);
+
+        actualResult = ticketDao.findTicketsByCriteria("type","incident")
+                .collect(Collectors.<Ticket>toList())
+                .block();
+        Assertions.assertTrue(actualResult != null && actualResult.size() == 2);
 
     }
 }

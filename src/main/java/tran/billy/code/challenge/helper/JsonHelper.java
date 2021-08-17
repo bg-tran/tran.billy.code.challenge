@@ -18,14 +18,14 @@ public class JsonHelper {
      * Read a JSON file containing array of JSON objects
      * and deserialize into a stream of T
      *
-     * @param filename
-     * @param valueType
+     * @param filename file name
+     * @param valueType Java Class of the JSON object
      * @return a stream of T
      */
     public static <T> Flux<T> readJSONFile(String filename, Class<T> valueType) {
 
-        return Flux.<T>create(sink -> {
-            BufferedReader reader = null;
+        return Flux.create(sink -> {
+            BufferedReader reader;
             Path inputFile = Paths.get(filename);
             try {
 

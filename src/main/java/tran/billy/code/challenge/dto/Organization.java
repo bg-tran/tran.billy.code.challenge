@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tran.billy.code.challenge.helper.StringHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Organization {
 
@@ -34,6 +35,9 @@ public class Organization {
     @JsonProperty("tags")
     private ArrayList<String> tags;
 
+    private ArrayList<User> users;
+
+    private ArrayList<Ticket> tickets;
 
     public int getId() {
         return id;
@@ -107,6 +111,23 @@ public class Organization {
         this.tags = tags;
     }
 
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void addUsers(List<User> users){
+
+        this.users = new ArrayList<>(users);
+    }
+
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void addTickets(List<Ticket> tickets){
+
+        this.tickets = new ArrayList<>(tickets);
+    }
 
     @Override
     public String toString() {
@@ -115,14 +136,16 @@ public class Organization {
 
     public String print() {
         return
-                StringHelper.addRightPadding("_id", StringHelper.WIDTH) + getId() + "\n" +
-                StringHelper.addRightPadding("url", StringHelper.WIDTH) +  getUrl() + "\n" +
-                StringHelper.addRightPadding("external_id", StringHelper.WIDTH) + getExternalId() + "\n" +
-                StringHelper.addRightPadding("name", StringHelper.WIDTH) + getName() + "\n" +
-                StringHelper.addRightPadding("domain_names", StringHelper.WIDTH)  + getDomainNames() + "\n" +
-                StringHelper.addRightPadding("created_at", StringHelper.WIDTH) + getCreatedAt() + "\n" +
-                StringHelper.addRightPadding("details", StringHelper.WIDTH) + getDetails() + "\n" +
-                StringHelper.addRightPadding("shared_tickets", StringHelper.WIDTH) + isSharedTickets() + "\n" +
-                StringHelper.addRightPadding("tags", StringHelper.WIDTH) +  getTags() + "\n" ;
+                StringHelper.addRightPadding("_id", StringHelper.RIGHT_PADDING_WIDTH) + getId() + "\n" +
+                StringHelper.addRightPadding("url", StringHelper.RIGHT_PADDING_WIDTH) +  getUrl() + "\n" +
+                StringHelper.addRightPadding("external_id", StringHelper.RIGHT_PADDING_WIDTH) + getExternalId() + "\n" +
+                StringHelper.addRightPadding("name", StringHelper.RIGHT_PADDING_WIDTH) + getName() + "\n" +
+                StringHelper.addRightPadding("domain_names", StringHelper.RIGHT_PADDING_WIDTH)  + getDomainNames() + "\n" +
+                StringHelper.addRightPadding("created_at", StringHelper.RIGHT_PADDING_WIDTH) + getCreatedAt() + "\n" +
+                StringHelper.addRightPadding("details", StringHelper.RIGHT_PADDING_WIDTH) + getDetails() + "\n" +
+                StringHelper.addRightPadding("shared_tickets", StringHelper.RIGHT_PADDING_WIDTH) + isSharedTickets() + "\n" +
+                StringHelper.addRightPadding("tags", StringHelper.RIGHT_PADDING_WIDTH) +  getTags() + "\n" +
+                StringHelper.printListAsString(Ticket.TERM_PREFIX, getTickets()) +
+                StringHelper.printListAsString(User.TERM_PREFIX, getUsers())  + "\n";
     }
 }

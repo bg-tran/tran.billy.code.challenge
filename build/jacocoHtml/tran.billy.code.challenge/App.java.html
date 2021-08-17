@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tran.billy.code.challenge</a> &gt; <a href="index.source.html" class="el_package">tran.billy.code.challenge</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package tran.billy.code.challenge;
+
+import tran.billy.code.challenge.dao.OrganizationDAO;
+import tran.billy.code.challenge.dao.TicketDAO;
+import tran.billy.code.challenge.dao.UserDAO;
+import tran.billy.code.challenge.helper.StringHelper;
+import tran.billy.code.challenge.services.HelpdeskService;
+
+
+import java.util.Scanner;
+
+
+
+<span class="nc" id="L14">public class App {</span>
+
+    private void printHeaders(){
+<span class="nc" id="L17">        System.out.println(&quot;Welcome to Zendesk Search&quot;);</span>
+<span class="nc" id="L18">        System.out.println(&quot;Type \'quit\' to exit any time, Press enter to continue\n\n&quot;);</span>
+<span class="nc" id="L19">        System.out.println(StringHelper.addLeftPadding(&quot; &quot;, StringHelper.LEFT_PADDING_WIDTH - 5) + &quot;Select search options:&quot;);</span>
+<span class="nc" id="L20">        System.out.println(StringHelper.addLeftPadding(&quot; * &quot;, StringHelper.LEFT_PADDING_WIDTH) + &quot;Press 1 to search Zendesk&quot;);</span>
+<span class="nc" id="L21">        System.out.println(StringHelper.addLeftPadding(&quot; * &quot;, StringHelper.LEFT_PADDING_WIDTH) + &quot;Press 2 to view a list of searchable fields&quot;);</span>
+<span class="nc" id="L22">        System.out.println(StringHelper.addLeftPadding(&quot; * &quot;, StringHelper.LEFT_PADDING_WIDTH) + &quot;Type \'quit\' to exit&quot;);</span>
+<span class="nc" id="L23">    }</span>
+
+    private void printHelp(){
+<span class="nc" id="L26">        System.out.println(StringHelper.addRightPadding(&quot;_&quot;, StringHelper.RIGHT_PADDING_WIDTH).replace(' ','_'));</span>
+<span class="nc" id="L27">        System.out.println(&quot;Search Users with&quot;);</span>
+<span class="nc" id="L28">        UserDAO.SEARCH_FIELDS.keySet()</span>
+<span class="nc" id="L29">                .forEach( key -&gt; System.out.println(key));</span>
+
+<span class="nc" id="L31">        System.out.println(StringHelper.addRightPadding(&quot;_&quot;, StringHelper.RIGHT_PADDING_WIDTH).replace(' ','_'));</span>
+<span class="nc" id="L32">        System.out.println(&quot;Search Tickets with&quot;);</span>
+<span class="nc" id="L33">        TicketDAO.SEARCH_FIELDS.keySet()</span>
+<span class="nc" id="L34">                .forEach(key -&gt; System.out.println(key));</span>
+
+<span class="nc" id="L36">        System.out.println(StringHelper.addRightPadding(&quot;_&quot;, StringHelper.RIGHT_PADDING_WIDTH).replace(' ','_'));</span>
+<span class="nc" id="L37">        System.out.println(&quot;Search Organizations with&quot;);</span>
+<span class="nc" id="L38">        OrganizationDAO.SEARCH_FIELDS.keySet()</span>
+<span class="nc" id="L39">                .forEach(key -&gt; System.out.println(key));</span>
+<span class="nc" id="L40">    }</span>
+
+    private void run(){
+
+<span class="nc" id="L44">        printHeaders();</span>
+<span class="nc" id="L45">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L46">        String input = scanner.nextLine();</span>
+        String searchMenuInput;
+        String searchTerm, searchValue;
+<span class="nc" id="L49">        HelpdeskService helpdeskService = new HelpdeskService();</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        while (!&quot;quit&quot;.equals(input)){</span>
+
+<span class="nc bnc" id="L52" title="All 3 branches missed.">            switch (input){</span>
+                case &quot;1&quot;:
+<span class="nc" id="L54">                    System.out.println(&quot;Select 1) Users or 2) Tickets or 3) Organizations&quot;);</span>
+<span class="nc" id="L55">                    searchMenuInput = scanner.nextLine();</span>
+<span class="nc bnc" id="L56" title="All 4 branches missed.">                    switch(searchMenuInput) {</span>
+
+                        case &quot;1&quot;:
+<span class="nc" id="L59">                            System.out.println(&quot;Enter search term&quot;);</span>
+<span class="nc" id="L60">                            searchTerm = scanner.nextLine();</span>
+<span class="nc" id="L61">                            System.out.println(&quot;Enter search value&quot;);</span>
+<span class="nc" id="L62">                            searchValue = scanner.nextLine();</span>
+<span class="nc" id="L63">                            helpdeskService.searchUsers(searchTerm, searchValue);</span>
+<span class="nc" id="L64">                            break;</span>
+                        case &quot;2&quot;:
+<span class="nc" id="L66">                            System.out.println(&quot;Enter search term&quot;);</span>
+<span class="nc" id="L67">                            searchTerm = scanner.nextLine();</span>
+<span class="nc" id="L68">                            System.out.println(&quot;Enter search value&quot;);</span>
+<span class="nc" id="L69">                            searchValue = scanner.nextLine();</span>
+<span class="nc" id="L70">                            helpdeskService.searchTickets(searchTerm, searchValue);</span>
+<span class="nc" id="L71">                            break;</span>
+                        case &quot;3&quot;:
+<span class="nc" id="L73">                            System.out.println(&quot;Enter search term&quot;);</span>
+<span class="nc" id="L74">                            searchTerm = scanner.nextLine();</span>
+<span class="nc" id="L75">                            System.out.println(&quot;Enter search value&quot;);</span>
+<span class="nc" id="L76">                            searchValue = scanner.nextLine();</span>
+<span class="nc" id="L77">                            helpdeskService.searchOrganizations(searchTerm, searchValue);</span>
+<span class="nc" id="L78">                            break;</span>
+                        default:
+<span class="nc" id="L80">                            System.out.println(&quot;Invalid input&quot;);</span>
+                            break;
+                    }
+<span class="nc" id="L83">                    break;</span>
+                case &quot;2&quot;:
+<span class="nc" id="L85">                    printHelp();</span>
+<span class="nc" id="L86">                    break;</span>
+
+                default:
+<span class="nc" id="L89">                    System.out.println(&quot;Invalid input&quot;);</span>
+                    break;
+            }
+<span class="nc" id="L92">            input = scanner.nextLine();</span>
+        }
+<span class="nc" id="L94">        scanner.close();</span>
+
+<span class="nc" id="L96">    }</span>
+
+    public static void main(String[] args){
+
+<span class="nc" id="L100">        App app = new App();</span>
+<span class="nc" id="L101">        app.run();</span>
+
+<span class="nc" id="L103">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Ticket.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tran.billy.code.challenge</a> &gt; <a href="index.source.html" class="el_package">tran.billy.code.challenge.dto</a> &gt; <span class="el_source">Ticket.java</span></div><h1>Ticket.java</h1><pre class="source lang-java linenums">package tran.billy.code.challenge.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import tran.billy.code.challenge.helper.StringHelper;
+
+import java.util.ArrayList;
+
+<span class="fc" id="L8">public class Ticket {</span>
+
+    static public final String TERM_PREFIX = &quot;ticket_&quot;;
+
+    @JsonProperty(&quot;_id&quot;)
+    private String id;
+
+    @JsonProperty(&quot;url&quot;)
+    private String url;
+
+    @JsonProperty(&quot;external_id&quot;)
+    private String externalId;
+
+    @JsonProperty(&quot;created_at&quot;)
+    private String createdAt;
+
+    @JsonProperty(&quot;type&quot;)
+    private String type;
+
+    @JsonProperty(&quot;subject&quot;)
+    private String subject;
+
+    @JsonProperty(&quot;description&quot;)
+    private String description;
+
+    @JsonProperty(&quot;priority&quot;)
+    private String priority;
+
+    @JsonProperty(&quot;status&quot;)
+    private String status;
+
+    @JsonProperty(&quot;submitter_id&quot;)
+    private int submitterId;
+
+    @JsonProperty(&quot;assignee_id&quot;)
+    private int assigneeId;
+
+    @JsonProperty(&quot;organization_id&quot;)
+    private int organizationId;
+
+    @JsonProperty(&quot;tags&quot;)
+    private ArrayList&lt;String&gt; tags;
+
+    @JsonProperty(&quot;has_incidents&quot;)
+    private boolean hasIncidents;
+
+    @JsonProperty(&quot;due_at&quot;)
+    private String dueAt;
+
+    @JsonProperty(&quot;via&quot;)
+    private String via;
+
+    private User submitter;
+
+    private User assignee;
+
+    private Organization organization;
+
+    public String getId() {
+<span class="fc" id="L67">        return id;</span>
+    }
+
+    public void setId(String id) {
+<span class="fc" id="L71">        this.id = id;</span>
+<span class="fc" id="L72">    }</span>
+
+    public String getUrl() {
+<span class="fc" id="L75">        return url;</span>
+    }
+
+    public void setUrl(String url) {
+<span class="fc" id="L79">        this.url = url;</span>
+<span class="fc" id="L80">    }</span>
+
+    public String getExternalId() {
+<span class="fc" id="L83">        return externalId;</span>
+    }
+
+    public void setExternalId(String externalId) {
+<span class="fc" id="L87">        this.externalId = externalId;</span>
+<span class="fc" id="L88">    }</span>
+
+    public String getCreatedAt() {
+<span class="fc" id="L91">        return createdAt;</span>
+    }
+
+    public void setCreatedAt(String createdAt) {
+<span class="fc" id="L95">        this.createdAt = createdAt;</span>
+<span class="fc" id="L96">    }</span>
+
+    public String getType() {
+<span class="fc" id="L99">        return type;</span>
+    }
+
+    public void setType(String type) {
+<span class="fc" id="L103">        this.type = type;</span>
+<span class="fc" id="L104">    }</span>
+
+    public String getSubject() {
+<span class="fc" id="L107">        return subject;</span>
+    }
+
+    public void setSubject(String subject) {
+<span class="fc" id="L111">        this.subject = subject;</span>
+<span class="fc" id="L112">    }</span>
+
+    public String getDescription() {
+<span class="fc" id="L115">        return description;</span>
+    }
+
+    public void setDescription(String description) {
+<span class="fc" id="L119">        this.description = description;</span>
+<span class="fc" id="L120">    }</span>
+
+    public String getPriority() {
+<span class="fc" id="L123">        return priority;</span>
+    }
+
+    public void setPriority(String priority) {
+<span class="fc" id="L127">        this.priority = priority;</span>
+<span class="fc" id="L128">    }</span>
+
+    public String getStatus() {
+<span class="fc" id="L131">        return status;</span>
+    }
+
+    public void setStatus(String status) {
+<span class="fc" id="L135">        this.status = status;</span>
+<span class="fc" id="L136">    }</span>
+
+    public int getSubmitterId() {
+<span class="fc" id="L139">        return submitterId;</span>
+    }
+
+    public void setSubmitterId(int submitterId) {
+<span class="fc" id="L143">        this.submitterId = submitterId;</span>
+<span class="fc" id="L144">    }</span>
+
+    public int getAssigneeId() {
+<span class="fc" id="L147">        return assigneeId;</span>
+    }
+
+    public void setAssigneeId(int assigneeId) {
+<span class="fc" id="L151">        this.assigneeId = assigneeId;</span>
+<span class="fc" id="L152">    }</span>
+
+    public int getOrganizationId() {
+<span class="fc" id="L155">        return organizationId;</span>
+    }
+
+    public void setOrganizationId(int organizationId) {
+<span class="fc" id="L159">        this.organizationId = organizationId;</span>
+<span class="fc" id="L160">    }</span>
+
+    public ArrayList&lt;String&gt; getTags() {
+<span class="fc" id="L163">        return tags;</span>
+    }
+
+    public void setTags(ArrayList&lt;String&gt; tags) {
+<span class="fc" id="L167">        this.tags = tags;</span>
+<span class="fc" id="L168">    }</span>
+
+    public boolean isHasIncidents() {
+<span class="fc" id="L171">        return hasIncidents;</span>
+    }
+
+    public void setHasIncidents(boolean hasIncidents) {
+<span class="fc" id="L175">        this.hasIncidents = hasIncidents;</span>
+<span class="fc" id="L176">    }</span>
+
+    public String getDueAt() {
+<span class="fc" id="L179">        return dueAt;</span>
+    }
+
+    public void setDueAt(String dueAt) {
+<span class="fc" id="L183">        this.dueAt = dueAt;</span>
+<span class="fc" id="L184">    }</span>
+
+    public String getVia() {
+<span class="nc" id="L187">        return via;</span>
+    }
+
+    public void setVia(String via) {
+<span class="fc" id="L191">        this.via = via;</span>
+<span class="fc" id="L192">    }</span>
+
+    public User getSubmitter() {
+<span class="fc" id="L195">        return submitter;</span>
+    }
+
+    public void setSubmitter(User submitter) {
+<span class="fc" id="L199">        this.submitter = submitter;</span>
+<span class="fc" id="L200">    }</span>
+
+    public User getAssignee() {
+<span class="fc" id="L203">        return assignee;</span>
+    }
+
+    public void setAssignee(User assignee) {
+<span class="fc" id="L207">        this.assignee = assignee;</span>
+<span class="fc" id="L208">    }</span>
+
+    public Organization getOrganization() {
+<span class="fc" id="L211">        return organization;</span>
+    }
+
+    public void setOrganization(Organization organization) {
+<span class="fc" id="L215">        this.organization = organization;</span>
+<span class="fc" id="L216">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L220">        return subject;</span>
+    }
+
+    public String print() {
+<span class="fc" id="L224">        return</span>
+<span class="fc" id="L225">                StringHelper.addRightPadding(&quot;_id&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getId() + &quot;\n&quot; +</span>
+<span class="fc" id="L226">                StringHelper.addRightPadding(&quot;url&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getUrl() + &quot;\n&quot; +</span>
+<span class="fc" id="L227">                StringHelper.addRightPadding(&quot;external_id&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getExternalId() + &quot;\n&quot; +</span>
+<span class="fc" id="L228">                StringHelper.addRightPadding(&quot;created_at&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getCreatedAt() + &quot;\n&quot; +</span>
+<span class="fc" id="L229">                StringHelper.addRightPadding(&quot;type&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getType() + &quot;\n&quot; +</span>
+<span class="fc" id="L230">                StringHelper.addRightPadding(&quot;subject&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getSubject() + &quot;\n&quot; +</span>
+<span class="fc" id="L231">                StringHelper.addRightPadding(&quot;description&quot;, StringHelper.RIGHT_PADDING_WIDTH) +  getDescription() + &quot;\n&quot; +</span>
+<span class="fc" id="L232">                StringHelper.addRightPadding(&quot;priority&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getPriority() + &quot;\n&quot; +</span>
+<span class="fc" id="L233">                StringHelper.addRightPadding(&quot;status&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getStatus() + &quot;\n&quot; +</span>
+<span class="fc" id="L234">                StringHelper.addRightPadding(&quot;submitter_id&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getSubmitterId() + &quot;\n&quot; +</span>
+<span class="fc" id="L235">                StringHelper.addRightPadding(&quot;assignee_id&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getAssigneeId() + &quot;\n&quot; +</span>
+<span class="fc" id="L236">                StringHelper.addRightPadding(&quot;organization_id&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getOrganizationId() + &quot;\n&quot; +</span>
+<span class="fc" id="L237">                StringHelper.addRightPadding(&quot;tags&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getTags() + &quot;\n&quot; +</span>
+<span class="fc" id="L238">                StringHelper.addRightPadding(&quot;has_incidents&quot;, StringHelper.RIGHT_PADDING_WIDTH) + isHasIncidents() + &quot;\n&quot; +</span>
+<span class="fc" id="L239">                StringHelper.addRightPadding(&quot;due_at&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getDueAt() + &quot;\n&quot; +</span>
+<span class="fc" id="L240">                StringHelper.addRightPadding(&quot;via&quot;, StringHelper.RIGHT_PADDING_WIDTH) +  via + &quot;\n&quot; +</span>
+<span class="fc" id="L241">                StringHelper.addRightPadding(&quot;organization_name&quot;, StringHelper.RIGHT_PADDING_WIDTH) + organization + &quot;\n&quot; +</span>
+<span class="fc" id="L242">                StringHelper.addRightPadding(&quot;submitter_name&quot;, StringHelper.RIGHT_PADDING_WIDTH) + submitter + &quot;\n&quot; +</span>
+<span class="fc" id="L243">                StringHelper.addRightPadding(&quot;assignee_name&quot;, StringHelper.RIGHT_PADDING_WIDTH) + assignee + &quot;\n&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

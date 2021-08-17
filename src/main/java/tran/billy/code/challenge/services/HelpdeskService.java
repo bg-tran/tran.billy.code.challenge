@@ -1,12 +1,13 @@
 package tran.billy.code.challenge.services;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import tran.billy.code.challenge.dao.OrganizationDAO;
 import tran.billy.code.challenge.dao.TicketDAO;
 import tran.billy.code.challenge.dao.UserDAO;
-import tran.billy.code.challenge.dto.Ticket;
-import tran.billy.code.challenge.dto.User;
-import tran.billy.code.challenge.helper.StringHelper;
+
+
+import java.util.ArrayList;
 
 
 public class HelpdeskService {
@@ -15,9 +16,9 @@ public class HelpdeskService {
     public static final String USER_DATASOURCE_NAME = "users.json";
     public static final String TICKET_DATASOURCE_NAME = "tickets.json";
 
-    private OrganizationDAO orgDAO;
-    private UserDAO userDAO;
-    private TicketDAO ticketDAO;
+    private final OrganizationDAO orgDAO;
+    private final UserDAO userDAO;
+    private final TicketDAO ticketDAO;
 
 
     public HelpdeskService() {
@@ -37,64 +38,77 @@ public class HelpdeskService {
     public void searchOrganizations(String searchTerm, String searchValue){
 
         orgDAO.findOrganizationsByCriteria(searchTerm, searchValue)
-                .subscribe( org -> {
-                    System.out.print(org.print());
-                    userDAO.findUsersByCriteria("organization_id", String.valueOf(org.getId()))
-                            .index()
-                            .flatMap(tuple2 -> {
-                                System.out.print(StringHelper.printKeyValue(User.TERM_PREFIX + tuple2.getT1()
-                                        ,tuple2.getT2().toString()));
-                                return Mono.just(tuple2);
-                            })
-                            .subscribe();
-                    ticketDAO.findTicketsByCriteria("organization_id", String.valueOf(org.getId()))
-                            .index()
-                            .flatMap(tuple2 -> {
-                                System.out.print(StringHelper.printKeyValue(Ticket.TERM_PREFIX + tuple2.getT1()
-                                        ,tuple2.getT2().toString()));
-                                return Mono.just(tuple2);
-                            })
-                            .subscribe();
-                });
+                .flatMap(org -> Flux.zip(
+                                        Mono.just(org),
+                                        userDAO.findUsersByCriteria("organization_id", String.valueOf(org.getId()))
+                                                .collectList()
+                                                .switchIfEmpty(Mono.just(new ArrayList<>())),
+                                        ticketDAO.findTicketsByCriteria("organization_id", String.valueOf(org.getId()))
+                                                .collectList()
+                                                .switchIfEmpty(Mono.just(new ArrayList<>()))
+                                )
+                                .map( t -> {
+                                    t.getT1().addUsers(t.getT2());
+                                    t.getT1().addTickets(t.getT3());
+                                    return t.getT1();
+                                })
+                )
+                .subscribe( org -> System.out.println(org.print()));
+
     }
 
     public void searchUsers(String searchTerm, String searchValue){
 
         userDAO.findUsersByCriteria(searchTerm,searchValue)
-                .subscribe(user -> {
-                    System.out.print(user.print());
-                    orgDAO.findOrganizationsByCriteria("_id", String.valueOf(user.getOrganizationId()))
-                            .flatMap(org -> {
-                                System.out.print(StringHelper.printKeyValue("organization_name", org.getName()));
-                                return Mono.just(org);
-                            }).subscribe();
-                    ticketDAO.findTicketsByCriteria("submitter_id", String.valueOf(user.getId()))
-                            .index()
-                            .flatMap(tuple2 -> {
-                                System.out.print(StringHelper.printKeyValue(Ticket.TERM_PREFIX + tuple2.getT1()
-                                        ,tuple2.getT2().toString()));
-                                return Mono.just(tuple2);
-                            })
-                            .subscribe();
-                });
+                .flatMap(user -> Flux.zip(
+                                        Mono.just(user),
+                                        orgDAO.findOrganizationsByCriteria("_id", String.valueOf(user.getOrganizationId()))
+                                                .collectList()
+                                                .switchIfEmpty(Mono.just(new ArrayList<>())),
+                                        ticketDAO.findTicketsByCriteria("submitter_id", String.valueOf(user.getId()))
+                                                .collectList()
+                                                .switchIfEmpty(Mono.just(new ArrayList<>()))
+                                )
+                                .map( t -> {
+                                    if (t.getT2().size() > 0) {
+                                        t.getT1().setOrganization(t.getT2().get(0));
+                                    }
+                                    t.getT1().addTickets(t.getT3());
+                                    return t.getT1();
+                                })
+                )
+                .subscribe( org -> System.out.println(org.print()));
     }
 
     public void searchTickets(String searchTerm, String searchValue){
 
         ticketDAO.findTicketsByCriteria(searchTerm, searchValue)
-                .subscribe(ticket -> {
-                    System.out.print(ticket.print());
-                    orgDAO.findOrganizationsByCriteria("_id", String.valueOf(ticket.getOrganizationId()))
-                            .flatMap(org -> {
-                                System.out.print(StringHelper.printKeyValue("organization_name", org.getName()));
-                                return Mono.just(org);
-                            }).subscribe();
-                    userDAO.findUsersByCriteria("_id", String.valueOf(ticket.getSubmitterId()))
-                            .flatMap(user -> {
-                                System.out.print(StringHelper.printKeyValue("submitter_name", user.getName()));
-                                return Mono.just(user);
-                            }).subscribe();
-                });
+                .flatMap(ticket -> Flux.zip(
+                                        Mono.just(ticket),
+                                        orgDAO.findOrganizationsByCriteria("_id", String.valueOf(ticket.getOrganizationId()))
+                                                .collectList()
+                                                .switchIfEmpty(Mono.just(new ArrayList<>())),
+                                        userDAO.findUsersByCriteria("_id", String.valueOf(ticket.getSubmitterId()))
+                                                .collectList()
+                                                .switchIfEmpty(Mono.just(new ArrayList<>())),
+                                        userDAO.findUsersByCriteria("_id", String.valueOf(ticket.getAssigneeId()))
+                                                .collectList()
+                                                .switchIfEmpty(Mono.just(new ArrayList<>()))
+                                )
+                                .map( t -> {
+                                    if (t.getT2().size() > 0) {
+                                        t.getT1().setOrganization(t.getT2().get(0));
+                                    }
+                                    if (t.getT3().size() > 0) {
+                                        t.getT1().setSubmitter(t.getT3().get(0));
+                                    }
+                                    if (t.getT4().size() > 0) {
+                                        t.getT1().setAssignee(t.getT4().get(0));
+                                    }
+                                    return t.getT1();
+                                })
+                )
+                .subscribe( org -> System.out.println(org.print()));
     }
 
 }

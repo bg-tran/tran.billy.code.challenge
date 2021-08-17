@@ -57,6 +57,8 @@ public class JsonHelperTest {
                         && ticket.getSubject().equals("A Catastrophe in Korea (North)"))
                 .expectNextMatches(ticket -> ticket.getId().equals("1a227508-9f39-427c-8f57-1b72f3fab87c")
                         && ticket.getSubject().equals("A Catastrophe in Micronesia"))
+                .expectNextMatches(ticket -> ticket.getId().equals("1a227508-9f39-AAAA-8f57-1b72f3fab87c")
+                        && ticket.getSubject().equals("A Catastrophe in Micronesia"))
                 .expectComplete()
                 .verify();
     }

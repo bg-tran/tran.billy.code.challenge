@@ -1,49 +1,300 @@
-4_id                                               1
-aurl                                               http://initech.zendesk.com/api/v2/users/1.json
-Jname                                              Francisca Rasmussen LLL
->alias                                             Miss Coffey
-Mcreated_at                                        2016-04-15T05:19:46 -10:00
-7active                                            true
-7verified                                          true
-8shared                                            false
-8locale                                            en-AU
-<timezone                                          Sri Lanka
-MlastLoginAt                                       2013-08-04T01:03:27 -10:00
-Oemail                                             coffeyrasmussen@flotonic.com
-?phone                                             8335-422-718
-Hsignature                                         Don't Worry Be Happy!
-6organization_id                                   101
-itags                                              [Springville, Sutton, Hartsville/Hartley, Diaperville]
-7suspended                                         true
-8role                                              admin
-<organization_name                                 Enthaze 2
-Vticket_0                                          A Catastrophe in Korea (North NNNN)
-W_id                                               436bf9b0-1147-4c0a-8439-6f79833bff5b
-†url                                               http://initech.zendesk.com/api/v2/tickets/436bf9b0-1147-4c0a-8439-6f79833bff5b.json
-Wexternal_id                                       9210cdc9-4bee-485f-a078-35396cd74063
-Mcreated_at                                        2016-04-28T11:19:34 -10:00
-;type                                              incident
-Vsubject                                           A Catastrophe in Korea (North NNNN)
-Èdescription                                       Nostrud ad sit velit cupidatat laboris ipsum nisi amet laboris ex exercitation amet et proident. Ipsum fugiat aute dolore tempor nostrud velit ipsum.
-7priority                                          high
-:status                                            pending
-5submitter_id                                      38
-5assignee_id                                       24
-6organization_id                                   101
-qtags                                              [Ohio, Pennsylvania, American Samoa, Northern Mariana Islands]
-8has_incidents                                     false
-Mdue_at                                            2016-07-31T02:37:50 -10:00
-6via                                               web
-<organization_name                                 Enthaze 2
-Jsubmitter_name                                    Francisca Rasmussen LLL
-6_id                                               101
-kurl                                               http://initech.zendesk.com/api/v2/organizations/101.json
-Wexternal_id                                       9270ed79-35eb-4a38-a46f-35725197ea8d
-<name                                              Enthaze 2
-cdomain_names                                      [kage.com, ecratic.com, endipin.com, zentix.com]
-Mcreated_at                                        2016-05-21T11:10:28 -10:00
-;details                                           MegaCorp
-8shared_tickets                                    false
-Ttags                                              [Fulton, West, Rodriguez, Farley]
-Juser_0                                            Francisca Rasmussen LLL
-Vticket_0                                          A Catastrophe in Korea (North NNNN)
+:_id                                               1000001
+7url                                               null
+7external_id                                       null
+7created_at                                        null
+7type                                              null
+;subject                                           Ticket 1
+7description                                       null
+7priority                                          null
+7status                                            null
+8submitter_id                                      10001
+8assignee_id                                       20001
+7organization_id                                   1001
+7tags                                              null
+8has_incidents                                     false
+7due_at                                            null
+7via                                               null
+8organization_name                                 Org 1
+9submitter_name                                    User 1
+9assignee_name                                     User 1
+
+:_id                                               1000002
+7url                                               null
+7external_id                                       null
+7created_at                                        null
+7type                                              null
+;subject                                           Ticket 2
+7description                                       null
+7priority                                          null
+7status                                            null
+8submitter_id                                      10002
+8assignee_id                                       20002
+7organization_id                                   1002
+7tags                                              null
+8has_incidents                                     false
+7due_at                                            null
+7via                                               null
+8organization_name                                 Org 1
+9submitter_name                                    User 1
+9assignee_name                                     User 1
+
+:_id                                               1000003
+7url                                               null
+7external_id                                       null
+7created_at                                        null
+7type                                              null
+;subject                                           Ticket 3
+7description                                       null
+7priority                                          null
+7status                                            null
+8submitter_id                                      10003
+8assignee_id                                       20003
+7organization_id                                   1003
+7tags                                              null
+8has_incidents                                     false
+7due_at                                            null
+7via                                               null
+8organization_name                                 Org 1
+9submitter_name                                    User 1
+9assignee_name                                     User 1
+
+7_id                                               1001
+7url                                               null
+7external_id                                       null
+8name                                              Org 1
+7domain_names                                      null
+7created_at                                        null
+7details                                           null
+8shared_tickets                                    false
+7tags                                              null
+9user_0                                            User 1
+9user_1                                            User 2
+
+
+7_id                                               1002
+7url                                               null
+7external_id                                       null
+8name                                              Org 2
+7domain_names                                      null
+7created_at                                        null
+7details                                           null
+8shared_tickets                                    false
+7tags                                              null
+9user_0                                            User 1
+9user_1                                            User 2
+
+
+8_id                                               10001
+7url                                               null
+9name                                              User 1
+7alias                                             null
+7created_at                                        null
+8active                                            false
+8verified                                          false
+8shared                                            false
+7locale                                            null
+7timezone                                          null
+7lastLoginAt                                       null
+7email                                             null
+7phone                                             null
+7signature                                         null
+7organization_id                                   1001
+7tags                                              null
+8suspended                                         false
+7role                                              null
+7organization_name                                 null
+;ticket0                                           Ticket 1
+;ticket1                                           Ticket 2
+;ticket2                                           Ticket 3
+
+
+8_id                                               10001
+7url                                               null
+9name                                              User 1
+7alias                                             null
+7created_at                                        null
+8active                                            false
+8verified                                          false
+8shared                                            false
+7locale                                            null
+7timezone                                          null
+7lastLoginAt                                       null
+7email                                             null
+7phone                                             null
+7signature                                         null
+7organization_id                                   1001
+7tags                                              null
+8suspended                                         false
+7role                                              null
+8organization_name                                 Org 1
+
+
+8_id                                               10002
+7url                                               null
+9name                                              User 2
+7alias                                             null
+7created_at                                        null
+8active                                            false
+8verified                                          false
+8shared                                            false
+7locale                                            null
+7timezone                                          null
+7lastLoginAt                                       null
+7email                                             null
+7phone                                             null
+7signature                                         null
+7organization_id                                   1002
+7tags                                              null
+8suspended                                         false
+7role                                              null
+8organization_name                                 Org 1
+
+
+7_id                                               1001
+7url                                               null
+7external_id                                       null
+8name                                              Org 1
+7domain_names                                      null
+7created_at                                        null
+7details                                           null
+8shared_tickets                                    false
+7tags                                              null
+;ticket_0                                          Ticket 1
+;ticket_1                                          Ticket 2
+;ticket_2                                          Ticket 3
+9user_0                                            User 1
+9user_1                                            User 2
+
+
+7_id                                               1002
+7url                                               null
+7external_id                                       null
+8name                                              Org 2
+7domain_names                                      null
+7created_at                                        null
+7details                                           null
+8shared_tickets                                    false
+7tags                                              null
+;ticket_0                                          Ticket 1
+;ticket_1                                          Ticket 2
+;ticket_2                                          Ticket 3
+9user_0                                            User 1
+9user_1                                            User 2
+
+
+7_id                                               1001
+7url                                               null
+7external_id                                       null
+8name                                              Org 1
+7domain_names                                      null
+7created_at                                        null
+7details                                           null
+8shared_tickets                                    false
+7tags                                              null
+;ticket_0                                          Ticket 1
+;ticket_1                                          Ticket 2
+;ticket_2                                          Ticket 3
+
+
+7_id                                               1002
+7url                                               null
+7external_id                                       null
+8name                                              Org 2
+7domain_names                                      null
+7created_at                                        null
+7details                                           null
+8shared_tickets                                    false
+7tags                                              null
+;ticket_0                                          Ticket 1
+;ticket_1                                          Ticket 2
+;ticket_2                                          Ticket 3
+
+
+:_id                                               1000001
+7url                                               null
+7external_id                                       null
+7created_at                                        null
+7type                                              null
+;subject                                           Ticket 1
+7description                                       null
+7priority                                          null
+7status                                            null
+8submitter_id                                      10001
+8assignee_id                                       20001
+7organization_id                                   1001
+7tags                                              null
+8has_incidents                                     false
+7due_at                                            null
+7via                                               null
+8organization_name                                 Org 1
+7submitter_name                                    null
+7assignee_name                                     null
+
+:_id                                               1000001
+7url                                               null
+7external_id                                       null
+7created_at                                        null
+7type                                              null
+;subject                                           Ticket 1
+7description                                       null
+7priority                                          null
+7status                                            null
+8submitter_id                                      10001
+8assignee_id                                       20001
+7organization_id                                   1001
+7tags                                              null
+8has_incidents                                     false
+7due_at                                            null
+7via                                               null
+7organization_name                                 null
+9submitter_name                                    User 1
+9assignee_name                                     User 1
+
+8_id                                               10001
+7url                                               null
+9name                                              User 1
+7alias                                             null
+7created_at                                        null
+8active                                            false
+8verified                                          false
+8shared                                            false
+7locale                                            null
+7timezone                                          null
+7lastLoginAt                                       null
+7email                                             null
+7phone                                             null
+7signature                                         null
+7organization_id                                   1001
+7tags                                              null
+8suspended                                         false
+7role                                              null
+8organization_name                                 Org 1
+;ticket0                                           Ticket 1
+;ticket1                                           Ticket 2
+;ticket2                                           Ticket 3
+
+
+8_id                                               10002
+7url                                               null
+9name                                              User 2
+7alias                                             null
+7created_at                                        null
+8active                                            false
+8verified                                          false
+8shared                                            false
+7locale                                            null
+7timezone                                          null
+7lastLoginAt                                       null
+7email                                             null
+7phone                                             null
+7signature                                         null
+7organization_id                                   1002
+7tags                                              null
+8suspended                                         false
+7role                                              null
+8organization_name                                 Org 1
+;ticket0                                           Ticket 1
+;ticket1                                           Ticket 2
+;ticket2                                           Ticket 3
+
+

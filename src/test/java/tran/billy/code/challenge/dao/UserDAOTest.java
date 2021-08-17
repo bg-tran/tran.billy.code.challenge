@@ -27,17 +27,16 @@ class UserDAOTest {
         List<User> actualResult = userDao.findUsersByCriteria("email","rosannasimpson@flotonic.com")
                 .collect(Collectors.<User>toList())
                 .block();
-        Assertions.assertEquals(1, actualResult.size());
+        Assertions.assertTrue(actualResult != null && actualResult.size() == 1);
         actualResult = userDao.findUsersByCriteria("email","1022")
                 .collect(Collectors.<User>toList())
                 .block();
-        Assertions.assertEquals(0, actualResult.size());
+        Assertions.assertTrue(actualResult != null && actualResult.size() == 0);
 
         actualResult = userDao.findUsersByCriteria("tags","Navarre")
                 .collect(Collectors.<User>toList())
                 .block();
-        Assertions.assertEquals(1, actualResult.size());
-        Assertions.assertNotEquals(0,actualResult.get(0).print().length());
-//        System.out.print(actualResult.get(0).print());
+        Assertions.assertTrue(actualResult != null && actualResult.size() == 1);
+
     }
 }

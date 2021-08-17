@@ -27,16 +27,14 @@ class OrganizationDAOTest {
         List<Organization> actualResult = orgDao.findOrganizationsByCriteria("_id","102")
                 .collect(Collectors.<Organization>toList())
                 .block();
-        Assertions.assertEquals(1, actualResult.size());
+        Assertions.assertTrue(actualResult != null && actualResult.size() == 1);
         actualResult = orgDao.findOrganizationsByCriteria("_id","1022")
                 .collect(Collectors.<Organization>toList())
                 .block();
-        Assertions.assertEquals(0, actualResult.size());
+        Assertions.assertTrue(actualResult != null && actualResult.size() == 0);
         actualResult = orgDao.findOrganizationsByCriteria("domain_names","datagen.com")
                 .collect(Collectors.<Organization>toList())
                 .block();
-        Assertions.assertEquals(1, actualResult.size());
-        Assertions.assertNotEquals(0,actualResult.get(0).print().length());
-//        System.out.print(actualResult.get(0).print());
+        Assertions.assertTrue(actualResult != null && actualResult.size() == 1);
     }
 }

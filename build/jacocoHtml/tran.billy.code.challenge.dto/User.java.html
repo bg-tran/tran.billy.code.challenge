@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tran.billy.code.challenge</a> &gt; <a href="index.source.html" class="el_package">tran.billy.code.challenge.dto</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package tran.billy.code.challenge.dto;
+
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import tran.billy.code.challenge.helper.StringHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="fc" id="L10">public class User {</span>
+
+    static public final String TERM_PREFIX = &quot;user_&quot;;
+
+    @JsonProperty(&quot;_id&quot;)
+    private int id;
+
+    @JsonProperty(&quot;url&quot;)
+    private String url;
+
+    @JsonProperty(&quot;external_id&quot;)
+    private String externalId;
+
+    @JsonProperty(&quot;name&quot;)
+    private String name;
+
+    @JsonProperty(&quot;alias&quot;)
+    private String alias;
+
+    @JsonProperty(&quot;created_at&quot;)
+    private String createdAt;
+
+    @JsonProperty(&quot;active&quot;)
+    private boolean active;
+
+    @JsonProperty(&quot;verified&quot;)
+    private boolean verified;
+
+    @JsonProperty(&quot;shared&quot;)
+    private boolean shared;
+
+    @JsonProperty(&quot;locale&quot;)
+    private String locale;
+
+    @JsonProperty(&quot;timezone&quot;)
+    private String timezone;
+
+    @JsonProperty(&quot;last_login_at&quot;)
+    private String lastLoginAt;
+
+    @JsonProperty(&quot;email&quot;)
+    private String email;
+
+    @JsonProperty(&quot;phone&quot;)
+    private String phone;
+
+    @JsonProperty(&quot;signature&quot;)
+    private String signature;
+
+    @JsonProperty(&quot;organization_id&quot;)
+    private int organizationId;
+
+    @JsonProperty(&quot;tags&quot;)
+    private ArrayList&lt;String&gt; tags;
+
+    @JsonProperty(&quot;suspended&quot;)
+    private boolean suspended;
+
+    @JsonProperty(&quot;role&quot;)
+    private String role;
+
+    private Organization organization;
+
+    private ArrayList&lt;Ticket&gt; tickets;
+
+    public int getId() {
+<span class="fc" id="L76">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="fc" id="L80">        this.id = id;</span>
+<span class="fc" id="L81">    }</span>
+
+    public String getUrl() {
+<span class="fc" id="L84">        return url;</span>
+    }
+
+    public void setUrl(String url) {
+<span class="fc" id="L88">        this.url = url;</span>
+<span class="fc" id="L89">    }</span>
+
+    public String getExternalId() {
+<span class="nc" id="L92">        return externalId;</span>
+    }
+
+    public void setExternalId(String externalId) {
+<span class="fc" id="L96">        this.externalId = externalId;</span>
+<span class="fc" id="L97">    }</span>
+
+    public String getName() {
+<span class="fc" id="L100">        return name;</span>
+    }
+
+    public void setName(String name) {
+<span class="fc" id="L104">        this.name = name;</span>
+<span class="fc" id="L105">    }</span>
+
+    public String getAlias() {
+<span class="fc" id="L108">        return alias;</span>
+    }
+
+    public void setAlias(String alias) {
+<span class="fc" id="L112">        this.alias = alias;</span>
+<span class="fc" id="L113">    }</span>
+
+    public String getCreatedAt() {
+<span class="fc" id="L116">        return createdAt;</span>
+    }
+
+    public void setCreatedAt(String createdAt) {
+<span class="fc" id="L120">        this.createdAt = createdAt;</span>
+<span class="fc" id="L121">    }</span>
+
+    public boolean isActive() {
+<span class="fc" id="L124">        return active;</span>
+    }
+
+    public void setActive(boolean active) {
+<span class="fc" id="L128">        this.active = active;</span>
+<span class="fc" id="L129">    }</span>
+
+    public boolean isVerified() {
+<span class="fc" id="L132">        return verified;</span>
+    }
+
+    public void setVerified(boolean verified) {
+<span class="fc" id="L136">        this.verified = verified;</span>
+<span class="fc" id="L137">    }</span>
+
+    public boolean isShared() {
+<span class="fc" id="L140">        return shared;</span>
+    }
+
+    public void setShared(boolean shared) {
+<span class="fc" id="L144">        this.shared = shared;</span>
+<span class="fc" id="L145">    }</span>
+
+    public String getLocale() {
+<span class="fc" id="L148">        return locale;</span>
+    }
+
+    public void setLocale(String locale) {
+<span class="fc" id="L152">        this.locale = locale;</span>
+<span class="fc" id="L153">    }</span>
+
+    public String getTimezone() {
+<span class="fc" id="L156">        return timezone;</span>
+    }
+
+    public void setTimezone(String timezone) {
+<span class="fc" id="L160">        this.timezone = timezone;</span>
+<span class="fc" id="L161">    }</span>
+
+    public String getLastLoginAt() {
+<span class="fc" id="L164">        return lastLoginAt;</span>
+    }
+
+    public void setLastLoginAt(String lastLoginAt) {
+<span class="fc" id="L168">        this.lastLoginAt = lastLoginAt;</span>
+<span class="fc" id="L169">    }</span>
+
+    public String getEmail() {
+<span class="fc" id="L172">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="fc" id="L176">        this.email = email;</span>
+<span class="fc" id="L177">    }</span>
+
+    public String getPhone() {
+<span class="fc" id="L180">        return phone;</span>
+    }
+
+    public void setPhone(String phone) {
+<span class="fc" id="L184">        this.phone = phone;</span>
+<span class="fc" id="L185">    }</span>
+
+    public String getSignature() {
+<span class="fc" id="L188">        return signature;</span>
+    }
+
+    public void setSignature(String signature) {
+<span class="fc" id="L192">        this.signature = signature;</span>
+<span class="fc" id="L193">    }</span>
+
+    public int getOrganizationId() {
+<span class="fc" id="L196">        return organizationId;</span>
+    }
+
+    public void setOrganizationId(int organizationId) {
+<span class="fc" id="L200">        this.organizationId = organizationId;</span>
+<span class="fc" id="L201">    }</span>
+
+    public ArrayList&lt;String&gt; getTags() {
+<span class="fc" id="L204">        return tags;</span>
+    }
+
+    public void setTags(ArrayList&lt;String&gt; tags) {
+<span class="fc" id="L208">        this.tags = tags;</span>
+<span class="fc" id="L209">    }</span>
+
+    public boolean isSuspended() {
+<span class="fc" id="L212">        return suspended;</span>
+    }
+
+    public void setSuspended(boolean suspended) {
+<span class="fc" id="L216">        this.suspended = suspended;</span>
+<span class="fc" id="L217">    }</span>
+
+    public String getRole() {
+<span class="fc" id="L220">        return role;</span>
+    }
+
+    public void setRole(String role) {
+<span class="fc" id="L224">        this.role = role;</span>
+<span class="fc" id="L225">    }</span>
+
+    public Organization getOrganization() {
+<span class="fc" id="L228">        return organization;</span>
+    }
+
+    public void setOrganization(Organization organization) {
+<span class="fc" id="L232">        this.organization = organization;</span>
+<span class="fc" id="L233">    }</span>
+
+    public ArrayList&lt;Ticket&gt; getTickets() {
+<span class="fc" id="L236">        return tickets;</span>
+    }
+
+    public void addTickets(List&lt;Ticket&gt; tickets){
+
+<span class="fc" id="L241">        this.tickets = new ArrayList&lt;&gt;(tickets);</span>
+<span class="fc" id="L242">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L246">        return name;</span>
+    }
+
+    public String print() {
+<span class="fc" id="L250">        return</span>
+<span class="fc" id="L251">                StringHelper.addRightPadding(&quot;_id&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getId() + &quot;\n&quot; +</span>
+<span class="fc" id="L252">                StringHelper.addRightPadding(&quot;url&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getUrl() + &quot;\n&quot; +</span>
+<span class="fc" id="L253">                StringHelper.addRightPadding(&quot;name&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getName() + &quot;\n&quot; +</span>
+<span class="fc" id="L254">                StringHelper.addRightPadding(&quot;alias&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getAlias() + &quot;\n&quot; +</span>
+<span class="fc" id="L255">                StringHelper.addRightPadding(&quot;created_at&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getCreatedAt() + &quot;\n&quot; +</span>
+<span class="fc" id="L256">                StringHelper.addRightPadding(&quot;active&quot;, StringHelper.RIGHT_PADDING_WIDTH) +  isActive() + &quot;\n&quot; +</span>
+<span class="fc" id="L257">                StringHelper.addRightPadding(&quot;verified&quot;, StringHelper.RIGHT_PADDING_WIDTH) + isVerified() + &quot;\n&quot; +</span>
+<span class="fc" id="L258">                StringHelper.addRightPadding(&quot;shared&quot;, StringHelper.RIGHT_PADDING_WIDTH) + isShared() + &quot;\n&quot; +</span>
+<span class="fc" id="L259">                StringHelper.addRightPadding(&quot;locale&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getLocale() + &quot;\n&quot; +</span>
+<span class="fc" id="L260">                StringHelper.addRightPadding(&quot;timezone&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getTimezone() + &quot;\n&quot; +</span>
+<span class="fc" id="L261">                StringHelper.addRightPadding(&quot;lastLoginAt&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getLastLoginAt() + &quot;\n&quot; +</span>
+<span class="fc" id="L262">                StringHelper.addRightPadding(&quot;email&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getEmail() + &quot;\n&quot; +</span>
+<span class="fc" id="L263">                StringHelper.addRightPadding(&quot;phone&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getPhone() + &quot;\n&quot; +</span>
+<span class="fc" id="L264">                StringHelper.addRightPadding(&quot;signature&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getSignature() + &quot;\n&quot; +</span>
+<span class="fc" id="L265">                StringHelper.addRightPadding(&quot;organization_id&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getOrganizationId() + &quot;\n&quot; +</span>
+<span class="fc" id="L266">                StringHelper.addRightPadding(&quot;tags&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getTags() + &quot;\n&quot; +</span>
+<span class="fc" id="L267">                StringHelper.addRightPadding(&quot;suspended&quot;, StringHelper.RIGHT_PADDING_WIDTH) + isSuspended() + &quot;\n&quot; +</span>
+<span class="fc" id="L268">                StringHelper.addRightPadding(&quot;role&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getRole() + &quot;\n&quot; +</span>
+<span class="fc" id="L269">                StringHelper.addRightPadding(&quot;organization_name&quot;, StringHelper.RIGHT_PADDING_WIDTH) + organization + &quot;\n&quot; +</span>
+<span class="fc" id="L270">                StringHelper.printListAsString(&quot;ticket&quot;, tickets) + &quot;\n&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

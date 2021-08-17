@@ -24,8 +24,8 @@ public class OrganizationDAO extends GenericDAO{
 
     /**
      * Find organization by field in SEARCH_FIELDS
-     * @param fieldName
-     * @param fieldValue
+     * @param fieldName field name
+     * @param fieldValue field value
      * @return a stream of Organization
      */
     public Flux<Organization> findOrganizationsByCriteria(String fieldName, String fieldValue){

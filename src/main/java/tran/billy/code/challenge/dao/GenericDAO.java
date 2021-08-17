@@ -11,7 +11,7 @@ import tran.billy.code.challenge.helper.JsonHelper;
 
 public class GenericDAO {
 
-    private String dataSource;
+    private final String dataSource;
 
     public GenericDAO(String dataSource) {
         this.dataSource = dataSource;
@@ -20,9 +20,9 @@ public class GenericDAO {
 
     /**
      * Create a predicate by <fieldName,fieldValue> for filtering
-     * @param fieldName
-     * @param fieldValue
-     * @return
+     * @param fieldName field name
+     * @param fieldValue field value
+     * @return a predicate
      */
     private <T> Predicate<T> createCriteria(String fieldName, String fieldValue){
 
@@ -33,12 +33,12 @@ public class GenericDAO {
                 Object fieldObj = field.get(p);
 
 		        if (fieldObj instanceof List ) {
-                   return ((List)fieldObj).stream()
-                            .anyMatch(x -> x.equals(fieldValue));
+                   return ((List<?>)fieldObj).stream()
+                            .anyMatch(item -> fieldValue.equals(item.toString()));
 		        }
 
-                return fieldObj.toString().equals(fieldValue);
-            } catch (NoSuchFieldException | IllegalAccessException e) {
+                return fieldValue.equals(fieldObj.toString());
+            } catch (NoSuchFieldException | IllegalAccessException | NullPointerException e) {
                 return false;
             }
         };
@@ -47,8 +47,8 @@ public class GenericDAO {
 
     /**
      * Find T by field
-     * @param fieldName
-     * @param fieldValue
+     * @param fieldName field name
+     * @param fieldValue field value
      * @return a stream of T
      */
     public <T> Flux<T> findByCriteria(String fieldName, String fieldValue, Class<T> valueType){

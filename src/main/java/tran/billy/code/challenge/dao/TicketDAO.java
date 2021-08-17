@@ -30,8 +30,8 @@ public class TicketDAO extends GenericDAO {
 
     /**
      * Find ticket by field in SEARCH_FIELDS
-     * @param fieldName
-     * @param fieldValue
+     * @param fieldName field name
+     * @param fieldValue field value
      * @return a stream of Ticket
      */
     public Flux<Ticket> findTicketsByCriteria(String fieldName, String fieldValue){
