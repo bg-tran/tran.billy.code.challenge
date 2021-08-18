@@ -19,7 +19,7 @@ class HelpdeskServiceTest {
     OrganizationDAO orgDAO;
     UserDAO userDAO;
     TicketDAO ticketDAO;
-    HelpdeskService service;
+    HelpdeskService service = new HelpdeskService();
     Organization org1 = Mockito.spy(new Organization(){
         {
             setId(1001);

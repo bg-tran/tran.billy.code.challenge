@@ -41,7 +41,7 @@ public class UserDAO extends GenericDAO{
      */
     public Flux&lt;User&gt; findUsersByCriteria(String fieldName, String fieldValue){
 
-<span class="fc" id="L44">        return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, User.class);</span>
+<span class="nc" id="L44">        return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, User.class);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

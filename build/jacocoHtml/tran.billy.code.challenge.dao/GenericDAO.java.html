@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.function.Predicate;
 
-import tran.billy.code.challenge.helper.JsonHelper;
+import tran.billy.code.challenge.stream.datasource.DataStreamManager;
 
 
 public class GenericDAO {
@@ -26,20 +26,20 @@ public class GenericDAO {
      */
     private &lt;T&gt; Predicate&lt;T&gt; createCriteria(String fieldName, String fieldValue){
 
-<span class="fc" id="L29">        return p -&gt; {</span>
+<span class="nc" id="L29">        return p -&gt; {</span>
             try {
-<span class="fc" id="L31">                Field field = p.getClass().getDeclaredField(fieldName);</span>
-<span class="fc" id="L32">                field.setAccessible(true);</span>
-<span class="fc" id="L33">                Object fieldObj = field.get(p);</span>
+<span class="nc" id="L31">                Field field = p.getClass().getDeclaredField(fieldName);</span>
+<span class="nc" id="L32">                field.setAccessible(true);</span>
+<span class="nc" id="L33">                Object fieldObj = field.get(p);</span>
 
-<span class="fc bfc" id="L35" title="All 2 branches covered.">		        if (fieldObj instanceof List ) {</span>
-<span class="fc" id="L36">                   return ((List&lt;?&gt;)fieldObj).stream()</span>
-<span class="fc" id="L37">                            .anyMatch(item -&gt; fieldValue.equals(item.toString()));</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">		        if (fieldObj instanceof List ) {</span>
+<span class="nc" id="L36">                   return ((List&lt;?&gt;)fieldObj).stream()</span>
+<span class="nc" id="L37">                            .anyMatch(item -&gt; fieldValue.equals(item.toString()));</span>
 		        }
 
-<span class="fc" id="L40">                return fieldValue.equals(fieldObj.toString());</span>
-<span class="fc" id="L41">            } catch (NoSuchFieldException | IllegalAccessException | NullPointerException e) {</span>
-<span class="fc" id="L42">                return false;</span>
+<span class="nc" id="L40">                return fieldValue.equals(fieldObj.toString());</span>
+<span class="nc" id="L41">            } catch (NoSuchFieldException | IllegalAccessException | NullPointerException e) {</span>
+<span class="nc" id="L42">                return false;</span>
             }
         };
     }
@@ -51,12 +51,16 @@ public class GenericDAO {
      * @param fieldValue field value
      * @return a stream of T
      */
-    public &lt;T&gt; Flux&lt;T&gt; findByCriteria(String fieldName, String fieldValue, Class&lt;T&gt; valueType){
+    public &lt;T&gt; Flux&lt;T&gt; findByCriteria(String fieldName, String fieldValue, Class&lt;T&gt; dataType){
 
-<span class="fc" id="L56">        Predicate&lt;T&gt; predicate = createCriteria(fieldName, fieldValue);</span>
-<span class="fc" id="L57">        Flux&lt;T&gt; tFlux = JsonHelper.readJSONFile(dataSource, valueType);</span>
+<span class="nc" id="L56">        Predicate&lt;T&gt; predicate = createCriteria(fieldName, fieldValue);</span>
+<span class="nc" id="L57">        Flux&lt;T&gt; tFlux = DataStreamManager.getDataStream().getData(dataSource, dataType)</span>
+<span class="nc" id="L58">                                    .onErrorResume(e -&gt; {</span>
+<span class="nc" id="L59">                                        e.printStackTrace();</span>
+<span class="nc" id="L60">                                        return Flux.just();</span>
+                                    });
 
-<span class="fc" id="L59">        return tFlux.filter(predicate);</span>
+<span class="nc" id="L63">        return tFlux.filter(predicate);</span>
 
     }
 }

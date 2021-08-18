@@ -14,7 +14,8 @@ class TicketDAOTest {
     TicketDAO ticketDao;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ClassNotFoundException {
+        Class.forName("tran.billy.code.challenge.stream.connector.FileStreamConnectorImpl");
         ticketDao = new TicketDAO("src/test/tickets.json");
     }
 
@@ -23,7 +24,7 @@ class TicketDAOTest {
     }
 
     @Test
-    void testSearchOrgByCriteria(){
+    void testSearchTicketsByCriteria(){
         List<Ticket> actualResult = ticketDao.findTicketsByCriteria("submitter_id","38")
                 .collect(Collectors.<Ticket>toList())
                 .block();

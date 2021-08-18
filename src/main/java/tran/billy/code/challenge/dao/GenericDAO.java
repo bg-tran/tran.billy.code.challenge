@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.function.Predicate;
 
-import tran.billy.code.challenge.helper.JsonHelper;
+import tran.billy.code.challenge.stream.connector.StreamConnectorManager;
 
 
 public class GenericDAO {
@@ -51,10 +51,14 @@ public class GenericDAO {
      * @param fieldValue field value
      * @return a stream of T
      */
-    public <T> Flux<T> findByCriteria(String fieldName, String fieldValue, Class<T> valueType){
+    public <T> Flux<T> findByCriteria(String fieldName, String fieldValue, Class<T> dataType){
 
         Predicate<T> predicate = createCriteria(fieldName, fieldValue);
-        Flux<T> tFlux = JsonHelper.readJSONFile(dataSource, valueType);
+        Flux<T> tFlux = StreamConnectorManager.getStreamConnector().getData(dataSource, dataType)
+                                    .onErrorResume(e -> {
+                                        e.printStackTrace();
+                                        return Flux.just();
+                                    });
 
         return tFlux.filter(predicate);
 

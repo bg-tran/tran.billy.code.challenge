@@ -1,6 +1,7 @@
-package tran.billy.code.challenge.helper;
+package tran.billy.code.challenge.stream.connector;
 
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
@@ -10,12 +11,16 @@ import tran.billy.code.challenge.dto.User;
 
 import java.io.IOException;
 
-public class JsonHelperTest {
 
+class FileDataStreamImplTest {
+    @BeforeEach
+    void setUp() throws ClassNotFoundException {
+        Class.forName("tran.billy.code.challenge.stream.connector.FileStreamConnectorImpl");
+    }
     @Test
     void testReadOrganizationFile(){
 
-        Flux<Organization> organizationFlux = JsonHelper.readJSONFile("src/test/organizations.json", Organization.class);
+        Flux<Organization> organizationFlux = StreamConnectorManager.getStreamConnector().getData("src/test/organizations.json", Organization.class);
         StepVerifier
                 .create(organizationFlux)
                 .expectNextMatches(organization -> organization.getId() == 101
@@ -31,7 +36,7 @@ public class JsonHelperTest {
     @Test
     void testReadUserFile(){
 
-        Flux<User> userFlux = JsonHelper.readJSONFile("src/test/users.json", User.class);
+        Flux<User> userFlux = StreamConnectorManager.getStreamConnector().getData("src/test/users.json", User.class);
         StepVerifier
                 .create(userFlux)
                 .expectNextMatches(user -> user.getId() == 1
@@ -50,7 +55,7 @@ public class JsonHelperTest {
     @Test
     void testReadTicketFile(){
 
-        Flux<Ticket> ticketFlux = JsonHelper.readJSONFile("src/test/tickets.json", Ticket.class);
+        Flux<Ticket> ticketFlux = StreamConnectorManager.getStreamConnector().getData("src/test/tickets.json", Ticket.class);
         StepVerifier
                 .create(ticketFlux)
                 .expectNextMatches(ticket -> ticket.getId().equals("436bf9b0-1147-4c0a-8439-6f79833bff5b")
@@ -67,20 +72,19 @@ public class JsonHelperTest {
     void testInvalidFile() {
 
         StepVerifier
-                .create(JsonHelper.readJSONFile("src/test/invalid.json", Object.class))
+                .create(StreamConnectorManager.getStreamConnector().getData("src/test/invalid.json", Object.class))
                 .expectErrorMatches(throwable -> throwable instanceof IllegalStateException &&
                         throwable.getMessage().equals("Expected content to be an array"))
                 .verify();
 
         StepVerifier
-                .create(JsonHelper.readJSONFile("src/test/abc.json", Object.class))
+                .create(StreamConnectorManager.getStreamConnector().getData("src/test/abc.json", Object.class))
                 .expectErrorMatches(throwable -> throwable instanceof IOException)
                 .verify();
 
         StepVerifier
-                .create(JsonHelper.readJSONFile("src/test/invalid2.json", User.class))
+                .create(StreamConnectorManager.getStreamConnector().getData("src/test/invalid2.json", User.class))
                 .expectErrorMatches(throwable -> throwable instanceof UnrecognizedPropertyException)
                 .verify();
     }
-
 }

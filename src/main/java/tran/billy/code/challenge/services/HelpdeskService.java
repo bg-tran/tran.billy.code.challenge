@@ -2,6 +2,7 @@ package tran.billy.code.challenge.services;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import tran.billy.code.challenge.config.AppConfig;
 import tran.billy.code.challenge.dao.OrganizationDAO;
 import tran.billy.code.challenge.dao.TicketDAO;
 import tran.billy.code.challenge.dao.UserDAO;
@@ -12,9 +13,9 @@ import java.util.ArrayList;
 
 public class HelpdeskService {
 
-    public static final String ORG_DATASOURCE_NAME = "organizations.json";
-    public static final String USER_DATASOURCE_NAME = "users.json";
-    public static final String TICKET_DATASOURCE_NAME = "tickets.json";
+//    public static final String ORG_DATASOURCE_NAME = "organizations.json";
+//    public static final String USER_DATASOURCE_NAME = "users.json";
+//    public static final String TICKET_DATASOURCE_NAME = "tickets.json";
 
     private final OrganizationDAO orgDAO;
     private final UserDAO userDAO;
@@ -22,11 +23,9 @@ public class HelpdeskService {
 
 
     public HelpdeskService() {
-
-        String datasourcePath = System.getProperty("datasource_path");
-        this.orgDAO = new OrganizationDAO(datasourcePath + "/" + ORG_DATASOURCE_NAME);
-        this.userDAO = new UserDAO(datasourcePath + "/" + USER_DATASOURCE_NAME);
-        this.ticketDAO = new TicketDAO(datasourcePath + "/" + TICKET_DATASOURCE_NAME);
+        this(new OrganizationDAO(AppConfig.get(AppConfig.ORG_DATA_STREAM_RESOURCE_PATH))
+                ,new UserDAO(AppConfig.get(AppConfig.USER_DATA_STREAM_RESOURCE_PATH))
+                ,new TicketDAO(AppConfig.get(AppConfig.TICKET_DATA_STREAM_RESOURCE_PATH)));
     }
 
     public HelpdeskService(OrganizationDAO orgDAO, UserDAO userDAO, TicketDAO ticketDAO) {
@@ -53,6 +52,11 @@ public class HelpdeskService {
                                     return t.getT1();
                                 })
                 )
+                .switchIfEmpty(
+                        Mono.create(sink -> {
+                                System.out.println("No search result");
+                                sink.success();
+                            }))
                 .subscribe( org -> System.out.println(org.print()));
 
     }
@@ -77,6 +81,11 @@ public class HelpdeskService {
                                     return t.getT1();
                                 })
                 )
+                .switchIfEmpty(
+                        Mono.create(sink -> {
+                            System.out.println("No search result");
+                            sink.success();
+                        }))
                 .subscribe( org -> System.out.println(org.print()));
     }
 
@@ -108,6 +117,11 @@ public class HelpdeskService {
                                     return t.getT1();
                                 })
                 )
+                .switchIfEmpty(
+                        Mono.create(sink -> {
+                            System.out.println("No search result");
+                            sink.success();
+                        }))
                 .subscribe( org -> System.out.println(org.print()));
     }
 

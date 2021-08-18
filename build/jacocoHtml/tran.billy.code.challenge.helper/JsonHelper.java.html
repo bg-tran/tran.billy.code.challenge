@@ -22,31 +22,31 @@ import java.nio.file.Paths;
      * @param valueType Java Class of the JSON object
      * @return a stream of T
      */
-    public static &lt;T&gt; Flux&lt;T&gt; readJSONFile(String filename, Class&lt;T&gt; valueType) {
+    public static &lt;T&gt; Flux&lt;T&gt; readJSONStream(String filename, Class&lt;T&gt; valueType) {
 
-<span class="fc" id="L27">        return Flux.create(sink -&gt; {</span>
+<span class="nc" id="L27">        return Flux.create(sink -&gt; {</span>
             BufferedReader reader;
-<span class="fc" id="L29">            Path inputFile = Paths.get(filename);</span>
+<span class="nc" id="L29">            Path inputFile = Paths.get(filename);</span>
             try {
 
-<span class="fc" id="L32">                ObjectMapper mapper = new ObjectMapper();</span>
-<span class="fc" id="L33">                reader = Files.newBufferedReader(inputFile, Charset.defaultCharset());</span>
-<span class="fc" id="L34">                JsonParser jsonParser = new JsonFactory().createParser(reader);</span>
+<span class="nc" id="L32">                ObjectMapper mapper = new ObjectMapper();</span>
+<span class="nc" id="L33">                reader = Files.newBufferedReader(inputFile, Charset.defaultCharset());</span>
+<span class="nc" id="L34">                JsonParser jsonParser = new JsonFactory().createParser(reader);</span>
                 // Check the first token
-<span class="fc bfc" id="L36" title="All 2 branches covered.">                if (jsonParser.nextToken() != JsonToken.START_ARRAY) {</span>
-<span class="fc" id="L37">                    throw new IllegalStateException(&quot;Expected content to be an array&quot;);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">                if (jsonParser.nextToken() != JsonToken.START_ARRAY) {</span>
+<span class="nc" id="L37">                    throw new IllegalStateException(&quot;Expected content to be an array&quot;);</span>
                 }
 
-<span class="fc bfc" id="L40" title="All 2 branches covered.">                while (jsonParser.nextToken() == JsonToken.START_OBJECT) {</span>
-<span class="fc" id="L41">                    sink.next(mapper.readValue(jsonParser, valueType));</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">                while (jsonParser.nextToken() == JsonToken.START_OBJECT) {</span>
+<span class="nc" id="L41">                    sink.next(mapper.readValue(jsonParser, valueType));</span>
                 }
 
-<span class="fc" id="L44">                reader.close();</span>
-<span class="fc" id="L45">            } catch (IOException | IllegalStateException e) {</span>
-<span class="fc" id="L46">                sink.error(e);</span>
-<span class="fc" id="L47">            }</span>
-<span class="fc" id="L48">            sink.complete();</span>
-<span class="fc" id="L49">        });</span>
+<span class="nc" id="L44">                reader.close();</span>
+<span class="nc" id="L45">            } catch (IOException | IllegalStateException e) {</span>
+<span class="nc" id="L46">                sink.error(e);</span>
+<span class="nc" id="L47">            }</span>
+<span class="nc" id="L48">            sink.complete();</span>
+<span class="nc" id="L49">        });</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

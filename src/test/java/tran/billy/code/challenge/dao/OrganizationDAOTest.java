@@ -14,7 +14,8 @@ class OrganizationDAOTest {
     OrganizationDAO orgDao;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ClassNotFoundException {
+        Class.forName("tran.billy.code.challenge.stream.connector.FileStreamConnectorImpl");
         orgDao = new OrganizationDAO("src/test/organizations.json");
     }
 
@@ -23,7 +24,7 @@ class OrganizationDAOTest {
     }
 
     @Test
-    void testSearchOrgByCriteria(){
+    void testSearchOrganizationsByCriteria(){
         List<Organization> actualResult = orgDao.findOrganizationsByCriteria("_id","102")
                 .collect(Collectors.<Organization>toList())
                 .block();

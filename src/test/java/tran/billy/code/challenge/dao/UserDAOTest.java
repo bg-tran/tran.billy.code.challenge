@@ -14,7 +14,8 @@ class UserDAOTest {
     UserDAO userDao;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ClassNotFoundException {
+        Class.forName("tran.billy.code.challenge.stream.connector.FileStreamConnectorImpl");
         userDao = new UserDAO("src/test/users.json");
     }
 
@@ -23,7 +24,7 @@ class UserDAOTest {
     }
 
     @Test
-    void testSearchOrgByCriteria(){
+    void testSearchUsersByCriteria(){
         List<User> actualResult = userDao.findUsersByCriteria("email","rosannasimpson@flotonic.com")
                 .collect(Collectors.<User>toList())
                 .block();
