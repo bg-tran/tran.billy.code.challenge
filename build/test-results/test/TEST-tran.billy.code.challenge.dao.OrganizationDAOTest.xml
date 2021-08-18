@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tran.billy.code.challenge.dao.OrganizationDAOTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-17T12:30:08" hostname="Billys-Mac-mini.local" time="0.107">
-  <properties/>
-  <testcase name="testSearchOrgByCriteria()" classname="tran.billy.code.challenge.dao.OrganizationDAOTest" time="0.107"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
