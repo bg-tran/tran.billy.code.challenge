@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tran.billy.code.challenge.services.HelpdeskServiceTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-08-19T09:02:58" hostname="Billys-Mac-mini.local" time="0.656">
+<testsuite name="tran.billy.code.challenge.services.HelpdeskServiceTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-08-19T12:24:59" hostname="Billys-Mac-mini.local" time="0.704">
   <properties/>
-  <testcase name="testSearchTicketWithSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.238"/>
-  <testcase name="testSearchOrganizationsWillReturnOrgHavingNoTicket()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.057"/>
-  <testcase name="testSearchOrganizationsWillReturnEmptyResult()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.012"/>
-  <testcase name="testSearchUserHavingNoOrganization()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.043"/>
-  <testcase name="testSearchUserHavingNoTicket()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.092"/>
-  <testcase name="testSearchOrganizationsWillReturnSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.038"/>
-  <testcase name="testSearchOrganizationsWillReturnOrgHavingNoUser()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.024"/>
-  <testcase name="testSearchTicketHavingNoUser()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.021"/>
-  <testcase name="testSearchTicketHavingNoOrg()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.031"/>
-  <testcase name="testSearchUserWithSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.045"/>
+  <testcase name="testSearchTicketWithSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.286"/>
+  <testcase name="testSearchOrganizationsWillReturnOrgHavingNoTicket()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.091"/>
+  <testcase name="testSearchOrganizationsWillReturnEmptyResult()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.014"/>
+  <testcase name="testSearchUserHavingNoOrganization()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.038"/>
+  <testcase name="testSearchUserHavingNoTicket()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.032"/>
+  <testcase name="testSearchOrganizationsWillReturnSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.046"/>
+  <testcase name="testSearchOrganizationsWillReturnOrgHavingNoUser()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.03"/>
+  <testcase name="testSearchTicketHavingNoUser()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.016"/>
+  <testcase name="testSearchTicketHavingNoOrg()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.094"/>
+  <testcase name="testSearchUserWithSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.029"/>
   <system-out><![CDATA[_id                                               1000001
 url                                               null
 external_id                                       null
@@ -31,46 +31,7 @@ organization_name                                 Org 1
 submitter_name                                    User 1
 assignee_name                                     User 1
 
-_id                                               1000002
-url                                               null
-external_id                                       null
-created_at                                        null
-type                                              null
-subject                                           Ticket 2
-description                                       null
-priority                                          null
-status                                            null
-submitter_id                                      10002
-assignee_id                                       20002
-organization_id                                   1002
-tags                                              null
-has_incidents                                     false
-due_at                                            null
-via                                               null
-organization_name                                 Org 1
-submitter_name                                    User 1
-assignee_name                                     User 1
-
-_id                                               1000003
-url                                               null
-external_id                                       null
-created_at                                        null
-type                                              null
-subject                                           Ticket 3
-description                                       null
-priority                                          null
-status                                            null
-submitter_id                                      10003
-assignee_id                                       20003
-organization_id                                   1003
-tags                                              null
-has_incidents                                     false
-due_at                                            null
-via                                               null
-organization_name                                 Org 1
-submitter_name                                    User 1
-assignee_name                                     User 1
-
+Press enter/return to continue
 _id                                               1001
 url                                               null
 external_id                                       null
@@ -81,22 +42,9 @@ details                                           null
 shared_tickets                                    false
 tags                                              null
 user_0                                            User 1
-user_1                                            User 2
 
 
-_id                                               1002
-url                                               null
-external_id                                       null
-name                                              Org 2
-domain_names                                      null
-created_at                                        null
-details                                           null
-shared_tickets                                    false
-tags                                              null
-user_0                                            User 1
-user_1                                            User 2
-
-
+Press enter/return to continue
 No search result
 _id                                               10001
 url                                               null
@@ -118,10 +66,9 @@ suspended                                         false
 role                                              null
 organization_name                                 null
 ticket0                                           Ticket 1
-ticket1                                           Ticket 2
-ticket2                                           Ticket 3
 
 
+Press enter/return to continue
 _id                                               10001
 url                                               null
 name                                              User 1
@@ -143,27 +90,7 @@ role                                              null
 organization_name                                 Org 1
 
 
-_id                                               10002
-url                                               null
-name                                              User 2
-alias                                             null
-created_at                                        null
-active                                            false
-verified                                          false
-shared                                            false
-locale                                            null
-timezone                                          null
-lastLoginAt                                       null
-email                                             null
-phone                                             null
-signature                                         null
-organization_id                                   1002
-tags                                              null
-suspended                                         false
-role                                              null
-organization_name                                 Org 1
-
-
+Press enter/return to continue
 _id                                               1001
 url                                               null
 external_id                                       null
@@ -174,28 +101,10 @@ details                                           null
 shared_tickets                                    false
 tags                                              null
 ticket_0                                          Ticket 1
-ticket_1                                          Ticket 2
-ticket_2                                          Ticket 3
 user_0                                            User 1
-user_1                                            User 2
 
 
-_id                                               1002
-url                                               null
-external_id                                       null
-name                                              Org 2
-domain_names                                      null
-created_at                                        null
-details                                           null
-shared_tickets                                    false
-tags                                              null
-ticket_0                                          Ticket 1
-ticket_1                                          Ticket 2
-ticket_2                                          Ticket 3
-user_0                                            User 1
-user_1                                            User 2
-
-
+Press enter/return to continue
 _id                                               1001
 url                                               null
 external_id                                       null
@@ -206,24 +115,9 @@ details                                           null
 shared_tickets                                    false
 tags                                              null
 ticket_0                                          Ticket 1
-ticket_1                                          Ticket 2
-ticket_2                                          Ticket 3
 
 
-_id                                               1002
-url                                               null
-external_id                                       null
-name                                              Org 2
-domain_names                                      null
-created_at                                        null
-details                                           null
-shared_tickets                                    false
-tags                                              null
-ticket_0                                          Ticket 1
-ticket_1                                          Ticket 2
-ticket_2                                          Ticket 3
-
-
+Press enter/return to continue
 _id                                               1000001
 url                                               null
 external_id                                       null
@@ -244,6 +138,7 @@ organization_name                                 Org 1
 submitter_name                                    null
 assignee_name                                     null
 
+Press enter/return to continue
 _id                                               1000001
 url                                               null
 external_id                                       null
@@ -264,6 +159,7 @@ organization_name                                 null
 submitter_name                                    User 1
 assignee_name                                     User 1
 
+Press enter/return to continue
 _id                                               10001
 url                                               null
 name                                              User 1
@@ -284,34 +180,9 @@ suspended                                         false
 role                                              null
 organization_name                                 Org 1
 ticket0                                           Ticket 1
-ticket1                                           Ticket 2
-ticket2                                           Ticket 3
 
 
-_id                                               10002
-url                                               null
-name                                              User 2
-alias                                             null
-created_at                                        null
-active                                            false
-verified                                          false
-shared                                            false
-locale                                            null
-timezone                                          null
-lastLoginAt                                       null
-email                                             null
-phone                                             null
-signature                                         null
-organization_id                                   1002
-tags                                              null
-suspended                                         false
-role                                              null
-organization_name                                 Org 1
-ticket0                                           Ticket 1
-ticket1                                           Ticket 2
-ticket2                                           Ticket 3
-
-
+Press enter/return to continue
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

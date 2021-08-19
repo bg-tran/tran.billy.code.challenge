@@ -7,6 +7,7 @@ import tran.billy.code.challenge.dao.OrganizationDAO;
 import tran.billy.code.challenge.dao.TicketDAO;
 import tran.billy.code.challenge.dao.UserDAO;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -59,7 +60,15 @@ public class HelpdeskService {
                                 System.out.println("No search result");
                                 sink.success();
                             }))
-                .subscribe( org -> System.out.println(org.print()));
+                .subscribe( org -> {
+                    System.out.println(org.print());
+                    System.out.println("Press enter/return to continue");
+                    try {
+                        System.in.read();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
 
     }
 
@@ -93,7 +102,15 @@ public class HelpdeskService {
                             System.out.println("No search result");
                             sink.success();
                         }))
-                .subscribe( org -> System.out.println(org.print()));
+                .subscribe( org -> {
+                    System.out.println(org.print());
+                    System.out.println("Press enter/return to continue");
+                    try {
+                        System.in.read();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     /**
@@ -134,7 +151,15 @@ public class HelpdeskService {
                             System.out.println("No search result");
                             sink.success();
                         }))
-                .subscribe( org -> System.out.println(org.print()));
+                .subscribe( org -> {
+                    System.out.println(org.print());
+                    System.out.println("Press enter/return to continue");
+                    try {
+                        System.in.read();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
 }

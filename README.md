@@ -3,16 +3,30 @@
 A Simple CLI app to search users, tickets or organizations from a data source in JSON format.
 This version has only implemented file datasource.
 
+### Assumption
+    1) Data: _id is unique key. Search by _id should only return 1 result
+    2) Code coverage ~90%
+    3) Object matching is using Java reflection for simplicity
+    4) Jackson JSON parser lib is used for streaming parsing large JSON file 
+    5) The search app returns fully matched results 
+
+### Tradeoffs
+    1) If more than 1 record have same _id, only the first record will be taken
+    2) Reflection might impact to speed of processing
+    3) Streaming parser is slower than tree parser at the small scale of data
+    4) Streaming parser means no caching data
+    5) Cannot search using regex matching
+
 ### Build and release
 #### Prerequisite
-    Gradle 7.1 and above
-    Java JDK 1.8 and above
+    1) Gradle 7.1 and above
+    2) Java JDK 1.8 and above
 #### Download the source code
     git clone https://github.com/bg-tran/tran.billy.code.challenge.git
 #### Build
     cd tran.billy.code.challenge
     ./gradlew assmembleDist
-    ./gradlew assmembleDist
+    ./gradlew installDist
 Now the binary is copy into <project location>/build/install
 
 Another way to install into your desired directory:
