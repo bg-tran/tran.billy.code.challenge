@@ -1,300 +1,301 @@
-:_id                                               1000001
-7url                                               null
-7external_id                                       null
-7created_at                                        null
-7type                                              null
-;subject                                           Ticket 1
-7description                                       null
-7priority                                          null
-7status                                            null
-8submitter_id                                      10001
-8assignee_id                                       20001
-7organization_id                                   1001
-7tags                                              null
-8has_incidents                                     false
-7due_at                                            null
-7via                                               null
-8organization_name                                 Org 1
-9submitter_name                                    User 1
-9assignee_name                                     User 1
-
-:_id                                               1000002
-7url                                               null
-7external_id                                       null
-7created_at                                        null
-7type                                              null
-;subject                                           Ticket 2
-7description                                       null
-7priority                                          null
-7status                                            null
-8submitter_id                                      10002
-8assignee_id                                       20002
-7organization_id                                   1002
-7tags                                              null
-8has_incidents                                     false
-7due_at                                            null
-7via                                               null
-8organization_name                                 Org 1
-9submitter_name                                    User 1
-9assignee_name                                     User 1
-
-:_id                                               1000003
-7url                                               null
-7external_id                                       null
-7created_at                                        null
-7type                                              null
-;subject                                           Ticket 3
-7description                                       null
-7priority                                          null
-7status                                            null
-8submitter_id                                      10003
-8assignee_id                                       20003
-7organization_id                                   1003
-7tags                                              null
-8has_incidents                                     false
-7due_at                                            null
-7via                                               null
-8organization_name                                 Org 1
-9submitter_name                                    User 1
-9assignee_name                                     User 1
-
-7_id                                               1001
-7url                                               null
-7external_id                                       null
-8name                                              Org 1
-7domain_names                                      null
-7created_at                                        null
-7details                                           null
-8shared_tickets                                    false
-7tags                                              null
-9user_0                                            User 1
-9user_1                                            User 2
-
-
-7_id                                               1002
-7url                                               null
-7external_id                                       null
-8name                                              Org 2
-7domain_names                                      null
-7created_at                                        null
-7details                                           null
-8shared_tickets                                    false
-7tags                                              null
-9user_0                                            User 1
-9user_1                                            User 2
-
-
-8_id                                               10001
-7url                                               null
-9name                                              User 1
-7alias                                             null
-7created_at                                        null
-8active                                            false
-8verified                                          false
-8shared                                            false
-7locale                                            null
-7timezone                                          null
-7lastLoginAt                                       null
-7email                                             null
-7phone                                             null
-7signature                                         null
-7organization_id                                   1001
-7tags                                              null
-8suspended                                         false
-7role                                              null
-7organization_name                                 null
-;ticket0                                           Ticket 1
-;ticket1                                           Ticket 2
-;ticket2                                           Ticket 3
-
-
-8_id                                               10001
-7url                                               null
-9name                                              User 1
-7alias                                             null
-7created_at                                        null
-8active                                            false
-8verified                                          false
-8shared                                            false
-7locale                                            null
-7timezone                                          null
-7lastLoginAt                                       null
-7email                                             null
-7phone                                             null
-7signature                                         null
-7organization_id                                   1001
-7tags                                              null
-8suspended                                         false
-7role                                              null
-8organization_name                                 Org 1
-
-
-8_id                                               10002
-7url                                               null
-9name                                              User 2
-7alias                                             null
-7created_at                                        null
-8active                                            false
-8verified                                          false
-8shared                                            false
-7locale                                            null
-7timezone                                          null
-7lastLoginAt                                       null
-7email                                             null
-7phone                                             null
-7signature                                         null
-7organization_id                                   1002
-7tags                                              null
-8suspended                                         false
-7role                                              null
-8organization_name                                 Org 1
-
-
-7_id                                               1001
-7url                                               null
-7external_id                                       null
-8name                                              Org 1
-7domain_names                                      null
-7created_at                                        null
-7details                                           null
-8shared_tickets                                    false
-7tags                                              null
-;ticket_0                                          Ticket 1
-;ticket_1                                          Ticket 2
-;ticket_2                                          Ticket 3
-9user_0                                            User 1
-9user_1                                            User 2
-
-
-7_id                                               1002
-7url                                               null
-7external_id                                       null
-8name                                              Org 2
-7domain_names                                      null
-7created_at                                        null
-7details                                           null
-8shared_tickets                                    false
-7tags                                              null
-;ticket_0                                          Ticket 1
-;ticket_1                                          Ticket 2
-;ticket_2                                          Ticket 3
-9user_0                                            User 1
-9user_1                                            User 2
-
-
-7_id                                               1001
-7url                                               null
-7external_id                                       null
-8name                                              Org 1
-7domain_names                                      null
-7created_at                                        null
-7details                                           null
-8shared_tickets                                    false
-7tags                                              null
-;ticket_0                                          Ticket 1
-;ticket_1                                          Ticket 2
-;ticket_2                                          Ticket 3
-
-
-7_id                                               1002
-7url                                               null
-7external_id                                       null
-8name                                              Org 2
-7domain_names                                      null
-7created_at                                        null
-7details                                           null
-8shared_tickets                                    false
-7tags                                              null
-;ticket_0                                          Ticket 1
-;ticket_1                                          Ticket 2
-;ticket_2                                          Ticket 3
-
-
-:_id                                               1000001
-7url                                               null
-7external_id                                       null
-7created_at                                        null
-7type                                              null
-;subject                                           Ticket 1
-7description                                       null
-7priority                                          null
-7status                                            null
-8submitter_id                                      10001
-8assignee_id                                       20001
-7organization_id                                   1001
-7tags                                              null
-8has_incidents                                     false
-7due_at                                            null
-7via                                               null
-8organization_name                                 Org 1
-7submitter_name                                    null
-7assignee_name                                     null
-
-:_id                                               1000001
-7url                                               null
-7external_id                                       null
-7created_at                                        null
-7type                                              null
-;subject                                           Ticket 1
-7description                                       null
-7priority                                          null
-7status                                            null
-8submitter_id                                      10001
-8assignee_id                                       20001
-7organization_id                                   1001
-7tags                                              null
-8has_incidents                                     false
-7due_at                                            null
-7via                                               null
-7organization_name                                 null
-9submitter_name                                    User 1
-9assignee_name                                     User 1
-
-8_id                                               10001
-7url                                               null
-9name                                              User 1
-7alias                                             null
-7created_at                                        null
-8active                                            false
-8verified                                          false
-8shared                                            false
-7locale                                            null
-7timezone                                          null
-7lastLoginAt                                       null
-7email                                             null
-7phone                                             null
-7signature                                         null
-7organization_id                                   1001
-7tags                                              null
-8suspended                                         false
-7role                                              null
-8organization_name                                 Org 1
-;ticket0                                           Ticket 1
-;ticket1                                           Ticket 2
-;ticket2                                           Ticket 3
-
-
-8_id                                               10002
-7url                                               null
-9name                                              User 2
-7alias                                             null
-7created_at                                        null
-8active                                            false
-8verified                                          false
-8shared                                            false
-7locale                                            null
-7timezone                                          null
-7lastLoginAt                                       null
-7email                                             null
-7phone                                             null
-7signature                                         null
-7organization_id                                   1002
-7tags                                              null
-8suspended                                         false
-7role                                              null
-8organization_name                                 Org 1
-;ticket0                                           Ticket 1
-;ticket1                                           Ticket 2
-;ticket2                                           Ticket 3
-
-
+"!:_id                                               1000001
+"!7url                                               null
+"!7external_id                                       null
+"!7created_at                                        null
+"!7type                                              null
+"!;subject                                           Ticket 1
+"!7description                                       null
+"!7priority                                          null
+"!7status                                            null
+"!8submitter_id                                      10001
+"!8assignee_id                                       20001
+"!7organization_id                                   1001
+"!7tags                                              null
+"!8has_incidents                                     false
+"!7due_at                                            null
+"!7via                                               null
+"!8organization_name                                 Org 1
+"!9submitter_name                                    User 1
+"!9assignee_name                                     User 1
+"!
+"!:_id                                               1000002
+"!7url                                               null
+"!7external_id                                       null
+"!7created_at                                        null
+"!7type                                              null
+"!;subject                                           Ticket 2
+"!7description                                       null
+"!7priority                                          null
+"!7status                                            null
+"!8submitter_id                                      10002
+"!8assignee_id                                       20002
+"!7organization_id                                   1002
+"!7tags                                              null
+"!8has_incidents                                     false
+"!7due_at                                            null
+"!7via                                               null
+"!8organization_name                                 Org 1
+"!9submitter_name                                    User 1
+"!9assignee_name                                     User 1
+"!
+"!:_id                                               1000003
+"!7url                                               null
+"!7external_id                                       null
+"!7created_at                                        null
+"!7type                                              null
+"!;subject                                           Ticket 3
+"!7description                                       null
+"!7priority                                          null
+"!7status                                            null
+"!8submitter_id                                      10003
+"!8assignee_id                                       20003
+"!7organization_id                                   1003
+"!7tags                                              null
+"!8has_incidents                                     false
+"!7due_at                                            null
+"!7via                                               null
+"!8organization_name                                 Org 1
+"!9submitter_name                                    User 1
+"!9assignee_name                                     User 1
+"!
+"#7_id                                               1001
+"#7url                                               null
+"#7external_id                                       null
+"#8name                                              Org 1
+"#7domain_names                                      null
+"#7created_at                                        null
+"#7details                                           null
+"#8shared_tickets                                    false
+"#7tags                                              null
+"#9user_0                                            User 1
+"#9user_1                                            User 2
+"#
+"#
+"#7_id                                               1002
+"#7url                                               null
+"#7external_id                                       null
+"#8name                                              Org 2
+"#7domain_names                                      null
+"#7created_at                                        null
+"#7details                                           null
+"#8shared_tickets                                    false
+"#7tags                                              null
+"#9user_0                                            User 1
+"#9user_1                                            User 2
+"#
+"#
+"$No search result
+"%8_id                                               10001
+"%7url                                               null
+"%9name                                              User 1
+"%7alias                                             null
+"%7created_at                                        null
+"%8active                                            false
+"%8verified                                          false
+"%8shared                                            false
+"%7locale                                            null
+"%7timezone                                          null
+"%7lastLoginAt                                       null
+"%7email                                             null
+"%7phone                                             null
+"%7signature                                         null
+"%7organization_id                                   1001
+"%7tags                                              null
+"%8suspended                                         false
+"%7role                                              null
+"%7organization_name                                 null
+"%;ticket0                                           Ticket 1
+"%;ticket1                                           Ticket 2
+"%;ticket2                                           Ticket 3
+"%
+"%
+"&8_id                                               10001
+"&7url                                               null
+"&9name                                              User 1
+"&7alias                                             null
+"&7created_at                                        null
+"&8active                                            false
+"&8verified                                          false
+"&8shared                                            false
+"&7locale                                            null
+"&7timezone                                          null
+"&7lastLoginAt                                       null
+"&7email                                             null
+"&7phone                                             null
+"&7signature                                         null
+"&7organization_id                                   1001
+"&7tags                                              null
+"&8suspended                                         false
+"&7role                                              null
+"&8organization_name                                 Org 1
+"&
+"&
+"&8_id                                               10002
+"&7url                                               null
+"&9name                                              User 2
+"&7alias                                             null
+"&7created_at                                        null
+"&8active                                            false
+"&8verified                                          false
+"&8shared                                            false
+"&7locale                                            null
+"&7timezone                                          null
+"&7lastLoginAt                                       null
+"&7email                                             null
+"&7phone                                             null
+"&7signature                                         null
+"&7organization_id                                   1002
+"&7tags                                              null
+"&8suspended                                         false
+"&7role                                              null
+"&8organization_name                                 Org 1
+"&
+"&
+"'7_id                                               1001
+"'7url                                               null
+"'7external_id                                       null
+"'8name                                              Org 1
+"'7domain_names                                      null
+"'7created_at                                        null
+"'7details                                           null
+"'8shared_tickets                                    false
+"'7tags                                              null
+"';ticket_0                                          Ticket 1
+"';ticket_1                                          Ticket 2
+"';ticket_2                                          Ticket 3
+"'9user_0                                            User 1
+"'9user_1                                            User 2
+"'
+"'
+"'7_id                                               1002
+"'7url                                               null
+"'7external_id                                       null
+"'8name                                              Org 2
+"'7domain_names                                      null
+"'7created_at                                        null
+"'7details                                           null
+"'8shared_tickets                                    false
+"'7tags                                              null
+"';ticket_0                                          Ticket 1
+"';ticket_1                                          Ticket 2
+"';ticket_2                                          Ticket 3
+"'9user_0                                            User 1
+"'9user_1                                            User 2
+"'
+"'
+"(7_id                                               1001
+"(7url                                               null
+"(7external_id                                       null
+"(8name                                              Org 1
+"(7domain_names                                      null
+"(7created_at                                        null
+"(7details                                           null
+"(8shared_tickets                                    false
+"(7tags                                              null
+"(;ticket_0                                          Ticket 1
+"(;ticket_1                                          Ticket 2
+"(;ticket_2                                          Ticket 3
+"(
+"(
+"(7_id                                               1002
+"(7url                                               null
+"(7external_id                                       null
+"(8name                                              Org 2
+"(7domain_names                                      null
+"(7created_at                                        null
+"(7details                                           null
+"(8shared_tickets                                    false
+"(7tags                                              null
+"(;ticket_0                                          Ticket 1
+"(;ticket_1                                          Ticket 2
+"(;ticket_2                                          Ticket 3
+"(
+"(
+"):_id                                               1000001
+")7url                                               null
+")7external_id                                       null
+")7created_at                                        null
+")7type                                              null
+");subject                                           Ticket 1
+")7description                                       null
+")7priority                                          null
+")7status                                            null
+")8submitter_id                                      10001
+")8assignee_id                                       20001
+")7organization_id                                   1001
+")7tags                                              null
+")8has_incidents                                     false
+")7due_at                                            null
+")7via                                               null
+")8organization_name                                 Org 1
+")7submitter_name                                    null
+")7assignee_name                                     null
+")
+"*:_id                                               1000001
+"*7url                                               null
+"*7external_id                                       null
+"*7created_at                                        null
+"*7type                                              null
+"*;subject                                           Ticket 1
+"*7description                                       null
+"*7priority                                          null
+"*7status                                            null
+"*8submitter_id                                      10001
+"*8assignee_id                                       20001
+"*7organization_id                                   1001
+"*7tags                                              null
+"*8has_incidents                                     false
+"*7due_at                                            null
+"*7via                                               null
+"*7organization_name                                 null
+"*9submitter_name                                    User 1
+"*9assignee_name                                     User 1
+"*
+"+8_id                                               10001
+"+7url                                               null
+"+9name                                              User 1
+"+7alias                                             null
+"+7created_at                                        null
+"+8active                                            false
+"+8verified                                          false
+"+8shared                                            false
+"+7locale                                            null
+"+7timezone                                          null
+"+7lastLoginAt                                       null
+"+7email                                             null
+"+7phone                                             null
+"+7signature                                         null
+"+7organization_id                                   1001
+"+7tags                                              null
+"+8suspended                                         false
+"+7role                                              null
+"+8organization_name                                 Org 1
+"+;ticket0                                           Ticket 1
+"+;ticket1                                           Ticket 2
+"+;ticket2                                           Ticket 3
+"+
+"+
+"+8_id                                               10002
+"+7url                                               null
+"+9name                                              User 2
+"+7alias                                             null
+"+7created_at                                        null
+"+8active                                            false
+"+8verified                                          false
+"+8shared                                            false
+"+7locale                                            null
+"+7timezone                                          null
+"+7lastLoginAt                                       null
+"+7email                                             null
+"+7phone                                             null
+"+7signature                                         null
+"+7organization_id                                   1002
+"+7tags                                              null
+"+8suspended                                         false
+"+7role                                              null
+"+8organization_name                                 Org 1
+"+;ticket0                                           Ticket 1
+"+;ticket1                                           Ticket 2
+"+;ticket2                                           Ticket 3
+"+
+"+

@@ -7,9 +7,7 @@ import tran.billy.code.challenge.dao.OrganizationDAO;
 import tran.billy.code.challenge.dao.TicketDAO;
 import tran.billy.code.challenge.dao.UserDAO;
 
-
 import java.util.ArrayList;
-
 
 public class HelpdeskService {
 

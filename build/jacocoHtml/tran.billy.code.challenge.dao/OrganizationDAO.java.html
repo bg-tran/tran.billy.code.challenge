@@ -30,7 +30,7 @@ public class OrganizationDAO extends GenericDAO{
      */
     public Flux&lt;Organization&gt; findOrganizationsByCriteria(String fieldName, String fieldValue){
 
-<span class="nc" id="L33">        return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, Organization.class);</span>
+<span class="fc" id="L33">        return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, Organization.class);</span>
     }
 
 }

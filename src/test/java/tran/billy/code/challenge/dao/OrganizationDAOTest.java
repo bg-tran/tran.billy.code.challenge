@@ -19,10 +19,6 @@ class OrganizationDAOTest {
         orgDao = new OrganizationDAO("src/test/organizations.json");
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void testSearchOrganizationsByCriteria(){
         List<Organization> actualResult = orgDao.findOrganizationsByCriteria("_id","102")

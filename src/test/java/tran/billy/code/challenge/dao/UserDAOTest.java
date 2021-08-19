@@ -19,10 +19,6 @@ class UserDAOTest {
         userDao = new UserDAO("src/test/users.json");
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void testSearchUsersByCriteria(){
         List<User> actualResult = userDao.findUsersByCriteria("email","rosannasimpson@flotonic.com")

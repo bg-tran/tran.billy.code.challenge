@@ -12,18 +12,23 @@ import java.util.Scanner;
 
 public class HelpdeskApp {
 
-    static final int ERROR_CODE_BAD_ARGUMENTS   = 1;
+    static final int ERROR_CODE_BAD_ARGUMENTS = 1;
 
-    private static HelpdeskApp app = null;
+    static final int ERROR_CODE_BAD_CONFIG_FILE = 2;
 
-    public static HelpdeskApp current() {
-        return app;
-    }
+    static final int ERROR_CODE_CLASS_LOADING_FAILED = 3;
+
+    private HelpdeskService helpdeskService;
 
     private final String[] args;
 
     public HelpdeskApp(String[] args){
         this.args = args;
+    }
+
+    public HelpdeskApp(String[] args,HelpdeskService helpdeskService){
+        this.args = args;
+        this.helpdeskService = helpdeskService;
     }
 
     private void printHeaders(){
@@ -57,9 +62,9 @@ public class HelpdeskApp {
 
     private void printUsage(){
         System.out.println("Usage:");
-        System.out.println("sh tran.billy.code.challenge <input_directory>");
+        System.out.println("sh helpdesk <config file>");
         System.out.println("or if you are using Windows:");
-        System.out.println("tran.billy.code.challenge.bat <input_directory>");
+        System.out.println("helpdesk.bat <config file>");
     }
 
     private boolean validateArgs(String[] args) {
@@ -67,7 +72,7 @@ public class HelpdeskApp {
     }
 
     private void executeSearchZendesk(Scanner scanner) {
-        HelpdeskService helpdeskService = new HelpdeskService();
+
         String searchMenuInput;
         String searchTerm, searchValue;
 
@@ -108,7 +113,7 @@ public class HelpdeskApp {
         }
     }
 
-    private void run(){
+    public void run(){
 
         if (!validateArgs(args)){
             printUsage();
@@ -136,6 +141,7 @@ public class HelpdeskApp {
             printAppMenu();
             input = scanner.nextLine();
         }
+        System.out.println("Exiting ...");
         scanner.close();
 
     }
@@ -144,16 +150,19 @@ public class HelpdeskApp {
 
         try {
             AppConfig.init(configFile);
-
-        } catch (IOException | ClassNotFoundException ex) {
+            if (helpdeskService == null) helpdeskService = new HelpdeskService();
+        } catch (IOException e) {
             System.out.println("Unable to load config file");
-            System.exit(ERROR_CODE_BAD_ARGUMENTS);
+            System.exit(ERROR_CODE_BAD_CONFIG_FILE);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Unable to initialize app config");
+            System.exit(ERROR_CODE_CLASS_LOADING_FAILED);
         }
     }
 
     public static void main(String[] args){
 
-        app = new HelpdeskApp(args);
+        HelpdeskApp app = new HelpdeskApp(args);
         app.run();
 
     }

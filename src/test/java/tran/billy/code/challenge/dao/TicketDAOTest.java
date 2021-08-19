@@ -19,10 +19,6 @@ class TicketDAOTest {
         ticketDao = new TicketDAO("src/test/tickets.json");
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void testSearchTicketsByCriteria(){
         List<Ticket> actualResult = ticketDao.findTicketsByCriteria("submitter_id","38")

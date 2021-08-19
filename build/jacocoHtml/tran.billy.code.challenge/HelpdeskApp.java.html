@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HelpdeskApp.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tran.billy.code.challenge</a> &gt; <a href="index.source.html" class="el_package">tran.billy.code.challenge</a> &gt; <span class="el_source">HelpdeskApp.java</span></div><h1>HelpdeskApp.java</h1><pre class="source lang-java linenums">package tran.billy.code.challenge;
+
+import tran.billy.code.challenge.config.AppConfig;
+import tran.billy.code.challenge.dao.OrganizationDAO;
+import tran.billy.code.challenge.dao.TicketDAO;
+import tran.billy.code.challenge.dao.UserDAO;
+import tran.billy.code.challenge.helper.StringHelper;
+import tran.billy.code.challenge.services.HelpdeskService;
+import java.io.IOException;
+
+import java.util.Scanner;
+
+public class HelpdeskApp {
+
+    static final int ERROR_CODE_BAD_ARGUMENTS = 1;
+
+    static final int ERROR_CODE_BAD_CONFIG_FILE = 2;
+
+    static final int ERROR_CODE_CLASS_LOADING_FAILED = 3;
+
+    private HelpdeskService helpdeskService;
+
+    private final String[] args;
+
+<span class="fc" id="L25">    public HelpdeskApp(String[] args){</span>
+<span class="fc" id="L26">        this.args = args;</span>
+<span class="fc" id="L27">    }</span>
+
+<span class="fc" id="L29">    public HelpdeskApp(String[] args,HelpdeskService helpdeskService){</span>
+<span class="fc" id="L30">        this.args = args;</span>
+<span class="fc" id="L31">        this.helpdeskService = helpdeskService;</span>
+<span class="fc" id="L32">    }</span>
+
+    private void printHeaders(){
+<span class="fc" id="L35">        System.out.println(&quot;Welcome to Zendesk Search&quot;);</span>
+<span class="fc" id="L36">        System.out.println(&quot;Type 'quit' to exit any time, Press enter to continue\n\n&quot;);</span>
+<span class="fc" id="L37">    }</span>
+
+    private void printAppMenu(){
+<span class="fc" id="L40">        System.out.println(StringHelper.addLeftPadding(&quot; &quot;, StringHelper.LEFT_PADDING_WIDTH - 5) + &quot;Select search options:&quot;);</span>
+<span class="fc" id="L41">        System.out.println(StringHelper.addLeftPadding(&quot; * &quot;, StringHelper.LEFT_PADDING_WIDTH) + &quot;Press 1 to search Zendesk&quot;);</span>
+<span class="fc" id="L42">        System.out.println(StringHelper.addLeftPadding(&quot; * &quot;, StringHelper.LEFT_PADDING_WIDTH) + &quot;Press 2 to view a list of searchable fields&quot;);</span>
+<span class="fc" id="L43">        System.out.println(StringHelper.addLeftPadding(&quot; * &quot;, StringHelper.LEFT_PADDING_WIDTH) + &quot;Type 'quit' to exit&quot;);</span>
+<span class="fc" id="L44">    }</span>
+
+    private void printHelp(){
+<span class="fc" id="L47">        System.out.println(StringHelper.addRightPadding(&quot;_&quot;, StringHelper.RIGHT_PADDING_WIDTH).replace(' ','_'));</span>
+<span class="fc" id="L48">        System.out.println(&quot;Search Users with&quot;);</span>
+<span class="fc" id="L49">        UserDAO.SEARCH_FIELDS.keySet()</span>
+<span class="fc" id="L50">                .forEach(System.out::println);</span>
+
+<span class="fc" id="L52">        System.out.println(StringHelper.addRightPadding(&quot;_&quot;, StringHelper.RIGHT_PADDING_WIDTH).replace(' ','_'));</span>
+<span class="fc" id="L53">        System.out.println(&quot;Search Tickets with&quot;);</span>
+<span class="fc" id="L54">        TicketDAO.SEARCH_FIELDS.keySet()</span>
+<span class="fc" id="L55">                .forEach(System.out::println);</span>
+
+<span class="fc" id="L57">        System.out.println(StringHelper.addRightPadding(&quot;_&quot;, StringHelper.RIGHT_PADDING_WIDTH).replace(' ','_'));</span>
+<span class="fc" id="L58">        System.out.println(&quot;Search Organizations with&quot;);</span>
+<span class="fc" id="L59">        OrganizationDAO.SEARCH_FIELDS.keySet()</span>
+<span class="fc" id="L60">                .forEach(System.out::println);</span>
+<span class="fc" id="L61">    }</span>
+
+    private void printUsage(){
+<span class="fc" id="L64">        System.out.println(&quot;Usage:&quot;);</span>
+<span class="fc" id="L65">        System.out.println(&quot;sh helpdesk &lt;config file&gt;&quot;);</span>
+<span class="fc" id="L66">        System.out.println(&quot;or if you are using Windows:&quot;);</span>
+<span class="fc" id="L67">        System.out.println(&quot;helpdesk.bat &lt;config file&gt;&quot;);</span>
+<span class="fc" id="L68">    }</span>
+
+    private boolean validateArgs(String[] args) {
+<span class="pc bpc" id="L71" title="1 of 4 branches missed.">        return args != null &amp;&amp; args.length &gt;= 1;</span>
+    }
+
+    private void executeSearchZendesk(Scanner scanner) {
+
+        String searchMenuInput;
+        String searchTerm, searchValue;
+
+<span class="fc" id="L79">        System.out.println(&quot;Select 1) Users or 2) Tickets or 3) Organizations or 4) To go back&quot;);</span>
+<span class="fc" id="L80">        searchMenuInput = scanner.nextLine();</span>
+
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        while(!&quot;4&quot;.equals(searchMenuInput)) {</span>
+
+<span class="fc bfc" id="L84" title="All 4 branches covered.">            switch (searchMenuInput) {</span>
+                case &quot;1&quot;:
+<span class="fc" id="L86">                    System.out.println(&quot;Enter search term&quot;);</span>
+<span class="fc" id="L87">                    searchTerm = scanner.nextLine();</span>
+<span class="fc" id="L88">                    System.out.println(&quot;Enter search value&quot;);</span>
+<span class="fc" id="L89">                    searchValue = scanner.nextLine();</span>
+<span class="fc" id="L90">                    helpdeskService.searchUsers(searchTerm, searchValue);</span>
+<span class="fc" id="L91">                    break;</span>
+                case &quot;2&quot;:
+<span class="fc" id="L93">                    System.out.println(&quot;Enter search term&quot;);</span>
+<span class="fc" id="L94">                    searchTerm = scanner.nextLine();</span>
+<span class="fc" id="L95">                    System.out.println(&quot;Enter search value&quot;);</span>
+<span class="fc" id="L96">                    searchValue = scanner.nextLine();</span>
+<span class="fc" id="L97">                    helpdeskService.searchTickets(searchTerm, searchValue);</span>
+<span class="fc" id="L98">                    break;</span>
+                case &quot;3&quot;:
+<span class="fc" id="L100">                    System.out.println(&quot;Enter search term&quot;);</span>
+<span class="fc" id="L101">                    searchTerm = scanner.nextLine();</span>
+<span class="fc" id="L102">                    System.out.println(&quot;Enter search value&quot;);</span>
+<span class="fc" id="L103">                    searchValue = scanner.nextLine();</span>
+<span class="fc" id="L104">                    helpdeskService.searchOrganizations(searchTerm, searchValue);</span>
+<span class="fc" id="L105">                    break;</span>
+
+                default:
+<span class="fc" id="L108">                    System.out.println(&quot;Invalid input&quot;);</span>
+                    break;
+            }
+<span class="fc" id="L111">            System.out.println(&quot;Select 1) Users or 2) Tickets or 3) Organizations or 4) To go back&quot;);</span>
+<span class="fc" id="L112">            searchMenuInput = scanner.nextLine();</span>
+        }
+<span class="fc" id="L114">    }</span>
+
+    public void run(){
+
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (!validateArgs(args)){</span>
+<span class="fc" id="L119">            printUsage();</span>
+<span class="nc" id="L120">            System.exit(ERROR_CODE_BAD_ARGUMENTS);</span>
+        }
+
+<span class="fc" id="L123">        initAppConfig(args[0]);</span>
+<span class="fc" id="L124">        printHeaders();</span>
+<span class="fc" id="L125">        Scanner scanner = new Scanner(System.in);</span>
+<span class="fc" id="L126">        scanner.nextLine();</span>
+<span class="fc" id="L127">        printAppMenu();</span>
+<span class="fc" id="L128">        String input = scanner.nextLine();</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        while (!&quot;quit&quot;.equals(input)){</span>
+<span class="fc bfc" id="L130" title="All 3 branches covered.">            switch (input){</span>
+                case &quot;1&quot;:
+<span class="fc" id="L132">                    executeSearchZendesk(scanner);</span>
+<span class="fc" id="L133">                    break;</span>
+                case &quot;2&quot;:
+<span class="fc" id="L135">                    printHelp();</span>
+<span class="fc" id="L136">                    break;</span>
+                default:
+<span class="fc" id="L138">                    System.out.println(&quot;Invalid input&quot;);</span>
+                    break;
+            }
+<span class="fc" id="L141">            printAppMenu();</span>
+<span class="fc" id="L142">            input = scanner.nextLine();</span>
+        }
+<span class="fc" id="L144">        System.out.println(&quot;Exiting ...&quot;);</span>
+<span class="fc" id="L145">        scanner.close();</span>
+
+<span class="fc" id="L147">    }</span>
+
+    private void initAppConfig(String configFile) {
+
+        try {
+<span class="fc" id="L152">            AppConfig.init(configFile);</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">            if (helpdeskService == null) helpdeskService = new HelpdeskService();</span>
+<span class="fc" id="L154">        } catch (IOException e) {</span>
+<span class="fc" id="L155">            System.out.println(&quot;Unable to load config file&quot;);</span>
+<span class="nc" id="L156">            System.exit(ERROR_CODE_BAD_CONFIG_FILE);</span>
+<span class="fc" id="L157">        } catch (ClassNotFoundException e) {</span>
+<span class="fc" id="L158">            System.out.println(&quot;Unable to initialize app config&quot;);</span>
+<span class="nc" id="L159">            System.exit(ERROR_CODE_CLASS_LOADING_FAILED);</span>
+<span class="pc" id="L160">        }</span>
+<span class="fc" id="L161">    }</span>
+
+    public static void main(String[] args){
+
+<span class="fc" id="L165">        HelpdeskApp app = new HelpdeskApp(args);</span>
+<span class="fc" id="L166">        app.run();</span>
+
+<span class="fc" id="L168">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

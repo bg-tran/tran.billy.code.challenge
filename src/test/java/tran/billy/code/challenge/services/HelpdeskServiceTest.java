@@ -20,21 +20,21 @@ class HelpdeskServiceTest {
     UserDAO userDAO;
     TicketDAO ticketDAO;
     HelpdeskService service = new HelpdeskService();
-    Organization org1 = Mockito.spy(new Organization(){
+    final Organization org1 = Mockito.spy(new Organization(){
         {
             setId(1001);
             setName("Org 1");
         }
     });
 
-    Organization org2 = Mockito.spy(new Organization(){
+    final Organization org2 = Mockito.spy(new Organization(){
         {
             setId(1002);
             setName("Org 2");
         }
     });
 
-    User user1 = Mockito.spy(new User(){
+    final User user1 = Mockito.spy(new User(){
         {
             setId(10001);
             setName("User 1");
@@ -42,7 +42,7 @@ class HelpdeskServiceTest {
         }
     });
 
-    User user2 = Mockito.spy(new User(){
+    final User user2 = Mockito.spy(new User(){
         {
             setId(10002);
             setName("User 2");
@@ -50,7 +50,7 @@ class HelpdeskServiceTest {
         }
     });
 
-    Ticket ticket1 = Mockito.spy(new Ticket(){
+    final Ticket ticket1 = Mockito.spy(new Ticket(){
         {
             setId("1000001");
             setSubject("Ticket 1");
@@ -60,7 +60,7 @@ class HelpdeskServiceTest {
         }
     });
 
-    Ticket ticket2 = Mockito.spy(new Ticket(){
+    final Ticket ticket2 = Mockito.spy(new Ticket(){
         {
             setId("1000002");
             setSubject("Ticket 2");
@@ -70,7 +70,7 @@ class HelpdeskServiceTest {
         }
     });
 
-    Ticket ticket3 = Mockito.spy(new Ticket(){
+    final Ticket ticket3 = Mockito.spy(new Ticket(){
         {
             setId("1000003");
             setSubject("Ticket 3");
@@ -99,9 +99,6 @@ class HelpdeskServiceTest {
 
     }
 
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void testSearchOrganizationsWillReturnSuccess(){

@@ -26,7 +26,7 @@ public class AppConfig {
 
     public static void init(String configFile) throws IOException, ClassNotFoundException {
 
-        InputStream input = new FileInputStream(configFile );
+        InputStream input = new FileInputStream(configFile);
         Properties config = new Properties();
         config.load(input);
         appConfig = new AppConfig(config);
