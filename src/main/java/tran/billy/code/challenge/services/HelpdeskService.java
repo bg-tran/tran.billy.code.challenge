@@ -9,11 +9,10 @@ import tran.billy.code.challenge.dao.UserDAO;
 
 import java.util.ArrayList;
 
+/**
+ * Helpdesk service to search users, tickets or organizations
+ */
 public class HelpdeskService {
-
-//    public static final String ORG_DATASOURCE_NAME = "organizations.json";
-//    public static final String USER_DATASOURCE_NAME = "users.json";
-//    public static final String TICKET_DATASOURCE_NAME = "tickets.json";
 
     private final OrganizationDAO orgDAO;
     private final UserDAO userDAO;
@@ -32,6 +31,11 @@ public class HelpdeskService {
         this.ticketDAO = ticketDAO;
     }
 
+    /**
+     * Search organizations by field and print the result
+     * @param searchTerm JSON field
+     * @param searchValue filter value
+     */
     public void searchOrganizations(String searchTerm, String searchValue){
 
         orgDAO.findOrganizationsByCriteria(searchTerm, searchValue)
@@ -59,6 +63,11 @@ public class HelpdeskService {
 
     }
 
+    /**
+     * Search users by field and print the result
+     * @param searchTerm JSON field
+     * @param searchValue filter value
+     */
     public void searchUsers(String searchTerm, String searchValue){
 
         userDAO.findUsersByCriteria(searchTerm,searchValue)
@@ -87,6 +96,11 @@ public class HelpdeskService {
                 .subscribe( org -> System.out.println(org.print()));
     }
 
+    /**
+     * Search tickets by field and print the result
+     * @param searchTerm JSON field
+     * @param searchValue filter value
+     */
     public void searchTickets(String searchTerm, String searchValue){
 
         ticketDAO.findTicketsByCriteria(searchTerm, searchValue)

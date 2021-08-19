@@ -1,2 +1,2 @@
 rootProject.name = 'tran.billy.code.challenge'
-
+include('app')

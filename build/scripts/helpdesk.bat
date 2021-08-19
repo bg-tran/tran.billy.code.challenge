@@ -67,11 +67,11 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\tran.billy.code.challenge-1.0-SNAPSHOT.jar;%APP_HOME%\lib\reactor-core-3.4.9.jar;%APP_HOME%\lib\annotations-20.1.0.jar;%APP_HOME%\lib\jackson-annotations-2.12.4.jar;%APP_HOME%\lib\jackson-databind-2.12.4.jar;%APP_HOME%\lib\jackson-core-2.12.4.jar;%APP_HOME%\lib\reactive-streams-1.0.3.jar
+set CLASSPATH=%APP_HOME%\lib\tran.billy.code.challenge-1.0.jar;%APP_HOME%\lib\reactor-core-3.4.9.jar;%APP_HOME%\lib\jackson-annotations-2.12.4.jar;%APP_HOME%\lib\jackson-databind-2.12.4.jar;%APP_HOME%\lib\jackson-core-2.12.4.jar;%APP_HOME%\lib\reactive-streams-1.0.3.jar
 
 
 @rem Execute helpdesk
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %HELPDESK_OPTS%  -classpath "%CLASSPATH%" tran.billy.code.challenge.App %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %HELPDESK_OPTS%  -classpath "%CLASSPATH%" tran.billy.code.challenge.HelpdeskApp %*
 
 :end
 @rem End local scope for the variables with windows NT shell

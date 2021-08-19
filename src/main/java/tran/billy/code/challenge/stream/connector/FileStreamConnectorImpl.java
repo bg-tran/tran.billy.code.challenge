@@ -13,6 +13,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * File stream connector implementation
+ * using Jackson JsonParser and ObjectMapper to load data from a file
+ *
+ */
 public class FileStreamConnectorImpl implements StreamConnector {
 
     static {
