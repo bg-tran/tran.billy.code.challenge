@@ -1,7 +1,8 @@
 package tran.billy.code.challenge.dao;
 
-import reactor.core.publisher.Flux;
 import java.util.Hashtable;
+import java.util.List;
+
 import tran.billy.code.challenge.dto.User;
 
 public class UserDAO extends GenericDAO{
@@ -31,16 +32,17 @@ public class UserDAO extends GenericDAO{
 
     public UserDAO(String dataSource) {
         super(dataSource);
+        buildCache(User.class);
     }
 
     /**
      * Find user by field in SEARCH_FIELDS
      * @param fieldName field name
      * @param fieldValue field value
-     * @return a stream of User
+     * @return a list of User
      */
-    public Flux<User> findUsersByCriteria(String fieldName, String fieldValue){
+    public List<User> findUsers(String fieldName, String fieldValue){
 
-        return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, User.class);
+        return SEARCH_FIELDS.contains(fieldName) ? findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue) : null;
     }
 }

@@ -33,9 +33,9 @@ class HelpdeskServiceTest {
 
     final User user = Mockito.spy(new User(){
         {
-            setId(10001);
+            setId(10001l);
             setName("User 1");
-            setOrganizationId(1001);
+            setOrganizationId(1001l);
         }
     });
 

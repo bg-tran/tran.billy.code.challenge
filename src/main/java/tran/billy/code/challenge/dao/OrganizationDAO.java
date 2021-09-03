@@ -1,7 +1,7 @@
 package tran.billy.code.challenge.dao;
 
-import reactor.core.publisher.Flux;
 import java.util.Hashtable;
+import java.util.List;
 import tran.billy.code.challenge.dto.Organization;
 
 public class OrganizationDAO extends GenericDAO{
@@ -20,17 +20,17 @@ public class OrganizationDAO extends GenericDAO{
 
     public OrganizationDAO(String dataSource) {
         super(dataSource);
+        buildCache(Organization.class);
     }
 
     /**
-     * Find organization by field in SEARCH_FIELDS
+     * Find user by field in SEARCH_FIELDS
      * @param fieldName field name
      * @param fieldValue field value
-     * @return a stream of Organization
+     * @return a list of Organization
      */
-    public Flux<Organization> findOrganizationsByCriteria(String fieldName, String fieldValue){
+    public List<Organization> findOrganizations(String fieldName, String fieldValue){
 
-        return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, Organization.class);
+        return SEARCH_FIELDS.contains(fieldName) ? findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue) : null;
     }
-
 }

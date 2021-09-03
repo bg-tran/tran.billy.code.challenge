@@ -12,7 +12,7 @@ public class User {
     static public final String TERM_PREFIX = "user_";
 
     @JsonProperty("_id")
-    private int id;
+    private Long id;
 
     @JsonProperty("url")
     private String url;
@@ -30,13 +30,13 @@ public class User {
     private String createdAt;
 
     @JsonProperty("active")
-    private boolean active;
+    private Boolean active;
 
     @JsonProperty("verified")
-    private boolean verified;
+    private Boolean verified;
 
     @JsonProperty("shared")
-    private boolean shared;
+    private Boolean shared;
 
     @JsonProperty("locale")
     private String locale;
@@ -57,13 +57,13 @@ public class User {
     private String signature;
 
     @JsonProperty("organization_id")
-    private int organizationId;
+    private Long organizationId;
 
     @JsonProperty("tags")
     private ArrayList<String> tags;
 
     @JsonProperty("suspended")
-    private boolean suspended;
+    private Boolean suspended;
 
     @JsonProperty("role")
     private String role;
@@ -72,11 +72,11 @@ public class User {
 
     private ArrayList<Ticket> tickets;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -192,11 +192,11 @@ public class User {
         this.signature = signature;
     }
 
-    public int getOrganizationId() {
+    public Long getOrganizationId() {
         return organizationId;
     }
 
-    public void setOrganizationId(int organizationId) {
+    public void setOrganizationId(Long organizationId) {
         this.organizationId = organizationId;
     }
 

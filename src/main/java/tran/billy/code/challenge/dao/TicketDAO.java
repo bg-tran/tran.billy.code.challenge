@@ -1,8 +1,10 @@
 package tran.billy.code.challenge.dao;
 
-import reactor.core.publisher.Flux;
 import java.util.Hashtable;
+import java.util.List;
+
 import tran.billy.code.challenge.dto.Ticket;
+
 
 public class TicketDAO extends GenericDAO {
 
@@ -26,16 +28,17 @@ public class TicketDAO extends GenericDAO {
 
     public TicketDAO(String dataSource) {
         super(dataSource);
+        buildCache(Ticket.class);
     }
 
     /**
      * Find ticket by field in SEARCH_FIELDS
      * @param fieldName field name
      * @param fieldValue field value
-     * @return a stream of Ticket
+     * @return a list of Ticket
      */
-    public Flux<Ticket> findTicketsByCriteria(String fieldName, String fieldValue){
+    public List<Ticket> findTickets(String fieldName, String fieldValue){
 
-       return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, Ticket.class);
+        return SEARCH_FIELDS.contains(fieldName) ? findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue) : null;
     }
 }
