@@ -5,17 +5,13 @@ This version has only implemented file datasource.
 
 ### Assumption
     1) Data: _id is unique key. Search by _id should only return 1 result
-    2) Code coverage ~90%
-    3) Object matching is using Java reflection for simplicity
-    4) Jackson JSON parser lib is used for streaming parsing large JSON file 
-    5) The search app returns fully matched results 
+    2) The search app returns fully matched results  
+    3) Data should be able to fit into JVM heap memory
 
 ### Tradeoffs
     1) If more than 1 record have same _id, only the first record will be taken
-    2) Reflection might impact to speed of processing
-    3) Streaming parser is slower than tree parser at the small scale of data
-    4) Streaming parser means no caching data
-    5) Cannot search using regex matching
+    2) Cannot search using regex matching
+    3) Cannot process extremely large data file
 
 ### Build and release
 #### Prerequisite
