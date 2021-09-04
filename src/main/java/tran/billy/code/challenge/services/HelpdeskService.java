@@ -1,5 +1,7 @@
 package tran.billy.code.challenge.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tran.billy.code.challenge.config.AppConfig;
 import tran.billy.code.challenge.dao.OrganizationDAO;
 import tran.billy.code.challenge.dao.TicketDAO;
@@ -14,6 +16,8 @@ import java.util.List;
  * Helpdesk service to search users, tickets or organizations
  */
 public class HelpdeskService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HelpdeskService.class);
 
     private final OrganizationDAO orgDAO;
     private final UserDAO userDAO;
@@ -45,12 +49,14 @@ public class HelpdeskService {
 
         } else {
             orgs.forEach(org -> {
+                org.addUsers(userDAO.findUsers("organization_id",org.getId().toString()));
+                org.addTickets(ticketDAO.findTickets("organization_id",org.getId().toString()));
                 System.out.println(org.print());
                 System.out.println("Press enter/return to continue");
                 try {
                     System.in.read();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.error(e.getMessage());
                 }
             });
         }
@@ -70,13 +76,16 @@ public class HelpdeskService {
 
         } else {
             users.forEach(user -> {
+
+                user.setOrganization(orgDAO.findByID(user.getOrganizationId()));
+                user.addTickets(ticketDAO.findTickets("submitter_id", user.getId().toString()));
                 System.out.println(user.print());
                 System.out.println("Press enter/return to continue");
-                    try {
-                        System.in.read();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    System.in.read();
+                } catch (IOException e) {
+                    LOGGER.error(e.getMessage());
+                }
             });
         }
 
@@ -96,12 +105,16 @@ public class HelpdeskService {
 
         } else {
             tickets.forEach(ticket -> {
+
+                ticket.setOrganization(orgDAO.findByID(ticket.getOrganizationId()));
+                ticket.setSubmitter(userDAO.findByID(ticket.getSubmitterId()));
+                ticket.setAssignee(userDAO.findByID(ticket.getAssigneeId()));
                 System.out.println(ticket.print());
                 System.out.println("Press enter/return to continue");
                 try {
                     System.in.read();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.error(e.getMessage());
                 }
             });
         }

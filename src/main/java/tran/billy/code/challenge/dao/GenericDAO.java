@@ -5,9 +5,13 @@ import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.lang.reflect.Modifier;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 import reactor.core.scheduler.Schedulers;
+import tran.billy.code.challenge.dao.exception.EntityNotFoundException;
 import tran.billy.code.challenge.stream.connector.StreamConnectorManager;
 
 
@@ -15,18 +19,18 @@ public class GenericDAO {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GenericDAO.class);
 
-    private static final String ID = "id";
+    static final String ID = "id";
 
     private final String dataSource;
 
-    Map<Object,Object> mainCache;
-    HashMap<String, HashMap<String, List<Object>> > index;
+    ConcurrentHashMap<Object,Object> mainCache;
+    ConcurrentHashMap<String, ConcurrentHashMap<String, List<Object>> > index;
 
 
     public GenericDAO(String dataSource) {
         this.dataSource = dataSource;
-        mainCache = new HashMap<>();
-        index = new HashMap<>();
+        mainCache = new ConcurrentHashMap<>();
+        index = new ConcurrentHashMap<>();
     }
 
     /**
@@ -35,38 +39,39 @@ public class GenericDAO {
      */
     <T> void addToCache(T t) {
             try {
-                Field id = t.getClass().getField(ID);
+                Field id = t.getClass().getDeclaredField(ID);
                 id.setAccessible(true);
                 Object idObj = id.get(t);
                 mainCache.put(idObj,t);
+                Object fieldObj;
+                for(Field field : t.getClass().getDeclaredFields()) {
+                    field.setAccessible(true);
+                    fieldObj = field.get(t);
+                    if (fieldObj != null
+                            && Modifier.isPrivate(field.getModifiers())
+                            && !field.getName().equals(ID)) {
 
-                Arrays.stream(t.getClass().getDeclaredFields()).forEach(field -> {
-                    final Object fieldObj;
-                    if (!field.getName().equals(ID) && !index.containsKey(field.getName())) {
-                        index.put(field.getName(), new HashMap<>());
-
-                        try {
-                            fieldObj = field.get(t);
-
-                            if (fieldObj instanceof List ) {
-                                ((List<?>)fieldObj).forEach(item -> {
-                                    if (!index.get(field.getName()).containsKey(item.toString())){
-                                        index.get(field.getName()).put(item.toString(), new ArrayList<>());
-                                    }
-                                    index.get(field.getName()).get(item.toString()).add(idObj);
-                                });
-
-                            } else {
-                                if (!index.get(field.getName()).containsKey(fieldObj.toString())) {
-                                    index.get(field.getName()).put(fieldObj.toString(), new ArrayList<>());
-                                }
-                                index.get(field.getName()).get(fieldObj.toString()).add(idObj);
-                            }
-                        } catch (IllegalAccessException e) {
-                            LOGGER.error(e.getMessage());
+                        if (!index.containsKey(field.getName())) {
+                            index.put(field.getName(), new ConcurrentHashMap<>());
                         }
+
+                        if (fieldObj instanceof List ) {
+                            ((List<?>)fieldObj).forEach(item -> {
+                                if (!index.get(field.getName()).containsKey(item.toString())){
+                                    index.get(field.getName()).put(item.toString(), new ArrayList<>());
+                                }
+                                index.get(field.getName()).get(item.toString()).add(idObj);
+                            });
+
+                        } else {
+                            if (!index.get(field.getName()).containsKey(fieldObj.toString())) {
+                                index.get(field.getName()).put(fieldObj.toString(), new ArrayList<>());
+                            }
+                            index.get(field.getName()).get(fieldObj.toString()).add(idObj);
+                        }
+
                     }
-                });
+                }
 
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 LOGGER.error(e.getMessage());
@@ -80,10 +85,7 @@ public class GenericDAO {
     <T> void buildCache(Class<T> dataType){
 
         StreamConnectorManager.getStreamConnector().getData(dataSource, dataType)
-                .onErrorResume(e -> {
-                    e.printStackTrace();
-                    return Flux.just();
-                }).parallel()
+                .parallel()
                 .runOn(Schedulers.boundedElastic())
                 .subscribe(this::addToCache);
     }
@@ -92,13 +94,30 @@ public class GenericDAO {
      * Find T by field
      * @param fieldName field name
      * @param fieldValue field value
-     * @return T t from cache
+     * @return List<T> from cache
      */
     public <T> List<T> findByCriteria(String fieldName, String fieldValue){
         List<Object> idx = index.get(fieldName).get(fieldValue);
         List<T> result = new ArrayList<>();
-        idx.forEach(id -> result.add((T) mainCache.get(id)));
-
+        if (idx != null) {
+            idx.forEach(id -> result.add((T) mainCache.get(id)));
+        }
         return result;
+    }
+
+    /**
+     * Find T by ID
+     * @param fieldValue field value
+     * @return T t from cache
+     * @throws EntityNotFoundException if not found
+     */
+    public <T> T findByID(Object fieldValue) throws EntityNotFoundException {
+
+        T entity = (T) mainCache.get(fieldValue);
+
+        if (entity == null)
+            throw new EntityNotFoundException("Entity not found : " + fieldValue);
+
+        return entity;
     }
 }

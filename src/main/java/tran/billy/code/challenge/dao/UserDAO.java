@@ -1,11 +1,18 @@
 package tran.billy.code.challenge.dao;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import tran.billy.code.challenge.dao.exception.EntityNotFoundException;
 
 import tran.billy.code.challenge.dto.User;
 
 public class UserDAO extends GenericDAO{
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class);
 
     public static final Hashtable<String,String> SEARCH_FIELDS = new Hashtable<String,String>(){{
         put("_id","id");
@@ -42,7 +49,33 @@ public class UserDAO extends GenericDAO{
      * @return a list of User
      */
     public List<User> findUsers(String fieldName, String fieldValue){
+        List<User> result = new ArrayList<>();
+        if (ID.equals(SEARCH_FIELDS.get(fieldName))){
+            try {
+                result.add(super.findByID(Long.parseLong(fieldValue)));
+            } catch (EntityNotFoundException | NumberFormatException e) {
+                LOGGER.error(e.getMessage());
+            }
+            return result;
+        }
+        return SEARCH_FIELDS.get(fieldName) != null ? findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue) : result;
+    }
 
-        return SEARCH_FIELDS.contains(fieldName) ? findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue) : null;
+    /**
+     * Find User by ID
+     * @param id id
+     * @return nullable user from cache
+     */
+    public User findByID(Long id) {
+
+        User entity = null;
+        try {
+            entity = super.findByID(id);
+        } catch (EntityNotFoundException | NullPointerException e) {
+            LOGGER.error("id = " + id);
+            LOGGER.error(e.getMessage());
+        }
+
+        return entity;
     }
 }

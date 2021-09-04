@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tran.billy.code.challenge.HelpdeskAppTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2021-08-19T12:24:56" hostname="Billys-Mac-mini.local" time="1.743">
+<testsuite name="tran.billy.code.challenge.HelpdeskAppTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2021-09-04T13:59:31" hostname="Billys-Mac-mini" time="1.715">
   <properties/>
-  <testcase name="shouldPrintSearchMenu_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="1.605"/>
-  <testcase name="shouldFailInitAppConfig_ClassLoadingFailed()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.01"/>
-  <testcase name="shouldPrintInvalidInput()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.004"/>
-  <testcase name="shouldPrintUsage()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.005"/>
-  <testcase name="shouldCallSearchUsers_WithInput_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.048"/>
-  <testcase name="shouldCallSearchOrganizations_WithInput_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.019"/>
-  <testcase name="shouldFailInitAppConfig_InvalidConfigFile()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.003"/>
-  <testcase name="shouldPrintSearchMenu_InvalidInput_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.004"/>
-  <testcase name="shouldCallSearchTickets_WithInput_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.008"/>
-  <testcase name="shouldPrintHelp()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.01"/>
-  <testcase name="shouldPrintWelcomeThenExit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.004"/>
+  <testcase name="shouldPrintSearchMenu_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="1.358"/>
+  <testcase name="shouldFailInitAppConfig_ClassLoadingFailed()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.009"/>
+  <testcase name="shouldPrintInvalidInput()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.05"/>
+  <testcase name="shouldPrintUsage()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.013"/>
+  <testcase name="shouldCallSearchUsers_WithInput_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.062"/>
+  <testcase name="shouldCallSearchOrganizations_WithInput_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.011"/>
+  <testcase name="shouldFailInitAppConfig_InvalidConfigFile()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.004"/>
+  <testcase name="shouldPrintSearchMenu_InvalidInput_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.065"/>
+  <testcase name="shouldCallSearchTickets_WithInput_GoBack_Exit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.006"/>
+  <testcase name="shouldPrintHelp()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.063"/>
+  <testcase name="shouldPrintWelcomeThenExit()" classname="tran.billy.code.challenge.HelpdeskAppTest" time="0.048"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

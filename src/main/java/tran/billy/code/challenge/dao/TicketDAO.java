@@ -1,12 +1,19 @@
 package tran.billy.code.challenge.dao;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import tran.billy.code.challenge.dao.exception.EntityNotFoundException;
 import tran.billy.code.challenge.dto.Ticket;
 
 
+
 public class TicketDAO extends GenericDAO {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TicketDAO.class);
 
     public static final Hashtable<String,String> SEARCH_FIELDS = new Hashtable<String,String>(){{
         put("_id","id");
@@ -39,6 +46,15 @@ public class TicketDAO extends GenericDAO {
      */
     public List<Ticket> findTickets(String fieldName, String fieldValue){
 
-        return SEARCH_FIELDS.contains(fieldName) ? findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue) : null;
+        List<Ticket> result = new ArrayList<>();
+        if (ID.equals(SEARCH_FIELDS.get(fieldName))){
+            try {
+                result.add(findByID(fieldValue));
+            } catch (EntityNotFoundException | NullPointerException e) {
+                LOGGER.error(e.getMessage());
+            }
+            return result;
+        }
+        return SEARCH_FIELDS.get(fieldName) != null ? findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue) : result;
     }
 }

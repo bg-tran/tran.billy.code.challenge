@@ -12,7 +12,7 @@ import java.util.List;
     static public final String TERM_PREFIX = &quot;user_&quot;;
 
     @JsonProperty(&quot;_id&quot;)
-    private int id;
+    private Long id;
 
     @JsonProperty(&quot;url&quot;)
     private String url;
@@ -30,13 +30,13 @@ import java.util.List;
     private String createdAt;
 
     @JsonProperty(&quot;active&quot;)
-    private boolean active;
+    private Boolean active;
 
     @JsonProperty(&quot;verified&quot;)
-    private boolean verified;
+    private Boolean verified;
 
     @JsonProperty(&quot;shared&quot;)
-    private boolean shared;
+    private Boolean shared;
 
     @JsonProperty(&quot;locale&quot;)
     private String locale;
@@ -57,13 +57,13 @@ import java.util.List;
     private String signature;
 
     @JsonProperty(&quot;organization_id&quot;)
-    private int organizationId;
+    private Long organizationId;
 
     @JsonProperty(&quot;tags&quot;)
     private ArrayList&lt;String&gt; tags;
 
     @JsonProperty(&quot;suspended&quot;)
-    private boolean suspended;
+    private Boolean suspended;
 
     @JsonProperty(&quot;role&quot;)
     private String role;
@@ -72,11 +72,11 @@ import java.util.List;
 
     private ArrayList&lt;Ticket&gt; tickets;
 
-    public int getId() {
+    public Long getId() {
 <span class="fc" id="L76">        return id;</span>
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
 <span class="fc" id="L80">        this.id = id;</span>
 <span class="fc" id="L81">    }</span>
 
@@ -89,7 +89,7 @@ import java.util.List;
 <span class="fc" id="L89">    }</span>
 
     public String getExternalId() {
-<span class="nc" id="L92">        return externalId;</span>
+<span class="fc" id="L92">        return externalId;</span>
     }
 
     public void setExternalId(String externalId) {
@@ -120,27 +120,27 @@ import java.util.List;
 <span class="fc" id="L120">        this.createdAt = createdAt;</span>
 <span class="fc" id="L121">    }</span>
 
-    public boolean isActive() {
+    public Boolean isActive() {
 <span class="fc" id="L124">        return active;</span>
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
 <span class="fc" id="L128">        this.active = active;</span>
 <span class="fc" id="L129">    }</span>
 
-    public boolean isVerified() {
+    public Boolean isVerified() {
 <span class="fc" id="L132">        return verified;</span>
     }
 
-    public void setVerified(boolean verified) {
+    public void setVerified(Boolean verified) {
 <span class="fc" id="L136">        this.verified = verified;</span>
 <span class="fc" id="L137">    }</span>
 
-    public boolean isShared() {
+    public Boolean isShared() {
 <span class="fc" id="L140">        return shared;</span>
     }
 
-    public void setShared(boolean shared) {
+    public void setShared(Boolean shared) {
 <span class="fc" id="L144">        this.shared = shared;</span>
 <span class="fc" id="L145">    }</span>
 
@@ -192,11 +192,11 @@ import java.util.List;
 <span class="fc" id="L192">        this.signature = signature;</span>
 <span class="fc" id="L193">    }</span>
 
-    public int getOrganizationId() {
+    public Long getOrganizationId() {
 <span class="fc" id="L196">        return organizationId;</span>
     }
 
-    public void setOrganizationId(int organizationId) {
+    public void setOrganizationId(Long organizationId) {
 <span class="fc" id="L200">        this.organizationId = organizationId;</span>
 <span class="fc" id="L201">    }</span>
 
@@ -208,11 +208,11 @@ import java.util.List;
 <span class="fc" id="L208">        this.tags = tags;</span>
 <span class="fc" id="L209">    }</span>
 
-    public boolean isSuspended() {
+    public Boolean isSuspended() {
 <span class="fc" id="L212">        return suspended;</span>
     }
 
-    public void setSuspended(boolean suspended) {
+    public void setSuspended(Boolean suspended) {
 <span class="fc" id="L216">        this.suspended = suspended;</span>
 <span class="fc" id="L217">    }</span>
 
@@ -267,7 +267,7 @@ import java.util.List;
 <span class="fc" id="L267">                StringHelper.addRightPadding(&quot;suspended&quot;, StringHelper.RIGHT_PADDING_WIDTH) + isSuspended() + &quot;\n&quot; +</span>
 <span class="fc" id="L268">                StringHelper.addRightPadding(&quot;role&quot;, StringHelper.RIGHT_PADDING_WIDTH) + getRole() + &quot;\n&quot; +</span>
 <span class="fc" id="L269">                StringHelper.addRightPadding(&quot;organization_name&quot;, StringHelper.RIGHT_PADDING_WIDTH) + organization + &quot;\n&quot; +</span>
-<span class="fc" id="L270">                StringHelper.printListAsString(&quot;ticket&quot;, tickets) + &quot;\n&quot;;</span>
+<span class="fc" id="L270">                StringHelper.printListAsString(Ticket.TERM_PREFIX, getTickets()) + &quot;\n&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

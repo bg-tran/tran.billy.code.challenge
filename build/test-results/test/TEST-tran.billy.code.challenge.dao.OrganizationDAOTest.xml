@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tran.billy.code.challenge.dao.OrganizationDAOTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-19T12:24:56" hostname="Billys-Mac-mini.local" time="0.041">
+<testsuite name="tran.billy.code.challenge.dao.OrganizationDAOTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-09-04T13:59:31" hostname="Billys-Mac-mini" time="0.05">
   <properties/>
-  <testcase name="testSearchOrganizationsByCriteria()" classname="tran.billy.code.challenge.dao.OrganizationDAOTest" time="0.041"/>
+  <testcase name="testSearchOrganizationsByCriteria()" classname="tran.billy.code.challenge.dao.OrganizationDAOTest" time="0.023"/>
+  <testcase name="testSearchOrganizationsByID()" classname="tran.billy.code.challenge.dao.OrganizationDAOTest" time="0.026"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

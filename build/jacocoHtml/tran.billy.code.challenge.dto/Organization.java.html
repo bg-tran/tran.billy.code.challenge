@@ -9,7 +9,7 @@ import java.util.List;
 <span class="fc" id="L9">public class Organization {</span>
 
     @JsonProperty(&quot;_id&quot;)
-    private int id;
+    private Long id;
 
     @JsonProperty(&quot;url&quot;)
     private String url;
@@ -30,7 +30,7 @@ import java.util.List;
     private String details;
 
     @JsonProperty(&quot;shared_tickets&quot;)
-    private boolean sharedTickets;
+    private Boolean sharedTickets;
 
     @JsonProperty(&quot;tags&quot;)
     private ArrayList&lt;String&gt; tags;
@@ -39,11 +39,11 @@ import java.util.List;
 
     private ArrayList&lt;Ticket&gt; tickets;
 
-    public int getId() {
+    public Long getId() {
 <span class="fc" id="L43">        return id;</span>
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
 <span class="fc" id="L47">        this.id = id;</span>
 <span class="fc" id="L48">    }</span>
 
@@ -95,11 +95,11 @@ import java.util.List;
 <span class="fc" id="L95">        this.details = details;</span>
 <span class="fc" id="L96">    }</span>
 
-    public boolean isSharedTickets() {
+    public Boolean isSharedTickets() {
 <span class="fc" id="L99">        return sharedTickets;</span>
     }
 
-    public void setSharedTickets(boolean sharedTickets) {
+    public void setSharedTickets(Boolean sharedTickets) {
 <span class="fc" id="L103">        this.sharedTickets = sharedTickets;</span>
 <span class="fc" id="L104">    }</span>
 

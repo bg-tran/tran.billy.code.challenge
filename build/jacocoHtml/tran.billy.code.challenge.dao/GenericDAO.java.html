@@ -1,67 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GenericDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tran.billy.code.challenge</a> &gt; <a href="index.source.html" class="el_package">tran.billy.code.challenge.dao</a> &gt; <span class="el_source">GenericDAO.java</span></div><h1>GenericDAO.java</h1><pre class="source lang-java linenums">package tran.billy.code.challenge.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
+import reactor.core.scheduler.Schedulers;
+import tran.billy.code.challenge.dao.exception.EntityNotFoundException;
 import tran.billy.code.challenge.stream.connector.StreamConnectorManager;
 
 
 public class GenericDAO {
 
+<span class="fc" id="L20">    private static final Logger LOGGER = LoggerFactory.getLogger(GenericDAO.class);</span>
+
+    static final String ID = &quot;id&quot;;
+
     private final String dataSource;
 
-<span class="fc" id="L16">    public GenericDAO(String dataSource) {</span>
-<span class="fc" id="L17">        this.dataSource = dataSource;</span>
-<span class="fc" id="L18">    }</span>
+    ConcurrentHashMap&lt;Object,Object&gt; mainCache;
+    ConcurrentHashMap&lt;String, ConcurrentHashMap&lt;String, List&lt;Object&gt;&gt; &gt; index;
 
+
+<span class="fc" id="L30">    public GenericDAO(String dataSource) {</span>
+<span class="fc" id="L31">        this.dataSource = dataSource;</span>
+<span class="fc" id="L32">        mainCache = new ConcurrentHashMap&lt;&gt;();</span>
+<span class="fc" id="L33">        index = new ConcurrentHashMap&lt;&gt;();</span>
+<span class="fc" id="L34">    }</span>
 
     /**
-     * Create a predicate by &lt;fieldName,fieldValue&gt; for filtering
-     * @param fieldName field name
-     * @param fieldValue field value
-     * @return a predicate
+     * Add an object to cache and build inverted index
+     * @param t an object T
      */
-    private &lt;T&gt; Predicate&lt;T&gt; createCriteria(String fieldName, String fieldValue){
-
-<span class="fc" id="L29">        return p -&gt; {</span>
+    &lt;T&gt; void addToCache(T t) {
             try {
-<span class="fc" id="L31">                Field field = p.getClass().getDeclaredField(fieldName);</span>
-<span class="fc" id="L32">                field.setAccessible(true);</span>
-<span class="fc" id="L33">                Object fieldObj = field.get(p);</span>
+<span class="fc" id="L42">                Field id = t.getClass().getDeclaredField(ID);</span>
+<span class="fc" id="L43">                id.setAccessible(true);</span>
+<span class="fc" id="L44">                Object idObj = id.get(t);</span>
+<span class="fc" id="L45">                mainCache.put(idObj,t);</span>
+                Object fieldObj;
+<span class="fc bfc" id="L47" title="All 2 branches covered.">                for(Field field : t.getClass().getDeclaredFields()) {</span>
+<span class="fc" id="L48">                    field.setAccessible(true);</span>
+<span class="fc" id="L49">                    fieldObj = field.get(t);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">                    if (fieldObj != null</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">                            &amp;&amp; Modifier.isPrivate(field.getModifiers())</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">                            &amp;&amp; !field.getName().equals(ID)) {</span>
 
-<span class="fc bfc" id="L35" title="All 2 branches covered.">		        if (fieldObj instanceof List ) {</span>
-<span class="fc" id="L36">                   return ((List&lt;?&gt;)fieldObj).stream()</span>
-<span class="fc" id="L37">                            .anyMatch(item -&gt; fieldValue.equals(item.toString()));</span>
-		        }
+<span class="fc bfc" id="L54" title="All 2 branches covered.">                        if (!index.containsKey(field.getName())) {</span>
+<span class="fc" id="L55">                            index.put(field.getName(), new ConcurrentHashMap&lt;&gt;());</span>
+                        }
 
-<span class="fc" id="L40">                return fieldValue.equals(fieldObj.toString());</span>
-<span class="fc" id="L41">            } catch (NoSuchFieldException | IllegalAccessException | NullPointerException e) {</span>
-<span class="fc" id="L42">                return false;</span>
-            }
-        };
-    }
+<span class="fc bfc" id="L58" title="All 2 branches covered.">                        if (fieldObj instanceof List ) {</span>
+<span class="fc" id="L59">                            ((List&lt;?&gt;)fieldObj).forEach(item -&gt; {</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">                                if (!index.get(field.getName()).containsKey(item.toString())){</span>
+<span class="fc" id="L61">                                    index.get(field.getName()).put(item.toString(), new ArrayList&lt;&gt;());</span>
+                                }
+<span class="fc" id="L63">                                index.get(field.getName()).get(item.toString()).add(idObj);</span>
+<span class="fc" id="L64">                            });</span>
 
+                        } else {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">                            if (!index.get(field.getName()).containsKey(fieldObj.toString())) {</span>
+<span class="fc" id="L68">                                index.get(field.getName()).put(fieldObj.toString(), new ArrayList&lt;&gt;());</span>
+                            }
+<span class="fc" id="L70">                            index.get(field.getName()).get(fieldObj.toString()).add(idObj);</span>
+                        }
+
+                    }
+                }
+
+<span class="nc" id="L76">            } catch (NoSuchFieldException | IllegalAccessException e) {</span>
+<span class="nc" id="L77">                LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L78">            }</span>
+<span class="fc" id="L79">    }</span>
+
+    /**
+     * Build inverted index of Class&lt;T&gt;
+     * @param dataType Class&lt;T&gt;
+     */
+    &lt;T&gt; void buildCache(Class&lt;T&gt; dataType){
+
+<span class="fc" id="L87">        StreamConnectorManager.getStreamConnector().getData(dataSource, dataType)</span>
+<span class="fc" id="L88">                .parallel()</span>
+<span class="fc" id="L89">                .runOn(Schedulers.boundedElastic())</span>
+<span class="fc" id="L90">                .subscribe(this::addToCache);</span>
+<span class="fc" id="L91">    }</span>
 
     /**
      * Find T by field
      * @param fieldName field name
      * @param fieldValue field value
-     * @return a stream of T
+     * @return List&lt;T&gt; from cache
      */
-    public &lt;T&gt; Flux&lt;T&gt; findByCriteria(String fieldName, String fieldValue, Class&lt;T&gt; dataType){
+    public &lt;T&gt; List&lt;T&gt; findByCriteria(String fieldName, String fieldValue){
+<span class="fc" id="L100">        List&lt;Object&gt; idx = index.get(fieldName).get(fieldValue);</span>
+<span class="fc" id="L101">        List&lt;T&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (idx != null) {</span>
+<span class="fc" id="L103">            idx.forEach(id -&gt; result.add((T) mainCache.get(id)));</span>
+        }
+<span class="fc" id="L105">        return result;</span>
+    }
 
-<span class="fc" id="L56">        Predicate&lt;T&gt; predicate = createCriteria(fieldName, fieldValue);</span>
-<span class="fc" id="L57">        Flux&lt;T&gt; tFlux = StreamConnectorManager.getStreamConnector().getData(dataSource, dataType)</span>
-<span class="fc" id="L58">                                    .onErrorResume(e -&gt; {</span>
-<span class="nc" id="L59">                                        e.printStackTrace();</span>
-<span class="nc" id="L60">                                        return Flux.just();</span>
-                                    });
+    /**
+     * Find T by ID
+     * @param fieldValue field value
+     * @return T t from cache
+     * @throws EntityNotFoundException if not found
+     */
+    public &lt;T&gt; T findByID(Object fieldValue) throws EntityNotFoundException {
 
-<span class="fc" id="L63">        return tFlux.filter(predicate);</span>
+<span class="fc" id="L116">        T entity = (T) mainCache.get(fieldValue);</span>
 
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (entity == null)</span>
+<span class="fc" id="L119">            throw new EntityNotFoundException(&quot;Entity not found : &quot; + fieldValue);</span>
+
+<span class="fc" id="L121">        return entity;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
