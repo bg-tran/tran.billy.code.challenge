@@ -37,19 +37,19 @@ import java.util.ArrayList;
     private String status;
 
     @JsonProperty(&quot;submitter_id&quot;)
-    private int submitterId;
+    private Long submitterId;
 
     @JsonProperty(&quot;assignee_id&quot;)
-    private int assigneeId;
+    private Long assigneeId;
 
     @JsonProperty(&quot;organization_id&quot;)
-    private int organizationId;
+    private Long organizationId;
 
     @JsonProperty(&quot;tags&quot;)
     private ArrayList&lt;String&gt; tags;
 
     @JsonProperty(&quot;has_incidents&quot;)
-    private boolean hasIncidents;
+    private Boolean hasIncidents;
 
     @JsonProperty(&quot;due_at&quot;)
     private String dueAt;
@@ -135,27 +135,27 @@ import java.util.ArrayList;
 <span class="fc" id="L135">        this.status = status;</span>
 <span class="fc" id="L136">    }</span>
 
-    public int getSubmitterId() {
+    public Long getSubmitterId() {
 <span class="fc" id="L139">        return submitterId;</span>
     }
 
-    public void setSubmitterId(int submitterId) {
+    public void setSubmitterId(Long submitterId) {
 <span class="fc" id="L143">        this.submitterId = submitterId;</span>
 <span class="fc" id="L144">    }</span>
 
-    public int getAssigneeId() {
+    public Long getAssigneeId() {
 <span class="fc" id="L147">        return assigneeId;</span>
     }
 
-    public void setAssigneeId(int assigneeId) {
+    public void setAssigneeId(Long assigneeId) {
 <span class="fc" id="L151">        this.assigneeId = assigneeId;</span>
 <span class="fc" id="L152">    }</span>
 
-    public int getOrganizationId() {
+    public Long getOrganizationId() {
 <span class="fc" id="L155">        return organizationId;</span>
     }
 
-    public void setOrganizationId(int organizationId) {
+    public void setOrganizationId(Long organizationId) {
 <span class="fc" id="L159">        this.organizationId = organizationId;</span>
 <span class="fc" id="L160">    }</span>
 
@@ -167,11 +167,11 @@ import java.util.ArrayList;
 <span class="fc" id="L167">        this.tags = tags;</span>
 <span class="fc" id="L168">    }</span>
 
-    public boolean isHasIncidents() {
+    public Boolean isHasIncidents() {
 <span class="fc" id="L171">        return hasIncidents;</span>
     }
 
-    public void setHasIncidents(boolean hasIncidents) {
+    public void setHasIncidents(Boolean hasIncidents) {
 <span class="fc" id="L175">        this.hasIncidents = hasIncidents;</span>
 <span class="fc" id="L176">    }</span>
 

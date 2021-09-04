@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 
 import java.io.BufferedReader;
@@ -18,38 +20,40 @@ import java.nio.file.Paths;
  * using Jackson JsonParser and ObjectMapper to load data from a file
  *
  */
-<span class="fc" id="L21">public class FileStreamConnectorImpl implements StreamConnector {</span>
+<span class="fc" id="L23">public class FileStreamConnectorImpl implements StreamConnector {</span>
 
+<span class="fc" id="L25">    private static final Logger LOGGER = LoggerFactory.getLogger(FileStreamConnectorImpl.class);</span>
     static {
-<span class="fc" id="L24">        StreamConnectorManager.registerDataStream(new FileStreamConnectorImpl());</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L27">        StreamConnectorManager.registerDataStream(new FileStreamConnectorImpl());</span>
+<span class="fc" id="L28">    }</span>
 
     @Override
     public &lt;T&gt; Flux&lt;T&gt; getData(String resourceURL, Class&lt;T&gt; dataType) {
 
-<span class="fc" id="L30">        return Flux.create(sink -&gt; {</span>
+<span class="fc" id="L33">        return Flux.create(sink -&gt; {</span>
             BufferedReader reader;
-<span class="fc" id="L32">            Path inputFile = Paths.get(resourceURL);</span>
+<span class="fc" id="L35">            Path inputFile = Paths.get(resourceURL);</span>
             try {
 
-<span class="fc" id="L35">                ObjectMapper mapper = new ObjectMapper();</span>
-<span class="fc" id="L36">                reader = Files.newBufferedReader(inputFile, Charset.defaultCharset());</span>
-<span class="fc" id="L37">                JsonParser jsonParser = new JsonFactory().createParser(reader);</span>
+<span class="fc" id="L38">                ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L39">                reader = Files.newBufferedReader(inputFile, Charset.defaultCharset());</span>
+<span class="fc" id="L40">                JsonParser jsonParser = new JsonFactory().createParser(reader);</span>
                 // Check the first token
-<span class="fc bfc" id="L39" title="All 2 branches covered.">                if (jsonParser.nextToken() != JsonToken.START_ARRAY) {</span>
-<span class="fc" id="L40">                    throw new IllegalStateException(&quot;Expected content to be an array&quot;);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">                if (jsonParser.nextToken() != JsonToken.START_ARRAY) {</span>
+<span class="fc" id="L43">                    throw new IllegalStateException(&quot;Expected content to be an array&quot;);</span>
                 }
 
-<span class="fc bfc" id="L43" title="All 2 branches covered.">                while (jsonParser.nextToken() == JsonToken.START_OBJECT) {</span>
-<span class="fc" id="L44">                    sink.next(mapper.readValue(jsonParser, dataType));</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">                while (jsonParser.nextToken() == JsonToken.START_OBJECT) {</span>
+<span class="fc" id="L47">                    sink.next(mapper.readValue(jsonParser, dataType));</span>
                 }
 
-<span class="fc" id="L47">                reader.close();</span>
-<span class="fc" id="L48">            } catch (IOException | IllegalStateException e) {</span>
-<span class="fc" id="L49">                sink.error(e);</span>
-<span class="fc" id="L50">            }</span>
-<span class="fc" id="L51">            sink.complete();</span>
-<span class="fc" id="L52">        });</span>
+<span class="fc" id="L50">                reader.close();</span>
+<span class="fc" id="L51">            } catch (IOException | IllegalStateException e) {</span>
+<span class="fc" id="L52">                sink.error(e);</span>
+<span class="fc" id="L53">                LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L54">            }</span>
+<span class="fc" id="L55">            sink.complete();</span>
+<span class="fc" id="L56">        });</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

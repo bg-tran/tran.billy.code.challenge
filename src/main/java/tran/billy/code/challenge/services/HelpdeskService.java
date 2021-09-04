@@ -1,19 +1,23 @@
 package tran.billy.code.challenge.services;
 
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tran.billy.code.challenge.config.AppConfig;
 import tran.billy.code.challenge.dao.OrganizationDAO;
 import tran.billy.code.challenge.dao.TicketDAO;
 import tran.billy.code.challenge.dao.UserDAO;
-
+import tran.billy.code.challenge.dto.Organization;
+import tran.billy.code.challenge.dto.Ticket;
+import tran.billy.code.challenge.dto.User;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Helpdesk service to search users, tickets or organizations
  */
 public class HelpdeskService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HelpdeskService.class);
 
     private final OrganizationDAO orgDAO;
     private final UserDAO userDAO;
@@ -39,36 +43,23 @@ public class HelpdeskService {
      */
     public void searchOrganizations(String searchTerm, String searchValue){
 
-        orgDAO.findOrganizationsByCriteria(searchTerm, searchValue)
-                .flatMap(org -> Flux.zip(
-                                        Mono.just(org),
-                                        userDAO.findUsersByCriteria("organization_id", String.valueOf(org.getId()))
-                                                .collectList()
-                                                .switchIfEmpty(Mono.just(new ArrayList<>())),
-                                        ticketDAO.findTicketsByCriteria("organization_id", String.valueOf(org.getId()))
-                                                .collectList()
-                                                .switchIfEmpty(Mono.just(new ArrayList<>()))
-                                )
-                                .map( t -> {
-                                    t.getT1().addUsers(t.getT2());
-                                    t.getT1().addTickets(t.getT3());
-                                    return t.getT1();
-                                })
-                )
-                .switchIfEmpty(
-                        Mono.create(sink -> {
-                                System.out.println("No search result");
-                                sink.success();
-                            }))
-                .subscribe( org -> {
-                    System.out.println(org.print());
-                    System.out.println("Press enter/return to continue");
-                    try {
-                        System.in.read();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+        List<Organization> orgs = orgDAO.findOrganizations(searchTerm,searchValue);
+        if (orgs == null || orgs.size() == 0){
+            System.out.println("No search result");
+
+        } else {
+            orgs.forEach(org -> {
+                org.addUsers(userDAO.findUsers("organization_id",org.getId().toString()));
+                org.addTickets(ticketDAO.findTickets("organization_id",org.getId().toString()));
+                System.out.println(org.print());
+                System.out.println("Press enter/return to continue");
+                try {
+                    System.in.read();
+                } catch (IOException e) {
+                    LOGGER.error(e.getMessage());
+                }
+            });
+        }
 
     }
 
@@ -79,38 +70,25 @@ public class HelpdeskService {
      */
     public void searchUsers(String searchTerm, String searchValue){
 
-        userDAO.findUsersByCriteria(searchTerm,searchValue)
-                .flatMap(user -> Flux.zip(
-                                        Mono.just(user),
-                                        orgDAO.findOrganizationsByCriteria("_id", String.valueOf(user.getOrganizationId()))
-                                                .collectList()
-                                                .switchIfEmpty(Mono.just(new ArrayList<>())),
-                                        ticketDAO.findTicketsByCriteria("submitter_id", String.valueOf(user.getId()))
-                                                .collectList()
-                                                .switchIfEmpty(Mono.just(new ArrayList<>()))
-                                )
-                                .map( t -> {
-                                    if (t.getT2().size() > 0) {
-                                        t.getT1().setOrganization(t.getT2().get(0));
-                                    }
-                                    t.getT1().addTickets(t.getT3());
-                                    return t.getT1();
-                                })
-                )
-                .switchIfEmpty(
-                        Mono.create(sink -> {
-                            System.out.println("No search result");
-                            sink.success();
-                        }))
-                .subscribe( org -> {
-                    System.out.println(org.print());
-                    System.out.println("Press enter/return to continue");
-                    try {
-                        System.in.read();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+        List<User> users = userDAO.findUsers(searchTerm,searchValue);
+        if (users == null || users.size() == 0){
+            System.out.println("No search result");
+
+        } else {
+            users.forEach(user -> {
+
+                user.setOrganization(orgDAO.findByID(user.getOrganizationId()));
+                user.addTickets(ticketDAO.findTickets("submitter_id", user.getId().toString()));
+                System.out.println(user.print());
+                System.out.println("Press enter/return to continue");
+                try {
+                    System.in.read();
+                } catch (IOException e) {
+                    LOGGER.error(e.getMessage());
+                }
+            });
+        }
+
     }
 
     /**
@@ -120,46 +98,26 @@ public class HelpdeskService {
      */
     public void searchTickets(String searchTerm, String searchValue){
 
-        ticketDAO.findTicketsByCriteria(searchTerm, searchValue)
-                .flatMap(ticket -> Flux.zip(
-                                        Mono.just(ticket),
-                                        orgDAO.findOrganizationsByCriteria("_id", String.valueOf(ticket.getOrganizationId()))
-                                                .collectList()
-                                                .switchIfEmpty(Mono.just(new ArrayList<>())),
-                                        userDAO.findUsersByCriteria("_id", String.valueOf(ticket.getSubmitterId()))
-                                                .collectList()
-                                                .switchIfEmpty(Mono.just(new ArrayList<>())),
-                                        userDAO.findUsersByCriteria("_id", String.valueOf(ticket.getAssigneeId()))
-                                                .collectList()
-                                                .switchIfEmpty(Mono.just(new ArrayList<>()))
-                                )
-                                .map( t -> {
-                                    if (t.getT2().size() > 0) {
-                                        t.getT1().setOrganization(t.getT2().get(0));
-                                    }
-                                    if (t.getT3().size() > 0) {
-                                        t.getT1().setSubmitter(t.getT3().get(0));
-                                    }
-                                    if (t.getT4().size() > 0) {
-                                        t.getT1().setAssignee(t.getT4().get(0));
-                                    }
-                                    return t.getT1();
-                                })
-                )
-                .switchIfEmpty(
-                        Mono.create(sink -> {
-                            System.out.println("No search result");
-                            sink.success();
-                        }))
-                .subscribe( org -> {
-                    System.out.println(org.print());
-                    System.out.println("Press enter/return to continue");
-                    try {
-                        System.in.read();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+
+        List<Ticket> tickets = ticketDAO.findTickets(searchTerm,searchValue);
+        if (tickets == null || tickets.size() == 0){
+            System.out.println("No search result");
+
+        } else {
+            tickets.forEach(ticket -> {
+
+                ticket.setOrganization(orgDAO.findByID(ticket.getOrganizationId()));
+                ticket.setSubmitter(userDAO.findByID(ticket.getSubmitterId()));
+                ticket.setAssignee(userDAO.findByID(ticket.getAssigneeId()));
+                System.out.println(ticket.print());
+                System.out.println("Press enter/return to continue");
+                try {
+                    System.in.read();
+                } catch (IOException e) {
+                    LOGGER.error(e.getMessage());
+                }
+            });
+        }
     }
 
 }

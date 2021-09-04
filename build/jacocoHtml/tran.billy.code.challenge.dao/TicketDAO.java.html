@@ -1,42 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TicketDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tran.billy.code.challenge</a> &gt; <a href="index.source.html" class="el_package">tran.billy.code.challenge.dao</a> &gt; <span class="el_source">TicketDAO.java</span></div><h1>TicketDAO.java</h1><pre class="source lang-java linenums">package tran.billy.code.challenge.dao;
 
-import reactor.core.publisher.Flux;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import tran.billy.code.challenge.dao.exception.EntityNotFoundException;
 import tran.billy.code.challenge.dto.Ticket;
+
+
 
 public class TicketDAO extends GenericDAO {
 
-<span class="fc" id="L9">    public static final Hashtable&lt;String,String&gt; SEARCH_FIELDS = new Hashtable&lt;String,String&gt;(){{</span>
-<span class="fc" id="L10">        put(&quot;_id&quot;,&quot;id&quot;);</span>
-<span class="fc" id="L11">        put(&quot;url&quot;,&quot;url&quot;);</span>
-<span class="fc" id="L12">        put(&quot;external_id&quot;,&quot;externalId&quot;);</span>
-<span class="fc" id="L13">        put(&quot;created_at&quot;,&quot;createdAt&quot;);</span>
-<span class="fc" id="L14">        put(&quot;type&quot;,&quot;type&quot;);</span>
-<span class="fc" id="L15">        put(&quot;subject&quot;,&quot;subject&quot;);</span>
-<span class="fc" id="L16">        put(&quot;description&quot;,&quot;description&quot;);</span>
-<span class="fc" id="L17">        put(&quot;priority&quot;,&quot;priority&quot;);</span>
-<span class="fc" id="L18">        put(&quot;submitter_id&quot;,&quot;submitterId&quot;);</span>
-<span class="fc" id="L19">        put(&quot;assignee_id&quot;,&quot;assigneeId&quot;);</span>
-<span class="fc" id="L20">        put(&quot;organization_id&quot;,&quot;organizationId&quot;);</span>
-<span class="fc" id="L21">        put(&quot;tags&quot;,&quot;tags&quot;);</span>
-<span class="fc" id="L22">        put(&quot;has_incidents&quot;,&quot;hasIncidents&quot;);</span>
-<span class="fc" id="L23">        put(&quot;due_at&quot;,&quot;dueAt&quot;);</span>
-<span class="fc" id="L24">        put(&quot;via&quot;,&quot;via&quot;);</span>
-<span class="fc" id="L25">    }};</span>
+<span class="fc" id="L16">    private static final Logger LOGGER = LoggerFactory.getLogger(TicketDAO.class);</span>
+
+<span class="fc" id="L18">    public static final Hashtable&lt;String,String&gt; SEARCH_FIELDS = new Hashtable&lt;String,String&gt;(){{</span>
+<span class="fc" id="L19">        put(&quot;_id&quot;,&quot;id&quot;);</span>
+<span class="fc" id="L20">        put(&quot;url&quot;,&quot;url&quot;);</span>
+<span class="fc" id="L21">        put(&quot;external_id&quot;,&quot;externalId&quot;);</span>
+<span class="fc" id="L22">        put(&quot;created_at&quot;,&quot;createdAt&quot;);</span>
+<span class="fc" id="L23">        put(&quot;type&quot;,&quot;type&quot;);</span>
+<span class="fc" id="L24">        put(&quot;subject&quot;,&quot;subject&quot;);</span>
+<span class="fc" id="L25">        put(&quot;description&quot;,&quot;description&quot;);</span>
+<span class="fc" id="L26">        put(&quot;priority&quot;,&quot;priority&quot;);</span>
+<span class="fc" id="L27">        put(&quot;submitter_id&quot;,&quot;submitterId&quot;);</span>
+<span class="fc" id="L28">        put(&quot;assignee_id&quot;,&quot;assigneeId&quot;);</span>
+<span class="fc" id="L29">        put(&quot;organization_id&quot;,&quot;organizationId&quot;);</span>
+<span class="fc" id="L30">        put(&quot;tags&quot;,&quot;tags&quot;);</span>
+<span class="fc" id="L31">        put(&quot;has_incidents&quot;,&quot;hasIncidents&quot;);</span>
+<span class="fc" id="L32">        put(&quot;due_at&quot;,&quot;dueAt&quot;);</span>
+<span class="fc" id="L33">        put(&quot;via&quot;,&quot;via&quot;);</span>
+<span class="fc" id="L34">    }};</span>
 
     public TicketDAO(String dataSource) {
-<span class="fc" id="L28">        super(dataSource);</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L37">        super(dataSource);</span>
+<span class="fc" id="L38">        buildCache(Ticket.class);</span>
+<span class="fc" id="L39">    }</span>
 
     /**
      * Find ticket by field in SEARCH_FIELDS
      * @param fieldName field name
      * @param fieldValue field value
-     * @return a stream of Ticket
+     * @return a list of Ticket
      */
-    public Flux&lt;Ticket&gt; findTicketsByCriteria(String fieldName, String fieldValue){
+    public List&lt;Ticket&gt; findTickets(String fieldName, String fieldValue){
 
-<span class="fc" id="L39">       return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, Ticket.class);</span>
+<span class="fc" id="L49">        List&lt;Ticket&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (ID.equals(SEARCH_FIELDS.get(fieldName))){</span>
+            try {
+<span class="fc" id="L52">                result.add(findByID(fieldValue));</span>
+<span class="fc" id="L53">            } catch (EntityNotFoundException | NullPointerException e) {</span>
+<span class="fc" id="L54">                LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L55">            }</span>
+<span class="fc" id="L56">            return result;</span>
+        }
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        return SEARCH_FIELDS.get(fieldName) != null ? findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue) : result;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

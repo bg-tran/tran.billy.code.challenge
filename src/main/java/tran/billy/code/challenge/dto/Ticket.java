@@ -37,19 +37,19 @@ public class Ticket {
     private String status;
 
     @JsonProperty("submitter_id")
-    private int submitterId;
+    private Long submitterId;
 
     @JsonProperty("assignee_id")
-    private int assigneeId;
+    private Long assigneeId;
 
     @JsonProperty("organization_id")
-    private int organizationId;
+    private Long organizationId;
 
     @JsonProperty("tags")
     private ArrayList<String> tags;
 
     @JsonProperty("has_incidents")
-    private boolean hasIncidents;
+    private Boolean hasIncidents;
 
     @JsonProperty("due_at")
     private String dueAt;
@@ -135,27 +135,27 @@ public class Ticket {
         this.status = status;
     }
 
-    public int getSubmitterId() {
+    public Long getSubmitterId() {
         return submitterId;
     }
 
-    public void setSubmitterId(int submitterId) {
+    public void setSubmitterId(Long submitterId) {
         this.submitterId = submitterId;
     }
 
-    public int getAssigneeId() {
+    public Long getAssigneeId() {
         return assigneeId;
     }
 
-    public void setAssigneeId(int assigneeId) {
+    public void setAssigneeId(Long assigneeId) {
         this.assigneeId = assigneeId;
     }
 
-    public int getOrganizationId() {
+    public Long getOrganizationId() {
         return organizationId;
     }
 
-    public void setOrganizationId(int organizationId) {
+    public void setOrganizationId(Long organizationId) {
         this.organizationId = organizationId;
     }
 
@@ -167,11 +167,11 @@ public class Ticket {
         this.tags = tags;
     }
 
-    public boolean isHasIncidents() {
+    public Boolean isHasIncidents() {
         return hasIncidents;
     }
 
-    public void setHasIncidents(boolean hasIncidents) {
+    public void setHasIncidents(Boolean hasIncidents) {
         this.hasIncidents = hasIncidents;
     }
 

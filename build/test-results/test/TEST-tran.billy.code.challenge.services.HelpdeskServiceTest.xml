@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tran.billy.code.challenge.services.HelpdeskServiceTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-08-19T12:24:59" hostname="Billys-Mac-mini.local" time="0.704">
+<testsuite name="tran.billy.code.challenge.services.HelpdeskServiceTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-09-04T13:59:33" hostname="Billys-Mac-mini" time="0.451">
   <properties/>
-  <testcase name="testSearchTicketWithSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.286"/>
-  <testcase name="testSearchOrganizationsWillReturnOrgHavingNoTicket()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.091"/>
-  <testcase name="testSearchOrganizationsWillReturnEmptyResult()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.014"/>
-  <testcase name="testSearchUserHavingNoOrganization()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.038"/>
-  <testcase name="testSearchUserHavingNoTicket()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.032"/>
-  <testcase name="testSearchOrganizationsWillReturnSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.046"/>
-  <testcase name="testSearchOrganizationsWillReturnOrgHavingNoUser()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.03"/>
-  <testcase name="testSearchTicketHavingNoUser()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.016"/>
-  <testcase name="testSearchTicketHavingNoOrg()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.094"/>
-  <testcase name="testSearchUserWithSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.029"/>
+  <testcase name="testSearchTicketWithSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.272"/>
+  <testcase name="testSearchOrganizationsWillReturnOrgHavingNoTicket()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.014"/>
+  <testcase name="testSearchOrganizationsWillReturnEmptyResult()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.006"/>
+  <testcase name="testSearchUserHavingNoOrganization()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.018"/>
+  <testcase name="testSearchUserHavingNoTicket()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.023"/>
+  <testcase name="testSearchOrganizationsWillReturnSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.014"/>
+  <testcase name="testSearchOrganizationsWillReturnOrgHavingNoUser()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.012"/>
+  <testcase name="testSearchTicketHavingNoUser()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.025"/>
+  <testcase name="testSearchTicketHavingNoOrg()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.019"/>
+  <testcase name="testSearchUserWithSuccess()" classname="tran.billy.code.challenge.services.HelpdeskServiceTest" time="0.032"/>
   <system-out><![CDATA[_id                                               1000001
 url                                               null
 external_id                                       null
@@ -24,7 +24,7 @@ submitter_id                                      10001
 assignee_id                                       20001
 organization_id                                   1001
 tags                                              null
-has_incidents                                     false
+has_incidents                                     null
 due_at                                            null
 via                                               null
 organization_name                                 Org 1
@@ -39,7 +39,7 @@ name                                              Org 1
 domain_names                                      null
 created_at                                        null
 details                                           null
-shared_tickets                                    false
+shared_tickets                                    null
 tags                                              null
 user_0                                            User 1
 
@@ -51,9 +51,9 @@ url                                               null
 name                                              User 1
 alias                                             null
 created_at                                        null
-active                                            false
-verified                                          false
-shared                                            false
+active                                            null
+verified                                          null
+shared                                            null
 locale                                            null
 timezone                                          null
 lastLoginAt                                       null
@@ -62,10 +62,10 @@ phone                                             null
 signature                                         null
 organization_id                                   1001
 tags                                              null
-suspended                                         false
+suspended                                         null
 role                                              null
 organization_name                                 null
-ticket0                                           Ticket 1
+ticket_0                                          Ticket 1
 
 
 Press enter/return to continue
@@ -74,9 +74,9 @@ url                                               null
 name                                              User 1
 alias                                             null
 created_at                                        null
-active                                            false
-verified                                          false
-shared                                            false
+active                                            null
+verified                                          null
+shared                                            null
 locale                                            null
 timezone                                          null
 lastLoginAt                                       null
@@ -85,7 +85,7 @@ phone                                             null
 signature                                         null
 organization_id                                   1001
 tags                                              null
-suspended                                         false
+suspended                                         null
 role                                              null
 organization_name                                 Org 1
 
@@ -98,7 +98,7 @@ name                                              Org 1
 domain_names                                      null
 created_at                                        null
 details                                           null
-shared_tickets                                    false
+shared_tickets                                    null
 tags                                              null
 ticket_0                                          Ticket 1
 user_0                                            User 1
@@ -112,7 +112,7 @@ name                                              Org 1
 domain_names                                      null
 created_at                                        null
 details                                           null
-shared_tickets                                    false
+shared_tickets                                    null
 tags                                              null
 ticket_0                                          Ticket 1
 
@@ -131,7 +131,7 @@ submitter_id                                      10001
 assignee_id                                       20001
 organization_id                                   1001
 tags                                              null
-has_incidents                                     false
+has_incidents                                     null
 due_at                                            null
 via                                               null
 organization_name                                 Org 1
@@ -152,7 +152,7 @@ submitter_id                                      10001
 assignee_id                                       20001
 organization_id                                   1001
 tags                                              null
-has_incidents                                     false
+has_incidents                                     null
 due_at                                            null
 via                                               null
 organization_name                                 null
@@ -165,9 +165,9 @@ url                                               null
 name                                              User 1
 alias                                             null
 created_at                                        null
-active                                            false
-verified                                          false
-shared                                            false
+active                                            null
+verified                                          null
+shared                                            null
 locale                                            null
 timezone                                          null
 lastLoginAt                                       null
@@ -176,10 +176,10 @@ phone                                             null
 signature                                         null
 organization_id                                   1001
 tags                                              null
-suspended                                         false
+suspended                                         null
 role                                              null
 organization_name                                 Org 1
-ticket0                                           Ticket 1
+ticket_0                                          Ticket 1
 
 
 Press enter/return to continue

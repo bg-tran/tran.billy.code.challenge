@@ -9,7 +9,7 @@ import java.util.List;
 public class Organization {
 
     @JsonProperty("_id")
-    private int id;
+    private Long id;
 
     @JsonProperty("url")
     private String url;
@@ -30,7 +30,7 @@ public class Organization {
     private String details;
 
     @JsonProperty("shared_tickets")
-    private boolean sharedTickets;
+    private Boolean sharedTickets;
 
     @JsonProperty("tags")
     private ArrayList<String> tags;
@@ -39,11 +39,11 @@ public class Organization {
 
     private ArrayList<Ticket> tickets;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -95,11 +95,11 @@ public class Organization {
         this.details = details;
     }
 
-    public boolean isSharedTickets() {
+    public Boolean isSharedTickets() {
         return sharedTickets;
     }
 
-    public void setSharedTickets(boolean sharedTickets) {
+    public void setSharedTickets(Boolean sharedTickets) {
         this.sharedTickets = sharedTickets;
     }
 

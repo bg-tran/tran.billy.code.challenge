@@ -1,37 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrganizationDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tran.billy.code.challenge</a> &gt; <a href="index.source.html" class="el_package">tran.billy.code.challenge.dao</a> &gt; <span class="el_source">OrganizationDAO.java</span></div><h1>OrganizationDAO.java</h1><pre class="source lang-java linenums">package tran.billy.code.challenge.dao;
 
-import reactor.core.publisher.Flux;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import tran.billy.code.challenge.dao.exception.EntityNotFoundException;
 import tran.billy.code.challenge.dto.Organization;
 
 public class OrganizationDAO extends GenericDAO{
 
-<span class="fc" id="L9">    public static final Hashtable&lt;String,String&gt; SEARCH_FIELDS = new Hashtable&lt;String,String&gt;(){{</span>
-<span class="fc" id="L10">        put(&quot;_id&quot;,&quot;id&quot;);</span>
-<span class="fc" id="L11">        put(&quot;url&quot;,&quot;url&quot;);</span>
-<span class="fc" id="L12">        put(&quot;external_id&quot;,&quot;externalId&quot;);</span>
-<span class="fc" id="L13">        put(&quot;name&quot;,&quot;name&quot;);</span>
-<span class="fc" id="L14">        put(&quot;domain_names&quot;,&quot;domainNames&quot;);</span>
-<span class="fc" id="L15">        put(&quot;created_at&quot;,&quot;createdAt&quot;);</span>
-<span class="fc" id="L16">        put(&quot;details&quot;,&quot;details&quot;);</span>
-<span class="fc" id="L17">        put(&quot;shared_tickets&quot;,&quot;sharedTickets&quot;);</span>
-<span class="fc" id="L18">        put(&quot;tags&quot;,&quot;tags&quot;);</span>
-<span class="fc" id="L19">    }};</span>
+<span class="fc" id="L14">    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationDAO.class);</span>
+
+<span class="fc" id="L16">    public static final Hashtable&lt;String,String&gt; SEARCH_FIELDS = new Hashtable&lt;String,String&gt;(){{</span>
+<span class="fc" id="L17">        put(&quot;_id&quot;,&quot;id&quot;);</span>
+<span class="fc" id="L18">        put(&quot;url&quot;,&quot;url&quot;);</span>
+<span class="fc" id="L19">        put(&quot;external_id&quot;,&quot;externalId&quot;);</span>
+<span class="fc" id="L20">        put(&quot;name&quot;,&quot;name&quot;);</span>
+<span class="fc" id="L21">        put(&quot;domain_names&quot;,&quot;domainNames&quot;);</span>
+<span class="fc" id="L22">        put(&quot;created_at&quot;,&quot;createdAt&quot;);</span>
+<span class="fc" id="L23">        put(&quot;details&quot;,&quot;details&quot;);</span>
+<span class="fc" id="L24">        put(&quot;shared_tickets&quot;,&quot;sharedTickets&quot;);</span>
+<span class="fc" id="L25">        put(&quot;tags&quot;,&quot;tags&quot;);</span>
+<span class="fc" id="L26">    }};</span>
 
     public OrganizationDAO(String dataSource) {
-<span class="fc" id="L22">        super(dataSource);</span>
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L29">        super(dataSource);</span>
+<span class="fc" id="L30">        buildCache(Organization.class);</span>
+<span class="fc" id="L31">    }</span>
 
     /**
-     * Find organization by field in SEARCH_FIELDS
+     * Find user by field in SEARCH_FIELDS
      * @param fieldName field name
      * @param fieldValue field value
-     * @return a stream of Organization
+     * @return a list of Organization
      */
-    public Flux&lt;Organization&gt; findOrganizationsByCriteria(String fieldName, String fieldValue){
-
-<span class="fc" id="L33">        return findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue, Organization.class);</span>
+    public List&lt;Organization&gt; findOrganizations(String fieldName, String fieldValue) {
+<span class="fc" id="L40">        List&lt;Organization&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (ID.equals(SEARCH_FIELDS.get(fieldName))){</span>
+            try {
+<span class="fc" id="L43">                result.add(super.findByID(Long.parseLong(fieldValue)));</span>
+<span class="fc" id="L44">            } catch (EntityNotFoundException | NumberFormatException e) {</span>
+<span class="fc" id="L45">                LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L46">            }</span>
+<span class="fc" id="L47">            return result;</span>
+        }
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        return SEARCH_FIELDS.get(fieldName) != null ? findByCriteria(SEARCH_FIELDS.get(fieldName), fieldValue) : result;</span>
     }
 
+    /**
+     * Find Organization by ID
+     * @param id id
+     * @return nullable organization from cache
+     */
+    public Organization findByID(Long id) {
+
+<span class="fc" id="L59">        Organization entity = null;</span>
+        try {
+<span class="fc" id="L61">            entity = super.findByID(id);</span>
+<span class="fc" id="L62">        } catch (EntityNotFoundException | NullPointerException e) {</span>
+<span class="fc" id="L63">            LOGGER.error(&quot;id = &quot; + id);</span>
+<span class="fc" id="L64">            LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L65">        }</span>
+
+<span class="fc" id="L67">        return entity;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

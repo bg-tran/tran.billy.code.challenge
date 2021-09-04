@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 
 import java.io.BufferedReader;
@@ -20,6 +22,7 @@ import java.nio.file.Paths;
  */
 public class FileStreamConnectorImpl implements StreamConnector {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileStreamConnectorImpl.class);
     static {
         StreamConnectorManager.registerDataStream(new FileStreamConnectorImpl());
     }
@@ -47,6 +50,7 @@ public class FileStreamConnectorImpl implements StreamConnector {
                 reader.close();
             } catch (IOException | IllegalStateException e) {
                 sink.error(e);
+                LOGGER.error(e.getMessage());
             }
             sink.complete();
         });

@@ -26,9 +26,9 @@ class AppConfigTest {
 
         String configFile = "./src/test/config.properties";
         AppConfig.init(configFile);
-        Assertions.assertEquals("organizations.json", AppConfig.get(AppConfig.ORG_DATA_STREAM_RESOURCE_PATH));
-        Assertions.assertEquals("tickets.json", AppConfig.get(AppConfig.TICKET_DATA_STREAM_RESOURCE_PATH));
-        Assertions.assertEquals("users.json", AppConfig.get(AppConfig.USER_DATA_STREAM_RESOURCE_PATH));
+        Assertions.assertEquals("src/test/organizations.json", AppConfig.get(AppConfig.ORG_DATA_STREAM_RESOURCE_PATH));
+        Assertions.assertEquals("src/test/tickets.json", AppConfig.get(AppConfig.TICKET_DATA_STREAM_RESOURCE_PATH));
+        Assertions.assertEquals("src/test/users.json", AppConfig.get(AppConfig.USER_DATA_STREAM_RESOURCE_PATH));
     }
 
 }

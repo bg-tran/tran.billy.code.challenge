@@ -2,11 +2,11 @@ package tran.billy.code.challenge.services;
 
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
-import reactor.core.publisher.Flux;
 
 import tran.billy.code.challenge.dao.OrganizationDAO;
 import tran.billy.code.challenge.dao.TicketDAO;
 import tran.billy.code.challenge.dao.UserDAO;
+import tran.billy.code.challenge.dao.exception.EntityNotFoundException;
 import tran.billy.code.challenge.dto.Organization;
 import tran.billy.code.challenge.dto.Ticket;
 import tran.billy.code.challenge.dto.User;
@@ -14,6 +14,7 @@ import tran.billy.code.challenge.dto.User;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 class HelpdeskServiceTest {
 
@@ -26,16 +27,16 @@ class HelpdeskServiceTest {
 
     final Organization org = Mockito.spy(new Organization(){
         {
-            setId(1001);
+            setId(1001L);
             setName("Org 1");
         }
     });
 
     final User user = Mockito.spy(new User(){
         {
-            setId(10001);
+            setId(10001L);
             setName("User 1");
-            setOrganizationId(1001);
+            setOrganizationId(1001L);
         }
     });
 
@@ -44,9 +45,9 @@ class HelpdeskServiceTest {
         {
             setId("1000001");
             setSubject("Ticket 1");
-            setOrganizationId(1001);
-            setSubmitterId(10001);
-            setAssigneeId(20001);
+            setOrganizationId(1001L);
+            setSubmitterId(10001L);
+            setAssigneeId(20001L);
         }
     });
 
@@ -63,14 +64,20 @@ class HelpdeskServiceTest {
         ticketDAO = Mockito.mock(TicketDAO.class);
         service = new HelpdeskService(orgDAO, userDAO, ticketDAO);
 
-        Mockito.when(orgDAO.findOrganizationsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(org));
+        Mockito.when(orgDAO.findOrganizations(Mockito.anyString(),Mockito.anyString()))
+                .thenReturn(new ArrayList<Organization>(){{ add(org); }});
 
-        Mockito.when(userDAO.findUsersByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(user));
+        Mockito.when(userDAO.findUsers(Mockito.anyString(),Mockito.anyString()))
+                .thenReturn(new ArrayList<User>() {{ add(user); }});
 
-        Mockito.when(ticketDAO.findTicketsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(ticket));
+        Mockito.when(ticketDAO.findTickets(Mockito.anyString(),Mockito.anyString()))
+                .thenReturn(new ArrayList<Ticket>() {{ add(ticket); }});
+
+        Mockito.when(orgDAO.findByID(Mockito.anyLong()))
+                .thenReturn(org);
+
+        Mockito.when(userDAO.findByID(Mockito.anyLong()))
+                .thenReturn(user);
 
     }
 
@@ -84,12 +91,12 @@ class HelpdeskServiceTest {
 
         service.searchOrganizations("_id", "101");
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","101");
+                .findOrganizations("_id","101");
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria("organization_id","1001");
+                .findUsers("organization_id","1001");
 
         Mockito.verify(ticketDAO,Mockito.times(1))
-                .findTicketsByCriteria("organization_id","1001");
+                .findTickets("organization_id","1001");
 
         Assertions.assertEquals(1, org.getUsers().size());
         Assertions.assertEquals(1, org.getTickets().size());
@@ -99,32 +106,32 @@ class HelpdeskServiceTest {
     @Test
     void testSearchOrganizationsWillReturnEmptyResult(){
 
-        Mockito.when(orgDAO.findOrganizationsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just());
+        Mockito.when(orgDAO.findOrganizations(Mockito.anyString(),Mockito.anyString()))
+                .thenReturn(new ArrayList<>());
 
         service.searchOrganizations("_id", "101");
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","101");
+                .findOrganizations("_id","101");
         Mockito.verify(userDAO,Mockito.times(0))
-                .findUsersByCriteria(Mockito.anyString(),Mockito.anyString());
+                .findUsers(Mockito.anyString(),Mockito.anyString());
         Mockito.verify(ticketDAO,Mockito.times(0))
-                .findTicketsByCriteria(Mockito.anyString(),Mockito.anyString());
+                .findTickets(Mockito.anyString(),Mockito.anyString());
 
     }
 
     @Test
     void testSearchOrganizationsWillReturnOrgHavingNoUser(){
 
-        Mockito.when(userDAO.findUsersByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just());
+        Mockito.when(userDAO.findUsers(Mockito.anyString(),Mockito.anyString()))
+                .thenReturn(new ArrayList<>());
 
         service.searchOrganizations("_id", "101");
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","101");
+                .findOrganizations("_id","101");
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria(Mockito.anyString(),Mockito.anyString());
+                .findUsers(Mockito.anyString(),Mockito.anyString());
         Mockito.verify(ticketDAO,Mockito.times(1))
-                .findTicketsByCriteria(Mockito.anyString(),Mockito.anyString());
+                .findTickets(Mockito.anyString(),Mockito.anyString());
         Assertions.assertEquals(0, org.getUsers().size());
         Assertions.assertEquals(1, org.getTickets().size());
     }
@@ -132,16 +139,16 @@ class HelpdeskServiceTest {
     @Test
     void testSearchOrganizationsWillReturnOrgHavingNoTicket(){
 
-        Mockito.when(ticketDAO.findTicketsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just());
+        Mockito.when(ticketDAO.findTickets(Mockito.anyString(),Mockito.anyString()))
+                .thenReturn(new ArrayList<>());
 
         service.searchOrganizations("_id", "101");
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","101");
+                .findOrganizations("_id","101");
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria(Mockito.anyString(),Mockito.anyString());
+                .findUsers(Mockito.anyString(),Mockito.anyString());
         Mockito.verify(ticketDAO,Mockito.times(1))
-                .findTicketsByCriteria(Mockito.anyString(),Mockito.anyString());
+                .findTickets(Mockito.anyString(),Mockito.anyString());
         Assertions.assertEquals(1, org.getUsers().size());
         Assertions.assertEquals(0, org.getTickets().size());
     }
@@ -149,18 +156,15 @@ class HelpdeskServiceTest {
     @Test
     void testSearchUserWithSuccess(){
 
-        Mockito.when(orgDAO.findOrganizationsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(org));
-
         service.searchUsers("organization_id", "101");
 
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria(Mockito.anyString(),Mockito.anyString());
+                .findUsers(Mockito.anyString(),Mockito.anyString());
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","1001");
+                .findByID(Long.parseLong("1001"));
 
         Mockito.verify(ticketDAO,Mockito.times(1))
-                .findTicketsByCriteria("submitter_id","10001");
+                .findTickets("submitter_id","10001");
 
         Assertions.assertEquals(org.getName(), user.getOrganization().getName());
         Assertions.assertEquals(org.getId(), user.getOrganization().getId());
@@ -170,20 +174,18 @@ class HelpdeskServiceTest {
     @Test
     void testSearchUserHavingNoTicket(){
 
-        Mockito.when(orgDAO.findOrganizationsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(org));
-        Mockito.when(ticketDAO.findTicketsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just());
+        Mockito.when(ticketDAO.findTickets(Mockito.anyString(),Mockito.anyString()))
+                .thenReturn(new ArrayList<>());
 
         service.searchUsers("organization_id", "101");
 
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria(Mockito.anyString(),Mockito.anyString());
+                .findUsers(Mockito.anyString(),Mockito.anyString());
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","1001");
+                .findByID(Long.parseLong("1001"));
 
         Mockito.verify(ticketDAO,Mockito.times(1))
-                .findTicketsByCriteria("submitter_id","10001");
+                .findTickets("submitter_id","10001");
 
         Assertions.assertEquals(org.getName(), user.getOrganization().getName());
         Assertions.assertEquals(org.getId(), user.getOrganization().getId());
@@ -192,20 +194,19 @@ class HelpdeskServiceTest {
     }
 
     @Test
-    void testSearchUserHavingNoOrganization(){
+    void testSearchUserHavingNoOrganization() throws EntityNotFoundException {
 
-        Mockito.when(orgDAO.findOrganizationsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just());
-        Mockito.when(userDAO.findUsersByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(user));
+        Mockito.when(orgDAO.findByID(Mockito.anyLong()))
+                .thenReturn(null);
+
         service.searchUsers("_id", "1001");
 
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria(Mockito.anyString(),Mockito.anyString());
+                .findUsers(Mockito.anyString(),Mockito.anyString());
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","1001");
+                .findByID(Long.parseLong("1001"));
         Mockito.verify(ticketDAO,Mockito.times(1))
-                .findTicketsByCriteria("submitter_id","10001");
+                .findTickets("submitter_id","10001");
 
         Assertions.assertNull(user.getOrganization());
         Assertions.assertEquals(1, user.getTickets().size());
@@ -214,24 +215,19 @@ class HelpdeskServiceTest {
     @Test
     void testSearchTicketWithSuccess(){
 
-        Mockito.when(orgDAO.findOrganizationsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(org));
-        Mockito.when(userDAO.findUsersByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(user));
-
         service.searchTickets("via", "web");
 
         Mockito.verify(ticketDAO,Mockito.times(1))
-                .findTicketsByCriteria("via","web");
+                .findTickets("via","web");
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","1001");
+                .findByID(Long.parseLong("1001"));
 
 
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria("_id","10001");
+                .findByID(Long.parseLong("10001"));
 
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria("_id","20001");
+                .findByID(Long.parseLong("20001"));
 
 
         Assertions.assertEquals(org.getName(), ticket.getOrganization().getName());
@@ -245,25 +241,21 @@ class HelpdeskServiceTest {
     @Test
     void testSearchTicketHavingNoOrg(){
 
-        Mockito.when(orgDAO.findOrganizationsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just());
-        Mockito.when(userDAO.findUsersByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(user));
-        Mockito.when(ticketDAO.findTicketsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(ticket));
+        Mockito.when(orgDAO.findByID(Mockito.anyLong()))
+                .thenReturn(null);
 
         service.searchTickets("via", "web");
 
         Mockito.verify(ticketDAO,Mockito.times(1))
-                .findTicketsByCriteria("via","web");
+                .findTickets("via","web");
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","1001");
+                .findByID(Long.parseLong("1001"));
 
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria("_id","10001");
+                .findByID(Long.parseLong("10001"));
 
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria("_id","20001");
+                .findByID(Long.parseLong("20001"));
 
         Assertions.assertNull(ticket.getOrganization());
 
@@ -276,25 +268,22 @@ class HelpdeskServiceTest {
     @Test
     void testSearchTicketHavingNoUser(){
 
-        Mockito.when(orgDAO.findOrganizationsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(org));
-        Mockito.when(userDAO.findUsersByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just());
-        Mockito.when(ticketDAO.findTicketsByCriteria(Mockito.anyString(),Mockito.anyString()))
-                .thenReturn(Flux.just(ticket));
+
+        Mockito.when(userDAO.findByID(Mockito.anyLong()))
+                .thenReturn(null);
 
         service.searchTickets("via", "web");
 
         Mockito.verify(ticketDAO,Mockito.times(1))
-                .findTicketsByCriteria("via","web");
+                .findTickets("via","web");
         Mockito.verify(orgDAO,Mockito.times(1))
-                .findOrganizationsByCriteria("_id","1001");
+                .findByID(Long.parseLong("1001"));
 
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria("_id","10001");
+                .findByID(Long.parseLong("10001"));
 
         Mockito.verify(userDAO,Mockito.times(1))
-                .findUsersByCriteria("_id","20001");
+                .findByID(Long.parseLong("20001"));
 
         Assertions.assertEquals(org.getName(), ticket.getOrganization().getName());
         Assertions.assertEquals(org.getId(), ticket.getOrganization().getId());
